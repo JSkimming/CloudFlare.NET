@@ -1,0 +1,64 @@
+﻿# Notes:
+#   - Minimal appveyor.yml file is an empty file. All sections are optional.
+#   - Indent each level of configuration with 2 spaces. Do not use tabs!
+#   - All section names are case-sensitive.
+#   - Section names should be unique on each level.
+
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+
+# Retain the NuGet package cache between builds
+cache:
+  - src\packages -> **\packages.config
+
+# version format
+version: 0.0.{build}
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# Operating system (build VM template)
+os: Visual Studio 2015
+
+# http://blog.appveyor.com/2014/06/04/shallow-clone-for-git-repositories/
+shallow_clone: true
+
+# scripts that run after cloning repository
+install:
+  - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+# build Configuration, i.e. Debug, Release, etc.
+configuration: Release
+
+build:
+  publish_nuget: true             # package projects with .nuspec files and push to artifacts
+  publish_nuget_symbols: true    # generate and publish NuGet symbol packages
+
+  # MSBuild verbosity level
+  verbosity: minimal
+
+# scripts to run before build
+before_build: |
+  nuget restore src\cloudflare.net.sln
+
+#---------------------------------#
+#       tests configuration       #
+#---------------------------------#
+
+#---------------------------------#
+#         notifications           #
+#---------------------------------#
+
+notifications:
+
+  # Slack
+  - provider: Slack
+    auth_token:
+      secure: AkSNuuHmfzAFp2+Oq00NRQFOfrXl4ue08SHx0FC2WTeXSiZv8uVKI3ZBWns7HTcV
+    channel: cloudflare_net
