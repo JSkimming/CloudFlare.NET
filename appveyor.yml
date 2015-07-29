@@ -22,12 +22,20 @@ version: 0.0.{build}
 # Operating system (build VM template)
 os: Visual Studio 2015
 
+# scripts that are called at very beginning, before repo cloning
+init:
+  - git config --global core.autocrlf input
+
 # http://blog.appveyor.com/2014/06/04/shallow-clone-for-git-repositories/
-shallow_clone: true
+#shallow_clone: true
 
 # scripts that run after cloning repository
 install:
+  - choco install gitversion.portable -y
   - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+
+assembly_info:
+  patch: false
 
 #---------------------------------#
 #       build configuration       #
@@ -37,15 +45,20 @@ install:
 configuration: Release
 
 build:
-  publish_nuget: true             # package projects with .nuspec files and push to artifacts
-  publish_nuget_symbols: true    # generate and publish NuGet symbol packages
+  #publish_nuget: true             # package projects with .nuspec files and push to artifacts
+  #publish_nuget_symbols: true    # generate and publish NuGet symbol packages
 
   # MSBuild verbosity level
   verbosity: minimal
 
-# scripts to run before build
-before_build: |
-  nuget restore src\cloudflare.net.sln
+before_build:
+  - nuget restore src\cloudflare.net.sln
+  - ps: gitversion /l console /output buildserver /updateAssemblyInfo
+
+after_build:
+  - nuget pack "%APPVEYOR_BUILD_FOLDER%\src\CloudFlare.NET\CloudFlare.NET.csproj" -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%" -Symbols 
+  - appveyor PushArtifact "CloudFlare.NET.%GitVersion_NuGetVersion%.nupkg"
+  - appveyor PushArtifact "CloudFlare.NET.%GitVersion_NuGetVersion%.symbols.nupkg"
 
 #---------------------------------#
 #       tests configuration       #
