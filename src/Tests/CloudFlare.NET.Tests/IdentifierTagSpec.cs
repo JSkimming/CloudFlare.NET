@@ -34,7 +34,7 @@
         static IdentifierTag _constructorCreated;
         static IdentifierTag _implicitCreated;
 
-        Establish context = () =>
+        Because of = () =>
         {
             _guid = Guid.NewGuid().ToString("N");
             _constructorCreated = new IdentifierTag(_guid);
@@ -87,97 +87,99 @@
     }
 
     [Subject(typeof(IdentifierTag))]
-    public class When_evaluating_equality_via_default_Equals
+    public class When_evaluating_identifier_equality_via_default_Equals
     {
         protected static object _source;
         protected static object _same;
         protected static object _different;
 
-        Establish context = () =>
+        Because of = () =>
         {
             _source = new IdentifierTag(Guid.NewGuid().ToString("N"));
             _same = new IdentifierTag(_source.ToString());
             _different = new IdentifierTag(Guid.NewGuid().ToString("N"));
         };
 
-        It should_be_equal_when_compared_against_the_same_reference =
-            () => _source.Equals(_source).ShouldBeTrue();
-
-        It should_be_equal_when_compared_against_the_same_value =
-            () => _source.Equals(_same).ShouldBeTrue();
-
-        It should_not_be_equal_when_compared_against_the_a_different_value =
-            () => _source.Equals(_different).ShouldBeFalse();
-
-        It should_not_be_equal_when_compared_against_a_different_type =
-            () => _source.Equals(Guid.NewGuid()).ShouldBeFalse();
-
-        It should_not_be_equal_when_compared_against_null =
-            () => _source.Equals(null).ShouldBeFalse();
+        Behaves_like<DefaultEqualsBehavior> default_equals_behavior;
     }
 
     [Subject(typeof(IdentifierTag))]
-    public class When_evaluating_equality_via_typed_Equals
+    public class When_evaluating_identifier_equality_via_typed_Equals
     {
         protected static IdentifierTag _source;
         protected static IdentifierTag _same;
         protected static IdentifierTag _different;
 
-        Establish context = () =>
+        Because of = () =>
         {
             _source = new IdentifierTag(Guid.NewGuid().ToString("N"));
             _same = new IdentifierTag(_source.ToString());
             _different = new IdentifierTag(Guid.NewGuid().ToString("N"));
         };
 
-        It should_be_equal_when_compared_against_the_same_reference =
-            () => _source.Equals(_source).ShouldBeTrue();
-
-        It should_be_equal_when_compared_against_the_same_value =
-            () => _source.Equals(_same).ShouldBeTrue();
-
-        It should_not_be_equal_when_compared_against_the_a_different_value =
-            () => _source.Equals(_different).ShouldBeFalse();
-
-        It should_not_be_equal_when_compared_against_null =
-            () => _source.Equals(null).ShouldBeFalse();
+        Behaves_like<TypedEqualsBehavior<IdentifierTag>> typed_equals_behavior;
     }
 
     [Subject(typeof(IdentifierTag))]
-    public class When_evaluating_equality_via_Comparer_Equals
+    public class When_evaluating_identifier_equality_via_Comparer_Equals
     {
+        protected static Func<IdentifierTag, IdentifierTag, bool> _equals;
         protected static IdentifierTag _source;
         protected static IdentifierTag _same;
         protected static IdentifierTag _different;
         protected static IdentifierTag _differentType;
 
-        Establish context = () =>
+        Because of = () =>
         {
+            _equals = IdentifierTag.Comparer.Equals;
             _source = new IdentifierTag(Guid.NewGuid().ToString("N"));
             _same = new IdentifierTag(_source.ToString());
             _different = new IdentifierTag(Guid.NewGuid().ToString("N"));
             _differentType = new Moq.Mock<IdentifierTag>(_source.ToString()).Object;
         };
 
-        It should_be_equal_when_compared_against_the_same_reference =
-            () => IdentifierTag.Comparer.Equals(_source, _source).ShouldBeTrue();
+        Behaves_like<ComparerEqualsBehavior<IdentifierTag>> equals_operator_behavior;
+    }
 
-        It should_be_equal_when_both_operands_null =
-            () => IdentifierTag.Comparer.Equals(null, null).ShouldBeTrue();
+    [Subject(typeof(IdentifierTag))]
+    public class When_evaluating_identifier_equality_via_Equals_operator
+    {
+        protected static Func<IdentifierTag, IdentifierTag, bool> _equals;
+        protected static IdentifierTag _source;
+        protected static IdentifierTag _same;
+        protected static IdentifierTag _different;
+        protected static IdentifierTag _differentType;
 
-        It should_be_equal_when_compared_against_the_same_value =
-            () => IdentifierTag.Comparer.Equals(_source, _same).ShouldBeTrue();
+        Because of = () =>
+        {
+            _equals = (l, r) => l == r;
+            _source = new IdentifierTag(Guid.NewGuid().ToString("N"));
+            _same = new IdentifierTag(_source.ToString());
+            _different = new IdentifierTag(Guid.NewGuid().ToString("N"));
+            _differentType = new Moq.Mock<IdentifierTag>(_source.ToString()).Object;
+        };
 
-        It should_not_be_equal_when_compared_against_the_a_different_value =
-            () => IdentifierTag.Comparer.Equals(_source, _different).ShouldBeFalse();
+        Behaves_like<ComparerEqualsBehavior<IdentifierTag>> equals_operator_behavior;
+    }
 
-        It should_not_be_equal_when_compared_against_null_lhs =
-            () => IdentifierTag.Comparer.Equals(null, _source).ShouldBeFalse();
+    [Subject(typeof(IdentifierTag))]
+    public class When_evaluating_identifier_enequality_via_Notequals_operator
+    {
+        protected static Func<IdentifierTag, IdentifierTag, bool> _notequals;
+        protected static IdentifierTag _source;
+        protected static IdentifierTag _same;
+        protected static IdentifierTag _different;
+        protected static IdentifierTag _differentType;
 
-        It should_not_be_equal_when_compared_against_null_rhs =
-            () => IdentifierTag.Comparer.Equals(_source, null).ShouldBeFalse();
+        Because of = () =>
+        {
+            _notequals = (l, r) => l != r;
+            _source = new IdentifierTag(Guid.NewGuid().ToString("N"));
+            _same = new IdentifierTag(_source.ToString());
+            _different = new IdentifierTag(Guid.NewGuid().ToString("N"));
+            _differentType = new Moq.Mock<IdentifierTag>(_source.ToString()).Object;
+        };
 
-        It should_not_be_equal_when_compared_against_different_type =
-            () => IdentifierTag.Comparer.Equals(_source, _differentType).ShouldBeFalse();
+        Behaves_like<ComparerNotEqualsBehavior<IdentifierTag>> notequals_operator_behavior;
     }
 }

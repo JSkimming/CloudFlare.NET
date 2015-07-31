@@ -39,13 +39,13 @@
 @SET coverage_results=%~dp0src\TestResults\Test.Coverage.xml
 
 @IF NOT EXIST "%~dp0src\TestResults" MD "%~dp0src\TestResults"
-::@echo "%mspec_exe%" "%test_assemblies%" --html "%spec_results%"
-::@"%mspec_exe%" "%test_assemblies%" --html "%spec_results%"
+::@echo "%mspec_exe%" "%test_assemblies%" --timeinfo --silent --html "%spec_results%"
+::@"%mspec_exe%" "%test_assemblies%" --timeinfo --silent --html "%spec_results%"
 ::@echo "%xunit_exe%" "%test_assemblies%" -noshadow -html "%xunit_results%"
 ::@"%xunit_exe%" "%test_assemblies%" -noshadow -html "%xunit_results%"
 
-@echo "%cover_exe%" -register:user "-target:%mspec_exe%" "-targetargs:%test_assemblies% --html %spec_results%" -filter:%coverage_filter% "-output:%coverage_results%"
-@"%cover_exe%" -register:user "-target:%mspec_exe%" "-targetargs:%test_assemblies% --html %spec_results%" -filter:%coverage_filter% "-output:%coverage_results%"
+@echo "%cover_exe%" -register:user "-target:%mspec_exe%" "-targetargs:%test_assemblies% --timeinfo --silent --html %spec_results%" -filter:%coverage_filter% "-output:%coverage_results%"
+@"%cover_exe%" -register:user "-target:%mspec_exe%" "-targetargs:%test_assemblies% --timeinfo --silent --html %spec_results%" -filter:%coverage_filter% "-output:%coverage_results%"
 
 @echo "%cover_exe%" -register:user "-target:%xunit_exe%" "-targetargs:%test_assemblies% -noshadow -html %xunit_results%" -mergeoutput -filter:%coverage_filter% "-output:%coverage_results%"
 @"%cover_exe%" -register:user "-target:%xunit_exe%" "-targetargs:%test_assemblies% -noshadow -html %xunit_results%" -mergeoutput -filter:%coverage_filter% "-output:%coverage_results%"

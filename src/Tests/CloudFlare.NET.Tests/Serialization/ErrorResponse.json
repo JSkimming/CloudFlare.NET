@@ -1,0 +1,14 @@
+﻿{
+    "result": {},
+    "success": false,
+    "errors": [
+        {
+            "code": 1003,
+            "message": "Invalid or missing zone id."
+        }
+    ],
+    "messages": [
+        "Message 1",
+        "Message 1"
+    ]
+}
