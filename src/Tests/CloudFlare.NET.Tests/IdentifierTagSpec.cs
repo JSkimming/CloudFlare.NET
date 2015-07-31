@@ -85,4 +85,99 @@
         It should_be_inequal_to_a_different_identifier_when_using_the_operator =
             () => (_implicitCreated != Guid.NewGuid().ToString("N")).ShouldBeTrue();
     }
+
+    [Subject(typeof(IdentifierTag))]
+    public class When_evaluating_equality_via_default_Equals
+    {
+        protected static object _source;
+        protected static object _same;
+        protected static object _different;
+
+        Establish context = () =>
+        {
+            _source = new IdentifierTag(Guid.NewGuid().ToString("N"));
+            _same = new IdentifierTag(_source.ToString());
+            _different = new IdentifierTag(Guid.NewGuid().ToString("N"));
+        };
+
+        It should_be_equal_when_compared_against_the_same_reference =
+            () => _source.Equals(_source).ShouldBeTrue();
+
+        It should_be_equal_when_compared_against_the_same_value =
+            () => _source.Equals(_same).ShouldBeTrue();
+
+        It should_not_be_equal_when_compared_against_the_a_different_value =
+            () => _source.Equals(_different).ShouldBeFalse();
+
+        It should_not_be_equal_when_compared_against_a_different_type =
+            () => _source.Equals(Guid.NewGuid()).ShouldBeFalse();
+
+        It should_not_be_equal_when_compared_against_null =
+            () => _source.Equals(null).ShouldBeFalse();
+    }
+
+    [Subject(typeof(IdentifierTag))]
+    public class When_evaluating_equality_via_typed_Equals
+    {
+        protected static IdentifierTag _source;
+        protected static IdentifierTag _same;
+        protected static IdentifierTag _different;
+
+        Establish context = () =>
+        {
+            _source = new IdentifierTag(Guid.NewGuid().ToString("N"));
+            _same = new IdentifierTag(_source.ToString());
+            _different = new IdentifierTag(Guid.NewGuid().ToString("N"));
+        };
+
+        It should_be_equal_when_compared_against_the_same_reference =
+            () => _source.Equals(_source).ShouldBeTrue();
+
+        It should_be_equal_when_compared_against_the_same_value =
+            () => _source.Equals(_same).ShouldBeTrue();
+
+        It should_not_be_equal_when_compared_against_the_a_different_value =
+            () => _source.Equals(_different).ShouldBeFalse();
+
+        It should_not_be_equal_when_compared_against_null =
+            () => _source.Equals(null).ShouldBeFalse();
+    }
+
+    [Subject(typeof(IdentifierTag))]
+    public class When_evaluating_equality_via_Comparer_Equals
+    {
+        protected static IdentifierTag _source;
+        protected static IdentifierTag _same;
+        protected static IdentifierTag _different;
+        protected static IdentifierTag _differentType;
+
+        Establish context = () =>
+        {
+            _source = new IdentifierTag(Guid.NewGuid().ToString("N"));
+            _same = new IdentifierTag(_source.ToString());
+            _different = new IdentifierTag(Guid.NewGuid().ToString("N"));
+            _differentType = new Moq.Mock<IdentifierTag>(_source.ToString()).Object;
+        };
+
+        It should_be_equal_when_compared_against_the_same_reference =
+            () => IdentifierTag.Comparer.Equals(_source, _source).ShouldBeTrue();
+
+        It should_be_equal_when_both_operands_null =
+            () => IdentifierTag.Comparer.Equals(null, null).ShouldBeTrue();
+
+        It should_be_equal_when_compared_against_the_same_value =
+            () => IdentifierTag.Comparer.Equals(_source, _same).ShouldBeTrue();
+
+        It should_not_be_equal_when_compared_against_the_a_different_value =
+            () => IdentifierTag.Comparer.Equals(_source, _different).ShouldBeFalse();
+
+        It should_not_be_equal_when_compared_against_null_lhs =
+            () => IdentifierTag.Comparer.Equals(null, _source).ShouldBeFalse();
+
+        It should_not_be_equal_when_compared_against_null_rhs =
+            () => IdentifierTag.Comparer.Equals(_source, null).ShouldBeFalse();
+
+        It should_not_be_equal_when_compared_against_different_type =
+            () => IdentifierTag.Comparer.Equals(_source, _differentType).ShouldBeFalse();
+    }
 }
