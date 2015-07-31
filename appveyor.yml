@@ -22,6 +22,10 @@ version: 0.0.{build}
 # Operating system (build VM template)
 os: Visual Studio 2015
 
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: jlhfF+rdDZcjWN/u57Q6xPQZbZCL9fMkqWaAfbyLp/C+H5gQ7PHLxFIIDX+7H4eV
+
 # scripts that are called at very beginning, before repo cloning
 init:
   - git config --global core.autocrlf input
@@ -71,6 +75,8 @@ after_test: |
   7z a CoverageResults.7z src\TestResults\
   appveyor PushArtifact CoverageResults.7z -FileName "CoverageResults_%GitVersion_FullSemVer%.7z"
   appveyor PushArtifact src\TestResults\Specifications.html -FileName "Specifications_%GitVersion_FullSemVer%.html"
+  FOR /r %%F IN (*coveralls.net.exe) DO SET coveralls_exe=%%F
+  %coveralls_exe% --opencover src\TestResults\Test.Coverage.xml
 
 #---------------------------------#
 #         notifications           #
