@@ -6,17 +6,6 @@
     using Machine.Specifications;
 
     [Subject(typeof(IdentifierTag))]
-    public class When_initializing_with_a_null_string
-    {
-        static Exception _exception;
-
-        Because of = () =>
-            _exception = Catch.Exception(() => new IdentifierTag(null));
-
-        It throw_an_ArgumentNullException = () => _exception.ShouldBeOfExactType<ArgumentNullException>();
-    }
-
-    [Subject(typeof(IdentifierTag))]
     public class When_initializing_with_an_empty_string
     {
         static Exception _exception;

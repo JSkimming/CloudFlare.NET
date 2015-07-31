@@ -54,7 +54,13 @@
         /// The implicit operator to return the string representation of an <see cref="IdentifierTag"/>.
         /// </summary>
         /// <param name="identifier">The unique identifier of an entity in CloudFlair.</param>
-        public static implicit operator string(IdentifierTag identifier) => identifier._id;
+        public static implicit operator string(IdentifierTag identifier)
+        {
+            if (identifier == null)
+                throw new ArgumentNullException(nameof(identifier));
+
+            return identifier._id;
+        }
 
         /// <summary>
         /// Returns a string that represents the current object.
