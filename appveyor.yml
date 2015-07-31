@@ -45,6 +45,7 @@ assembly_info:
 configuration: Release
 
 build:
+  project: src\cloudflare.net.sln
   #publish_nuget: true             # package projects with .nuspec files and push to artifacts
   #publish_nuget_symbols: true    # generate and publish NuGet symbol packages
 
@@ -56,13 +57,20 @@ before_build:
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 
 after_build:
-  - nuget pack "%APPVEYOR_BUILD_FOLDER%\src\CloudFlare.NET\CloudFlare.NET.csproj" -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%" -Symbols 
+  - nuget pack "%APPVEYOR_BUILD_FOLDER%\src\CloudFlare.NET\CloudFlare.NET.csproj" -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%" -Symbols
   - appveyor PushArtifact "CloudFlare.NET.%GitVersion_NuGetVersion%.nupkg"
   - appveyor PushArtifact "CloudFlare.NET.%GitVersion_NuGetVersion%.symbols.nupkg"
 
 #---------------------------------#
 #       tests configuration       #
 #---------------------------------#
+
+test_script: coverage.cmd
+
+after_test: |
+  7z a CoverageResults.7z src\TestResults\
+  appveyor PushArtifact CoverageResults.7z -FileName "CoverageResults_%GitVersion_FullSemVer%.7z"
+  appveyor PushArtifact src\TestResults\Specifications.html -FileName "Specifications_%GitVersion_FullSemVer%.html"
 
 #---------------------------------#
 #         notifications           #
