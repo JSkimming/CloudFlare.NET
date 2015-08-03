@@ -8,7 +8,7 @@
     [Subject("Zones")]
     public class ZonesSpec
     {
-        static ICloudFlareClient _client;
+        static IZoneClient _client;
         static CloudFlareAuth _auth;
         static IReadOnlyList<Zone> _zones;
 

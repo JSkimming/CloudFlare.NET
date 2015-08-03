@@ -70,10 +70,16 @@
     <Compile Include="CloudFlareResponse.cs" />
     <Compile Include="CloudFlareResponseBase.cs" />
     <Compile Include="CloudFlareResultInfo.cs" />
+    <Compile Include="DnsRecord.cs" />
+    <Compile Include="DnsRecordClientExtensions.cs" />
+    <Compile Include="DnsRecordType.cs" />
+    <Compile Include="HttpClientDnsRecordExtensions.cs" />
+    <Compile Include="HttpClientExtensions.cs" />
     <Compile Include="HttpClientZoneExtensions.cs" />
     <Compile Include="ICloudFlareClient.cs" />
     <Compile Include="IdentifierTag.cs" />
     <Compile Include="IdentifierTag.IEquatable.cs" />
+    <Compile Include="IDnsRecordClient.cs" />
     <Compile Include="IZoneClient.cs" />
     <Compile Include="Zone.cs" />
     <Compile Include="ZoneClientExtensions.cs" />

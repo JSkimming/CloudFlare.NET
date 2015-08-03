@@ -33,7 +33,16 @@
         /// <inheritdoc/>
         public Task<IReadOnlyList<Zone>> GetZonesAsync(CancellationToken cancellationToken, CloudFlareAuth auth = null)
         {
-            return Client.GetZonesAsync(auth, cancellationToken);
+            return Client.GetZonesAsync(cancellationToken, auth);
+        }
+
+        /// <inheritdoc/>
+        public Task<IReadOnlyList<DnsRecord>> GetDnsRecordsAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return Client.GetDnsRecordsAsync(zoneId, cancellationToken, auth);
         }
     }
 }

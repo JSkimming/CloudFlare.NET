@@ -58,6 +58,7 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DnsRecordsSpec.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ZonesSpec.cs" />
     <None Include="app.config" />
