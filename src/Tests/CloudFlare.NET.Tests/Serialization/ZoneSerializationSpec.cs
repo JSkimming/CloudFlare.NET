@@ -44,4 +44,21 @@
         It should_deserialize_name_servers =
             () => _zone.NameServers.ShouldContainOnly(_zoneJson["name_servers"].ToObject<List<string>>());
     }
+
+    [Subject(typeof(Zone))]
+    public class When_deserializing_zone_minimal
+    {
+        static JObject _zoneJson;
+        static Zone _zone;
+
+        Because of = () =>
+        {
+            _zoneJson = SampleJson.ZoneMinimal;
+            _zone = _zoneJson.ToObject<Zone>();
+        };
+
+        It should_deserialize_id = () => _zone.Id.ToString().ShouldEqual(_zoneJson["id"].Value<string>());
+
+        It should_deserialize_name = () => _zone.Name.ShouldEqual(_zoneJson["name"].Value<string>());
+    }
 }

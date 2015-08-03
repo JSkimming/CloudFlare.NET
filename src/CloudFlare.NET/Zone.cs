@@ -11,7 +11,7 @@
     /// <seealso href="https://api.cloudflare.com/#zone-properties"/>
     public class Zone
     {
-        private static readonly IReadOnlyList<string> EmptyString = Enumerable.Empty<string>().ToList();
+        private static readonly IReadOnlyList<string> EmptyStrings = Enumerable.Empty<string>().ToArray();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Zone"/> class.
@@ -20,33 +20,27 @@
             IdentifierTag id,
             string name,
             int developmentMode,
-            IReadOnlyList<string> originalNameServers,
-            string originalRegistrar,
-            string originalDnshost,
             DateTimeOffset createdOn,
             DateTimeOffset modifiedOn,
+            IReadOnlyList<string> originalNameServers = null,
+            string originalRegistrar = null,
+            string originalDnshost = null,
             IReadOnlyList<string> nameServers = null)
         {
             if (id == null)
                 throw new ArgumentNullException(nameof(id));
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException(nameof(name));
-            if (originalNameServers == null)
-                throw new ArgumentNullException(nameof(originalNameServers));
-            if (string.IsNullOrWhiteSpace(originalRegistrar))
-                throw new ArgumentNullException(nameof(originalRegistrar));
-            if (string.IsNullOrWhiteSpace(originalDnshost))
-                throw new ArgumentNullException(nameof(originalDnshost));
 
             Id = id;
             Name = name;
             DevelopmentMode = developmentMode;
-            OriginalNameServers = originalNameServers;
-            OriginalRegistrar = originalRegistrar;
-            OriginalDnshost = originalDnshost;
+            OriginalNameServers = originalNameServers ?? EmptyStrings;
+            OriginalRegistrar = originalRegistrar ?? string.Empty;
+            OriginalDnshost = originalDnshost ?? string.Empty;
             CreatedOn = createdOn;
             ModifiedOn = modifiedOn;
-            NameServers = nameServers ?? EmptyString;
+            NameServers = nameServers ?? EmptyStrings;
         }
 
         /// <summary>

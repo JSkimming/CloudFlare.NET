@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{872E03EB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.Tests", "Tests\CloudFlare.NET.Tests\CloudFlare.NET.Tests.csproj", "{33243227-AB2D-45FE-ABD3-2473A50CFD9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.IntegrationTests", "Tests\CloudFlare.NET.IntegrationTests\CloudFlare.NET.IntegrationTests.csproj", "{B6869F85-BD98-418D-89F7-7E15BB9F1240}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,11 +25,16 @@ Global
 		{33243227-AB2D-45FE-ABD3-2473A50CFD9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33243227-AB2D-45FE-ABD3-2473A50CFD9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33243227-AB2D-45FE-ABD3-2473A50CFD9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6869F85-BD98-418D-89F7-7E15BB9F1240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6869F85-BD98-418D-89F7-7E15BB9F1240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6869F85-BD98-418D-89F7-7E15BB9F1240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6869F85-BD98-418D-89F7-7E15BB9F1240}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{33243227-AB2D-45FE-ABD3-2473A50CFD9B} = {872E03EB-A9C9-45C8-9644-8442B9CF5C4F}
+		{B6869F85-BD98-418D-89F7-7E15BB9F1240} = {872E03EB-A9C9-45C8-9644-8442B9CF5C4F}
 	EndGlobalSection
 EndGlobal

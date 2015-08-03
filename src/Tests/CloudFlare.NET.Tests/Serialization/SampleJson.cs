@@ -30,5 +30,7 @@
         public static JObject SuccessResponse => Load(nameof(SuccessResponse));
 
         public static JObject Zone => Load(nameof(Zone));
+
+        public static JObject ZoneMinimal => Load(nameof(ZoneMinimal));
     }
 }
