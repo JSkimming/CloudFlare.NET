@@ -21,7 +21,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="IdentifierTag"/> class.
         /// </summary>
-        /// <param name="id">The unique identifier of an entity in CloudFlair.</param>
+        /// <param name="id">The unique identifier of an entity in CloudFlare.</param>
         public IdentifierTag(string id)
         {
             if (id == null)
@@ -47,13 +47,13 @@
         /// <summary>
         /// The implicit operator to create a new <see cref="IdentifierTag"/> from a string.
         /// </summary>
-        /// <param name="id">The unique identifier of an entity in CloudFlair.</param>
+        /// <param name="id">The unique identifier of an entity in CloudFlare.</param>
         public static implicit operator IdentifierTag(string id) => new IdentifierTag(id);
 
         /// <summary>
         /// The implicit operator to return the string representation of an <see cref="IdentifierTag"/>.
         /// </summary>
-        /// <param name="identifier">The unique identifier of an entity in CloudFlair.</param>
+        /// <param name="identifier">The unique identifier of an entity in CloudFlare.</param>
         public static implicit operator string(IdentifierTag identifier)
         {
             if (identifier == null)

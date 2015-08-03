@@ -1,0 +1,69 @@
+﻿{
+    "id": "9a7806061c88ada191ed06f989cc3dac",
+    "name": "example.com",
+    "development_mode": 7200,
+    "original_name_servers": [
+        "ns1.originaldnshost.com",
+        "ns2.originaldnshost.com"
+    ],
+    "original_registrar": "GoDaddy",
+    "original_dnshost": "NameCheap",
+    "created_on": "2014-01-01T05:20:00.12345Z",
+    "modified_on": "2014-01-01T05:20:00.12345Z",
+    "name_servers": [
+        "tony.ns.cloudflare.com",
+        "woz.ns.cloudflare.com"
+    ],
+    "owner": {
+        "id": "9a7806061c88ada191ed06f989cc3dac",
+        "email": "user@example.com",
+        "owner_type": "user"
+    },
+    "permissions": [
+        "#zone:read",
+        "#zone:edit"
+    ],
+    "plan": {
+        "id": "9a7806061c88ada191ed06f989cc3dac",
+        "name": "Pro Plan",
+        "price": 20,
+        "currency": "USD",
+        "frequency": "monthly",
+        "legacy_id": "pro",
+        "is_subscribed": true,
+        "can_subscribe": true
+    },
+    "plan_pending": {
+        "id": "9a7806061c88ada191ed06f989cc3dac",
+        "name": "Pro Plan",
+        "price": 20,
+        "currency": "USD",
+        "frequency": "monthly",
+        "legacy_id": "pro",
+        "is_subscribed": true,
+        "can_subscribe": true
+    },
+    "status": "active",
+    "paused": false,
+    "type": "full",
+    "checked_on": "2014-01-01T05:20:00.12345Z",
+    "host": {
+        "name": "Example Host",
+        "website": "http://www.examplehost.com"
+    },
+    "vanity_name_servers": [
+        "ns1.example.com",
+        "ns2.example.com"
+    ],
+    "betas": [
+        "new_feature"
+    ],
+    "deactivation_reason": "abuse_violation",
+    "meta": {
+        "custom_certificate_quota": 1,
+        "page_rule_quota": 5,
+        "wildcard_proxiable": false,
+        "phishing_detected": false,
+        "multiple_railgun_connections": false
+    }
+}

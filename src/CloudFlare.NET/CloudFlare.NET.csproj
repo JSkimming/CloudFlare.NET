@@ -63,12 +63,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloudFlareAuth.cs" />
+    <Compile Include="CloudFlareClient.cs" />
+    <Compile Include="CloudFlareConstants.cs" />
+    <Compile Include="CloudFlareError.cs" />
+    <Compile Include="CloudFlareResponse.cs" />
+    <Compile Include="CloudFlareResponseBase.cs" />
+    <Compile Include="CloudFlareResultInfo.cs" />
+    <Compile Include="HttpClientZoneExtensions.cs" />
+    <Compile Include="ICloudFlareClient.cs" />
     <Compile Include="IdentifierTag.cs" />
     <Compile Include="IdentifierTag.IEquatable.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IZoneClient.cs" />
+    <Compile Include="Zone.cs" />
+    <Compile Include="ZoneClientExtensions.cs" />
     <None Include="app.config" />
     <None Include="CloudFlare.NET.nuspec" />
     <None Include="packages.config" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0-beta001\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
