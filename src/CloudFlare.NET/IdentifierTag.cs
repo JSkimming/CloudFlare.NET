@@ -30,14 +30,14 @@
             if (string.IsNullOrEmpty(id))
             {
                 throw new ArgumentException(
-                    $"The { nameof(id) } cannot be empty.",
+                    $"The {nameof(id)} cannot be empty.",
                     nameof(id));
             }
 
             if (id.Length > MaxLength)
             {
                 throw new ArgumentException(
-                    $"The { nameof(id) } '{id}' is of length {id.Length} but cannot be greater than {MaxLength}.",
+                    $"The {nameof(id)} '{id}' is of length {id.Length} but cannot be greater than {MaxLength}.",
                     nameof(id));
             }
 
