@@ -9,7 +9,7 @@
     /// <summary>
     /// The CloudFlare API Client.
     /// </summary>
-    /// <seealso href="https://api.cloudflare.com/#zone-properties"/>
+    /// <seealso href="https://api.cloudflare.com/#zone"/>
     public interface IZoneClient
     {
         /// <summary>

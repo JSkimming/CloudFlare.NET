@@ -9,43 +9,43 @@
     [Subject(typeof(CloudFlareResponse<>))]
     public class When_deserializing_success_response
     {
-        static JObject _successResponseJson;
-        static CloudFlareResponse<JObject> _successResponse;
+        static JObject _json;
+        static CloudFlareResponse<JObject> _sut;
 
         Because of = () =>
         {
-            _successResponseJson = SampleJson.SuccessResponse;
-            _successResponse = _successResponseJson.ToObject<CloudFlareResponse<JObject>>();
+            _json = SampleJson.SuccessResponse;
+            _sut = _json.ToObject<CloudFlareResponse<JObject>>();
         };
 
         It should_deserialize_result =
-            () => _successResponse.Result["id"].ShouldEqual(_successResponseJson["result"]["id"]);
+            () => _sut.Result["id"].ShouldEqual(_json["result"]["id"]);
 
         It should_deserialize_success =
-            () => _successResponse.Success.ShouldEqual(_successResponseJson["success"].Value<bool>());
+            () => _sut.Success.ShouldEqual(_json["success"].Value<bool>());
 
         It should_deserialize_errors =
-            () => _successResponse.Errors
-                .ShouldContainOnly(_successResponseJson["errors"].ToObject<List<CloudFlareError>>());
+            () => _sut.Errors
+                .ShouldContainOnly(_json["errors"].ToObject<List<CloudFlareError>>());
 
         It should_deserialize_messages =
-            () => _successResponse.Messages
-                .ShouldContainOnly(_successResponseJson["messages"].ToObject<List<string>>());
+            () => _sut.Messages
+                .ShouldContainOnly(_json["messages"].ToObject<List<string>>());
 
         It should_deserialize_result_info_page =
-            () => _successResponse.ResultInfo.Page
-                .ShouldEqual(_successResponseJson["result_info"]["page"].Value<int>());
+            () => _sut.ResultInfo.Page
+                .ShouldEqual(_json["result_info"]["page"].Value<int>());
 
         It should_deserialize_result_info_per_page =
-            () => _successResponse.ResultInfo.PerPage
-                .ShouldEqual(_successResponseJson["result_info"]["per_page"].Value<int>());
+            () => _sut.ResultInfo.PerPage
+                .ShouldEqual(_json["result_info"]["per_page"].Value<int>());
 
         It should_deserialize_result_info_count =
-            () => _successResponse.ResultInfo.Count
-                .ShouldEqual(_successResponseJson["result_info"]["count"].Value<int>());
+            () => _sut.ResultInfo.Count
+                .ShouldEqual(_json["result_info"]["count"].Value<int>());
 
         It should_deserialize_result_info_total_count =
-            () => _successResponse.ResultInfo.TotalCount
-                .ShouldEqual(_successResponseJson["result_info"]["total_count"].Value<int>());
+            () => _sut.ResultInfo.TotalCount
+                .ShouldEqual(_json["result_info"]["total_count"].Value<int>());
     }
 }

@@ -25,6 +25,10 @@
             }
         }
 
+        public static JObject DnsRecord => Load(nameof(DnsRecord));
+
+        public static JObject DnsRecordMinimal => Load(nameof(DnsRecordMinimal));
+
         public static JObject ErrorResponse => Load(nameof(ErrorResponse));
 
         public static JObject SuccessResponse => Load(nameof(SuccessResponse));

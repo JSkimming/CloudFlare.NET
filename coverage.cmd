@@ -44,11 +44,13 @@
 ::@echo "%xunit_exe%" "%test_assemblies%" -noshadow -html "%xunit_results%"
 ::@"%xunit_exe%" "%test_assemblies%" -noshadow -html "%xunit_results%"
 
-@echo "%cover_exe%" -register:user "-target:%mspec_exe%" "-targetargs:%test_assemblies% --timeinfo --silent --html %spec_results%" -filter:%coverage_filter% "-output:%coverage_results%"
-@"%cover_exe%" -register:user "-target:%mspec_exe%" "-targetargs:%test_assemblies% --timeinfo --silent --html %spec_results%" -filter:%coverage_filter% "-output:%coverage_results%"
+@echo "%cover_exe%" -register:user "-target:%mspec_exe%" "-targetargs:%test_assemblies% --timeinfo --silent --html %spec_results%" -returntargetcode -filter:%coverage_filter% "-output:%coverage_results%"
+@"%cover_exe%" -register:user "-target:%mspec_exe%" "-targetargs:%test_assemblies% --timeinfo --silent --html %spec_results%" -returntargetcode -filter:%coverage_filter% "-output:%coverage_results%"
+@IF ERRORLEVEL 1 GOTO :EOF
 
-@echo "%cover_exe%" -register:user "-target:%xunit_exe%" "-targetargs:%test_assemblies% -noshadow -html %xunit_results%" -mergeoutput -filter:%coverage_filter% "-output:%coverage_results%"
-@"%cover_exe%" -register:user "-target:%xunit_exe%" "-targetargs:%test_assemblies% -noshadow -html %xunit_results%" -mergeoutput -filter:%coverage_filter% "-output:%coverage_results%"
+@echo "%cover_exe%" -register:user "-target:%xunit_exe%" "-targetargs:%test_assemblies% -noshadow -html %xunit_results%" -returntargetcode -mergeoutput -filter:%coverage_filter% "-output:%coverage_results%"
+@"%cover_exe%" -register:user "-target:%xunit_exe%" "-targetargs:%test_assemblies% -noshadow -html %xunit_results%" -returntargetcode -mergeoutput -filter:%coverage_filter% "-output:%coverage_results%"
+@IF ERRORLEVEL 1 GOTO :EOF
 
 @echo "%report_exe%" -verbosity:Error "-reports:%coverage_results%" "-targetdir:%~dp0src\TestResults" -reporttypes:XmlSummary
 @"%report_exe%" -verbosity:Error "-reports:%coverage_results%" "-targetdir:%~dp0src\TestResults" -reporttypes:XmlSummary

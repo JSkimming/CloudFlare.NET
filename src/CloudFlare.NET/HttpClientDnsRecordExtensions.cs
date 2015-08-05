@@ -10,28 +10,27 @@
     /// <summary>
     /// Extension methods on <see cref="HttpClient"/> to wrap the Zone APIs
     /// </summary>
-    /// <seealso href="https://api.cloudflare.com/#zone"/>
-    public static class HttpClientZoneExtensions
+    /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone"/>
+    public static class HttpClientDnsRecordExtensions
     {
-        /// <summary>
-        /// Gets the base address of the CloudFlare API.
-        /// </summary>
-        public static Uri ZonesUri { get; } = new Uri(CloudFlareConstants.BaseUri, "zones");
-
         /// <summary>
         /// Gets the zones for the account specified by the <paramref name="auth"/> details.
         /// </summary>
-        public static async Task<IReadOnlyList<Zone>> GetZonesAsync(
+        public static async Task<IReadOnlyList<DnsRecord>> GetDnsRecordsAsync(
             this HttpClient client,
+            IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
             if (auth == null)
                 throw new ArgumentNullException(nameof(auth));
 
-            var request = new HttpRequestMessage(HttpMethod.Get, ZonesUri);
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/dns_records");
+            var request = new HttpRequestMessage(HttpMethod.Get, uri);
             request.AddAuth(auth);
 
             HttpResponseMessage response =
@@ -39,7 +38,7 @@
                     .ConfigureAwait(false);
 
             return (await response
-                .GetResultAsync<IReadOnlyList<Zone>>(cancellationToken)
+                .GetResultAsync<IReadOnlyList<DnsRecord>>(cancellationToken)
                 .ConfigureAwait(false))
                 .Result;
         }

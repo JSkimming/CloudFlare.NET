@@ -1,0 +1,16 @@
+﻿{
+    "id": "9a7806061c88ada191ed06f989cc3dac",
+    "type": "A",
+    "name": "example.com",
+    "content": "1.2.3.4",
+    "proxiable": true,
+    "proxied": false,
+    "ttl": 120,
+    "locked": false,
+    "zone_id": "9a7806061c88ada191ed06f989cc3dac",
+    "zone_name": "example.com",
+    "created_on": "2014-01-01T05:20:00.12345Z",
+    "modified_on": "2014-01-01T05:20:00.12345Z",
+    "data": {},
+    "priority" : 10
+}
