@@ -24,7 +24,7 @@
             int ttl,
             bool locked,
             IdentifierTag zoneId,
-            DateTimeOffset createdOn,
+            DateTimeOffset? createdOn,
             DateTimeOffset modifiedOn,
             int priority,
             string content = null,
@@ -120,7 +120,7 @@
         /// When the record was created.
         /// </summary>
         [JsonProperty("created_on")]
-        public DateTimeOffset CreatedOn { get; }
+        public DateTimeOffset? CreatedOn { get; }
 
         /// <summary>
         /// When the record was last modified.
