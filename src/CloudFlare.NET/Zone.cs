@@ -20,7 +20,7 @@
             IdentifierTag id,
             string name,
             int developmentMode,
-            DateTimeOffset createdOn,
+            DateTimeOffset? createdOn,
             DateTimeOffset modifiedOn,
             IReadOnlyList<string> originalNameServers = null,
             string originalRegistrar = null,
@@ -84,7 +84,7 @@
         /// When the zone was created.
         /// </summary>
         [JsonProperty("created_on")]
-        public DateTimeOffset CreatedOn { get; }
+        public DateTimeOffset? CreatedOn { get; }
 
         /// <summary>
         /// When the zone was last modified.

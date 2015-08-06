@@ -106,6 +106,7 @@
     <Compile Include="EqualsBehaviors.cs" />
     <Compile Include="FixtureContext.cs" />
     <Compile Include="IdentifierTagSpec.cs" />
+    <Compile Include="IsNullable.cs" />
     <Compile Include="LikenessExtensions.cs" />
     <Compile Include="RequiresArgNullEx.cs" />
     <Compile Include="RequiresArgNullExAutoMoqAttribute.cs" />
