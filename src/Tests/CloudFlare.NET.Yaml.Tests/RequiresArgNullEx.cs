@@ -11,10 +11,8 @@
 
     public class RequiresArgNullEx
     {
-        [Theory, RequiresArgNullExAutoMoq(typeof(IdentifierTag))]
-        [Exclude(Method = "op_Equality")]
-        [Exclude(Method = "op_Inequality")]
-        public Task CloudFlare(MethodData method)
+        [Theory, RequiresArgNullExAutoMoq(typeof(ToYamlExtensions))]
+        public Task CloudFlareYaml(MethodData method)
         {
             return method.Execute();
         }

@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.Tests", "Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.IntegrationTests", "Tests\CloudFlare.NET.IntegrationTests\CloudFlare.NET.IntegrationTests.csproj", "{B6869F85-BD98-418D-89F7-7E15BB9F1240}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.Yaml", "CloudFlare.NET.Yaml\CloudFlare.NET.Yaml.csproj", "{86A16950-15A6-4BC3-90B6-00E4D08A1319}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.Yaml.Tests", "Tests\CloudFlare.NET.Yaml.Tests\CloudFlare.NET.Yaml.Tests.csproj", "{64495306-B225-4C98-9DF8-C57E1D6395E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{B6869F85-BD98-418D-89F7-7E15BB9F1240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6869F85-BD98-418D-89F7-7E15BB9F1240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6869F85-BD98-418D-89F7-7E15BB9F1240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86A16950-15A6-4BC3-90B6-00E4D08A1319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86A16950-15A6-4BC3-90B6-00E4D08A1319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86A16950-15A6-4BC3-90B6-00E4D08A1319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86A16950-15A6-4BC3-90B6-00E4D08A1319}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64495306-B225-4C98-9DF8-C57E1D6395E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64495306-B225-4C98-9DF8-C57E1D6395E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64495306-B225-4C98-9DF8-C57E1D6395E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64495306-B225-4C98-9DF8-C57E1D6395E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,5 +48,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{33243227-AB2D-45FE-ABD3-2473A50CFD9B} = {872E03EB-A9C9-45C8-9644-8442B9CF5C4F}
 		{B6869F85-BD98-418D-89F7-7E15BB9F1240} = {872E03EB-A9C9-45C8-9644-8442B9CF5C4F}
+		{64495306-B225-4C98-9DF8-C57E1D6395E9} = {872E03EB-A9C9-45C8-9644-8442B9CF5C4F}
 	EndGlobalSection
 EndGlobal
