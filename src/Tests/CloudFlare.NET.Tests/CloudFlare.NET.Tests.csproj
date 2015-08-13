@@ -110,6 +110,7 @@
     <Compile Include="LikenessExtensions.cs" />
     <Compile Include="RequiresArgNullEx.cs" />
     <Compile Include="RequiresArgNullExAutoMoqAttribute.cs" />
+    <Compile Include="Serialization\BehaviorTemplates.cs" />
     <Compile Include="ZoneClientExtensionsSpec.cs" />
     <Compile Include="Serialization\DnsRecordSerializationSpec.cs" />
     <Compile Include="Serialization\ErrorResponseSerializationSpec.cs" />
