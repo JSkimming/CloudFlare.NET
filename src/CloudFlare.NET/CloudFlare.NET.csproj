@@ -80,7 +80,11 @@
     <Compile Include="IdentifierTag.cs" />
     <Compile Include="IdentifierTag.IEquatable.cs" />
     <Compile Include="IDnsRecordClient.cs" />
+    <Compile Include="IIdentifier.cs" />
+    <Compile Include="IModified.cs" />
     <Compile Include="IZoneClient.cs" />
+    <Compile Include="Serialization\IsoDateTimeOffsetConverter.cs" />
+    <Compile Include="Serialization\ToStringJsonConverter.cs" />
     <Compile Include="Zone.cs" />
     <Compile Include="ZoneClientExtensions.cs" />
     <None Include="app.config" />

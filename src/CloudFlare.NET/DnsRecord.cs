@@ -4,19 +4,22 @@
     using System.Collections.Generic;
     using System.Linq;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
     using Newtonsoft.Json.Linq;
 
     /// <summary>
     /// Represents a DNS record for a <see cref="Zone"/>.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone-properties"/>
-    public class DnsRecord
+    public class DnsRecord : IIdentifier, IModified
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DnsRecord"/> class.
         /// </summary>
         public DnsRecord(
             IdentifierTag id,
+            DateTimeOffset? createdOn,
+            DateTimeOffset modifiedOn,
             DnsRecordType type,
             string name,
             bool proxiable,
@@ -24,8 +27,6 @@
             int ttl,
             bool locked,
             IdentifierTag zoneId,
-            DateTimeOffset? createdOn,
-            DateTimeOffset modifiedOn,
             int priority,
             string content = null,
             string zoneName = null,
@@ -40,6 +41,8 @@
                 throw new ArgumentNullException(nameof(zoneId));
 
             Id = id;
+            CreatedOn = createdOn;
+            ModifiedOn = modifiedOn;
             Type = type;
             Name = name;
             Content = content ?? string.Empty;
@@ -49,8 +52,6 @@
             Locked = locked;
             ZoneId = zoneId;
             ZoneName = zoneName ?? string.Empty;
-            CreatedOn = createdOn;
-            ModifiedOn = modifiedOn;
             Data = data ?? new JObject();
             Meta = meta ?? new JObject();
             Priority = priority;
@@ -59,8 +60,17 @@
         /// <summary>
         /// API item identifier tag.
         /// </summary>
-        [JsonProperty("id")]
         public IdentifierTag Id { get; }
+
+        /// <summary>
+        /// When the record was created.
+        /// </summary>
+        public DateTimeOffset? CreatedOn { get; }
+
+        /// <summary>
+        /// When the record was last modified.
+        /// </summary>
+        public DateTimeOffset ModifiedOn { get; }
 
         /// <summary>
         /// Record type.
@@ -115,18 +125,6 @@
         /// </summary>
         [JsonProperty("zone_name")]
         public string ZoneName { get; }
-
-        /// <summary>
-        /// When the record was created.
-        /// </summary>
-        [JsonProperty("created_on")]
-        public DateTimeOffset? CreatedOn { get; }
-
-        /// <summary>
-        /// When the record was last modified.
-        /// </summary>
-        [JsonProperty("modified_on")]
-        public DateTimeOffset ModifiedOn { get; }
 
         /// <summary>
         /// Metadata about the record.

@@ -3,13 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using CloudFlare.NET.Serialization;
     using Newtonsoft.Json;
 
     /// <summary>
     /// A Zone is a domain name along with its subdomains and other identities.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#zone-properties"/>
-    public class Zone
+    public class Zone : IIdentifier, IModified
     {
         private static readonly IReadOnlyList<string> EmptyStrings = Enumerable.Empty<string>().ToArray();
 
@@ -18,10 +19,10 @@
         /// </summary>
         public Zone(
             IdentifierTag id,
-            string name,
-            int developmentMode,
             DateTimeOffset? createdOn,
             DateTimeOffset modifiedOn,
+            string name,
+            int developmentMode,
             IReadOnlyList<string> originalNameServers = null,
             string originalRegistrar = null,
             string originalDnshost = null,
@@ -33,21 +34,30 @@
                 throw new ArgumentNullException(nameof(name));
 
             Id = id;
+            CreatedOn = createdOn;
+            ModifiedOn = modifiedOn;
             Name = name;
             DevelopmentMode = developmentMode;
             OriginalNameServers = originalNameServers ?? EmptyStrings;
             OriginalRegistrar = originalRegistrar ?? string.Empty;
             OriginalDnshost = originalDnshost ?? string.Empty;
-            CreatedOn = createdOn;
-            ModifiedOn = modifiedOn;
             NameServers = nameServers ?? EmptyStrings;
         }
 
         /// <summary>
         /// API item identifier tag.
         /// </summary>
-        [JsonProperty("id")]
         public IdentifierTag Id { get; }
+
+        /// <summary>
+        /// When the zone was created.
+        /// </summary>
+        public DateTimeOffset? CreatedOn { get; }
+
+        /// <summary>
+        /// When the zone was last modified.
+        /// </summary>
+        public DateTimeOffset ModifiedOn { get; }
 
         /// <summary>
         /// The domain name.
@@ -79,18 +89,6 @@
         /// </summary>
         [JsonProperty("original_dnshost")]
         public string OriginalDnshost { get; }
-
-        /// <summary>
-        /// When the zone was created.
-        /// </summary>
-        [JsonProperty("created_on")]
-        public DateTimeOffset? CreatedOn { get; }
-
-        /// <summary>
-        /// When the zone was last modified.
-        /// </summary>
-        [JsonProperty("modified_on")]
-        public DateTimeOffset ModifiedOn { get; }
 
         /// <summary>
         /// CloudFlare-assigned name servers. This is only populated for zones that use CloudFlare DNS.

@@ -4,11 +4,14 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using CloudFlare.NET.Serialization;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// A CloudFlare Identifier.
     /// </summary>
     [DebuggerDisplay("{_id}")]
+    [JsonConverter(typeof(ToStringJsonConverter))]
     public partial class IdentifierTag
     {
         /// <summary>
