@@ -16,6 +16,20 @@
 
         Because of = () => _yaml =_zone.ToYaml();
 
+
+        It should_serialize_the_name = () => _yaml.ShouldNotBeEmpty();
+    }
+
+    [Subject("DNS Records YAML")]
+    public class When_serializing_a_DNS_records_to_YAML : FixtureContext
+    {
+        static DnsRecord[] _dnsRecords;
+        static string _yaml;
+
+        Establish context = () => _dnsRecords = _fixture.Create<DnsRecord[]>();
+
+        Because of = () => _yaml = _dnsRecords.ToYaml("dns_records");
+
         It should_serialize_the_name = () => _yaml.ShouldNotBeEmpty();
     }
 

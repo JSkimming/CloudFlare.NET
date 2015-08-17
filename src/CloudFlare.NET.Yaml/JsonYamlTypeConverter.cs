@@ -37,8 +37,7 @@
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
 
-            var json = (JValue)value;
-            emitter.Emit(new Scalar(json.ToString()));
+            emitter.Emit(new Scalar(value.ToString()));
         }
     }
 }
