@@ -69,8 +69,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CloudFlareYamlTypeConverter.cs" />
     <Compile Include="JsonYamlTypeConverter.cs" />
+    <Compile Include="Serialization\DnsRecordFormatter.cs" />
+    <Compile Include="Serialization\FormatterHelpers.cs" />
+    <Compile Include="Serialization\IPostJsonFormatter.cs" />
+    <Compile Include="Serialization\StandardNonconfigurablePropertyFormatter.cs" />
+    <Compile Include="Serialization\TypedJsonFormatter.cs" />
+    <Compile Include="Serialization\YamlJsonFormatter.cs" />
+    <Compile Include="Serialization\ZoneFormatter.cs" />
     <Compile Include="ToYamlExtensions.cs" />
     <None Include="app.config" />
     <None Include="CloudFlare.NET.Yaml.nuspec" />

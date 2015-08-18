@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using CloudFlare.NET.Serialization;
     using Newtonsoft.Json.Linq;
     using YamlDotNet.Serialization;
 
@@ -28,7 +29,9 @@
             if (dnsRecords == null)
                 throw new ArgumentNullException(nameof(dnsRecords));
 
-            JToken jsonRecords = JArray.FromObject(dnsRecords);
+            var formatter = new YamlJsonFormatter();
+
+            JToken jsonRecords = JArray.FromObject(dnsRecords.Select(formatter.Process));
 
             if (!string.IsNullOrWhiteSpace(containerName))
             {
@@ -36,7 +39,6 @@
             }
 
             var serializer = new Serializer(SerializationOptions.DisableAliases);
-            ////serializer.RegisterTypeConverter(new CloudFlareYamlTypeConverter());
             serializer.RegisterTypeConverter(new JsonYamlTypeConverter());
             serializer.Serialize(writer, jsonRecords);
 
@@ -56,9 +58,11 @@
             if (zone == null)
                 throw new ArgumentNullException(nameof(zone));
 
-            var jObject = JObject.FromObject(zone);
+            var formatter = new YamlJsonFormatter();
+
+            JObject jObject = formatter.Process(zone);
+
             var serializer = new Serializer(SerializationOptions.DisableAliases);
-            ////serializer.RegisterTypeConverter(new CloudFlareYamlTypeConverter());
             serializer.RegisterTypeConverter(new JsonYamlTypeConverter());
             serializer.Serialize(writer, jObject);
 
