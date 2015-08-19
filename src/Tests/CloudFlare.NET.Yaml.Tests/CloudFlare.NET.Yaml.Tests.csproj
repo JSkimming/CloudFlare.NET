@@ -103,6 +103,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloudFlareClientExtensionsSpec.cs" />
     <Compile Include="CloudFlareCustomization.cs" />
     <Compile Include="FixtureContext.cs" />
     <Compile Include="IsNullable.cs" />

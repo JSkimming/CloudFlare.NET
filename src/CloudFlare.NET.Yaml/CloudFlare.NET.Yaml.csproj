@@ -69,6 +69,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloudFlareClientExtensions.cs" />
     <Compile Include="JsonYamlTypeConverter.cs" />
     <Compile Include="Serialization\DnsRecordFormatter.cs" />
     <Compile Include="Serialization\FormatterHelpers.cs" />
@@ -78,12 +79,20 @@
     <Compile Include="Serialization\YamlJsonFormatter.cs" />
     <Compile Include="Serialization\ZoneFormatter.cs" />
     <Compile Include="ToYamlExtensions.cs" />
+    <Compile Include="ZoneData.cs" />
     <None Include="app.config" />
     <None Include="CloudFlare.NET.Yaml.nuspec" />
     <None Include="packages.config" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Analyzer Include="..\packages\AsyncFixer.1.0.0.0\tools\analyzers\AsyncFixer.dll" />
+    <Analyzer Include="..\packages\AsyncFixer.1.0.0.0\tools\analyzers\RoslynUtilities.dll" />
+    <Analyzer Include="..\packages\AsyncFixer.1.0.0.0\tools\analyzers\System.Composition.AttributedModel.dll" />
+    <Analyzer Include="..\packages\AsyncFixer.1.0.0.0\tools\analyzers\System.Composition.Convention.dll" />
+    <Analyzer Include="..\packages\AsyncFixer.1.0.0.0\tools\analyzers\System.Composition.Hosting.dll" />
+    <Analyzer Include="..\packages\AsyncFixer.1.0.0.0\tools\analyzers\System.Composition.Runtime.dll" />
+    <Analyzer Include="..\packages\AsyncFixer.1.0.0.0\tools\analyzers\System.Composition.TypedParts.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0-beta003\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
