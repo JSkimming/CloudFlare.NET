@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -15,7 +14,7 @@
         /// <summary>
         /// Gets the zones for the subscription.
         /// </summary>
-        /// <returns>The zones for the subscription.</returns>
+        /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records"/>
         public static Task<IReadOnlyList<DnsRecord>> GetDnsRecordsAsync(
             this IDnsRecordClient client,
             IdentifierTag zoneId,

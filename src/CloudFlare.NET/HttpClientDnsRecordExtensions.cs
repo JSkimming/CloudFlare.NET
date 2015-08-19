@@ -16,6 +16,7 @@
         /// <summary>
         /// Gets the zones for the account specified by the <paramref name="auth"/> details.
         /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records"/>
         public static async Task<IReadOnlyList<DnsRecord>> GetDnsRecordsAsync(
             this HttpClient client,
             IdentifierTag zoneId,

@@ -15,7 +15,13 @@
         /// <summary>
         /// Gets the zones for the subscription.
         /// </summary>
-        /// <returns>The zones for the subscription.</returns>
+        /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
         Task<IReadOnlyList<Zone>> GetZonesAsync(CancellationToken cancellationToken, CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Gets the zone with the specified <paramref name="zoneId"/>.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-zone-details"/>
+        Task<Zone> GetZoneAsync(IdentifierTag zoneId, CancellationToken cancellationToken, CloudFlareAuth auth);
     }
 }

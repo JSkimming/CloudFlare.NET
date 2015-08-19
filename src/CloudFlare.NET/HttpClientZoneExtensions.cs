@@ -14,13 +14,9 @@
     public static class HttpClientZoneExtensions
     {
         /// <summary>
-        /// Gets the base address of the CloudFlare API.
-        /// </summary>
-        public static Uri ZonesUri { get; } = new Uri(CloudFlareConstants.BaseUri, "zones");
-
-        /// <summary>
         /// Gets the zones for the account specified by the <paramref name="auth"/> details.
         /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
         public static async Task<IReadOnlyList<Zone>> GetZonesAsync(
             this HttpClient client,
             CancellationToken cancellationToken,
@@ -31,7 +27,8 @@
             if (auth == null)
                 throw new ArgumentNullException(nameof(auth));
 
-            var request = new HttpRequestMessage(HttpMethod.Get, ZonesUri);
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, "zones");
+            var request = new HttpRequestMessage(HttpMethod.Get, uri);
             request.AddAuth(auth);
 
             HttpResponseMessage response =
@@ -40,6 +37,37 @@
 
             return (await response
                 .GetResultAsync<IReadOnlyList<Zone>>(cancellationToken)
+                .ConfigureAwait(false))
+                .Result;
+        }
+
+        /// <summary>
+        /// Gets the zones for the account specified by the <paramref name="auth"/> details.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-zone-details"/>
+        public static async Task<Zone> GetZoneAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+            if (auth == null)
+                throw new ArgumentNullException(nameof(auth));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}");
+            var request = new HttpRequestMessage(HttpMethod.Get, uri);
+            request.AddAuth(auth);
+
+            HttpResponseMessage response =
+                await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+                    .ConfigureAwait(false);
+
+            return (await response
+                .GetResultAsync<Zone>(cancellationToken)
                 .ConfigureAwait(false))
                 .Result;
         }
