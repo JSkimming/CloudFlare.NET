@@ -34,4 +34,29 @@
 
         It should_return_the_zones = () => _actual.ShouldBeTheSameAs(_expected);
     }
+
+    [Subject(typeof(ZoneClientExtensions))]
+    public class When_getting_a_zone : FixtureContext
+    {
+        static Mock<IZoneClient> _zoneClientMock;
+        static IdentifierTag _zoneId;
+        static CloudFlareAuth _auth;
+        static Zone _expected;
+        static Zone _actual;
+
+        Establish context = () =>
+        {
+            _zoneClientMock = _fixture.Create<Mock<IZoneClient>>();
+            _auth = _fixture.Create<CloudFlareAuth>();
+            _expected = _fixture.Create<Zone>();
+            _zoneId = _expected.Id;
+            _zoneClientMock
+                .Setup(c => c.GetZoneAsync(_zoneId, CancellationToken.None, _auth))
+                .ReturnsAsync(_expected);
+        };
+
+        Because of = () => _actual = _zoneClientMock.Object.GetZoneAsync(_zoneId, _auth).Await();
+
+        It should_return_the_zones = () => _actual.ShouldBeTheSameAs(_expected);
+    }
 }
