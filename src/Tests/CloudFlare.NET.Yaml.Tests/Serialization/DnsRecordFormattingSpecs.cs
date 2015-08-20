@@ -50,6 +50,6 @@
 
         It should_remove_meta = () => _json["meta"].ShouldBeNull();
 
-        It should_serialize_6_property = () => _json.Count.ShouldEqual(6);
+        It should_serialize_6_properties = () => _json.Count.ShouldEqual(6);
     }
 }

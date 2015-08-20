@@ -14,6 +14,26 @@
     public static class ToYamlExtensions
     {
         /// <summary>
+        /// Returns the YAML representation of a collection of <see cref="ZoneData"/>.
+        /// </summary>
+        /// <typeparam name="TWriter">The type of the <paramref name="writer"/>.</typeparam>
+        /// <returns>The <paramref name="writer"/> to allow for fluent usage.</returns>
+        public static TWriter SerializeYaml<TWriter>(
+            this TWriter writer,
+            ZoneData zoneData)
+            where TWriter : TextWriter
+        {
+            if (writer == null)
+                throw new ArgumentNullException(nameof(writer));
+            if (zoneData == null)
+                throw new ArgumentNullException(nameof(zoneData));
+
+            return writer
+                .SerializeYaml(zoneData.Zone)
+                .SerializeYaml(zoneData.DnsRecords, "dns_records");
+        }
+
+        /// <summary>
         /// Returns the YAML representation of a collection of <see cref="DnsRecord"/>.
         /// </summary>
         /// <typeparam name="TWriter">The type of the <paramref name="writer"/>.</typeparam>
@@ -31,7 +51,7 @@
 
             var formatter = new YamlJsonFormatter();
 
-            JToken jsonRecords = JArray.FromObject(dnsRecords.Select(formatter.Process));
+            JContainer jsonRecords = JArray.FromObject(dnsRecords.Select(formatter.Process));
 
             if (!string.IsNullOrWhiteSpace(containerName))
             {
@@ -67,6 +87,19 @@
             serializer.Serialize(writer, jObject);
 
             return writer;
+        }
+
+        /// <summary>
+        /// Returns the YAML representation of a <see cref="ZoneData"/>.
+        /// </summary>
+        public static string ToYaml(this ZoneData zoneData)
+        {
+            if (zoneData == null)
+                throw new ArgumentNullException(nameof(zoneData));
+
+            var writer = new StringWriter();
+
+            return writer.SerializeYaml(zoneData).ToString();
         }
 
         /// <summary>
