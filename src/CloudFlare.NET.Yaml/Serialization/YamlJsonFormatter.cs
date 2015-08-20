@@ -13,16 +13,24 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="YamlJsonFormatter"/> class.
         /// </summary>
-        public YamlJsonFormatter(IEnumerable<IPostJsonFormatter> additionalPostFormatters = null)
+        public YamlJsonFormatter(
+            IEnumerable<IPreJsonFormatter> customPreFormatters = null,
+            IEnumerable<IPostJsonFormatter> customPostFormatters = null)
         {
-            PostFormatters =
-                DefaultPostFormatters
-                    .Union(additionalPostFormatters ?? Enumerable.Empty<IPostJsonFormatter>())
-                    .ToList();
+            PreFormatters = customPreFormatters == null ? DefaultPreFormatters : customPreFormatters.ToList();
+            PostFormatters = customPostFormatters == null ? DefaultPostFormatters : customPostFormatters.ToList();
         }
 
         /// <summary>
-        /// The default formatters.
+        /// The default pre-formatters.
+        /// </summary>
+        public static IReadOnlyList<IPreJsonFormatter> DefaultPreFormatters { get; } =
+            new IPreJsonFormatter[]
+            {
+            };
+
+        /// <summary>
+        /// The default post-formatters.
         /// </summary>
         public static IReadOnlyList<IPostJsonFormatter> DefaultPostFormatters { get; } =
             new IPostJsonFormatter[]
@@ -33,32 +41,35 @@
             };
 
         /// <summary>
-        /// The formatters.
+        /// The pre-formatters.
         /// </summary>
-        public List<IPostJsonFormatter> PostFormatters { get; }
+        public IReadOnlyList<IPreJsonFormatter> PreFormatters { get; }
+
+        /// <summary>
+        /// The post-formatters.
+        /// </summary>
+        public IReadOnlyList<IPostJsonFormatter> PostFormatters { get; }
 
         /// <summary>
         /// Processes the value into a <see cref="JObject"/>.
         /// </summary>
-        /// <typeparam name="T">The type of the object to process, the <paramref name="value"/> can potentially derive
-        /// <typeparamref name="T"/>.</typeparam>
         /// <param name="value">The value to process.</param>
-        public JObject Process<T>(T value)
-            where T : class
+        public JObject Process(object value)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
+            var valueType = value.GetType();
+
+            // Perform an pre-formatting of the value.
+            value = PreFormatters.Where(f => f.Accepts(valueType))
+                .Aggregate(value, (current, f) => f.PreFormat(current, valueType));
+
             JObject json = JObject.FromObject(value);
 
-            List<IPostJsonFormatter> formatters = PostFormatters.Where(f => f.Accepts(typeof(T))).ToList();
-
-            foreach (IPostJsonFormatter formatter in formatters)
-            {
-                formatter.PostFormat(json, value, typeof(T));
-            }
-
-            return json;
+            // Perform an post-formatting of the json.
+            return PostFormatters.Where(f => f.Accepts(valueType))
+                .Aggregate(json, (current, f) => f.PostFormat(current, value, valueType));
         }
     }
 }

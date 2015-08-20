@@ -74,6 +74,7 @@
     <Compile Include="Serialization\DnsRecordFormatter.cs" />
     <Compile Include="Serialization\FormatterHelpers.cs" />
     <Compile Include="Serialization\IPostJsonFormatter.cs" />
+    <Compile Include="Serialization\IPreJsonFormatter.cs" />
     <Compile Include="Serialization\StandardNonconfigurablePropertyFormatter.cs" />
     <Compile Include="Serialization\TypedJsonFormatter.cs" />
     <Compile Include="Serialization\YamlJsonFormatter.cs" />
