@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>0.0.2</version>
+    <title>$title$</title>
+    <authors>James Skimming</authors>
+    <owners>James Skimming</owners>
+    <licenseUrl>https://github.com/JSkimming/CloudFlare.NET/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/JSkimming/CloudFlare.NET</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <tags>CloudFlare YAML API Client</tags>
+  </metadata>
+</package>

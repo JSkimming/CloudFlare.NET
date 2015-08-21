@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CloudFlare.NET.Tests")]
+[assembly: AssemblyTitle("CloudFlare.NET.Yaml.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CloudFlare.NET.Tests")]
+[assembly: AssemblyProduct("CloudFlare.NET.Yaml.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("33243227-ab2d-45fe-abd3-2473a50cfd9b")]
+[assembly: Guid("64495306-b225-4c98-9df8-c57e1d6395e9")]
 
 // Version information for an assembly consists of the following four values:
 //

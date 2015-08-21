@@ -6,15 +6,15 @@
     using System.Threading.Tasks;
     using AutoTest.ArgNullEx;
     using AutoTest.ArgNullEx.Xunit;
+    using CloudFlare.NET.Serialization;
     using Xunit;
     using Xunit.Extensions;
 
     public class RequiresArgNullEx
     {
-        [Theory, RequiresArgNullExAutoMoq(typeof(IdentifierTag))]
-        [Exclude(Method = "op_Equality")]
-        [Exclude(Method = "op_Inequality")]
-        public Task CloudFlare(MethodData method)
+        [Theory, RequiresArgNullExAutoMoq(typeof(ToYamlExtensions))]
+        [Substitute(typeof(TypedJsonFormatter<>), typeof(TypedJsonFormatter<object>))]
+        public Task CloudFlareYaml(MethodData method)
         {
             return method.Execute();
         }

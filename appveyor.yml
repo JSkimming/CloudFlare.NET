@@ -36,7 +36,6 @@ init:
 # scripts that run after cloning repository
 install:
   - choco install gitversion.portable -y
-  - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
 
 assembly_info:
   patch: false
