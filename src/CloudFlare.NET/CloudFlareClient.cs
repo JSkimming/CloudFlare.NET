@@ -101,7 +101,8 @@
                 if (dHandler == null)
                 {
                     throw new ArgumentException(
-                        $"All message handlers except the last must be of type '{typeof(DelegatingHandler).Name}'");
+                        $"All message handlers except the last must be of type '{typeof(DelegatingHandler).Name}'.",
+                        nameof(handlers));
                 }
 
                 dHandler.InnerHandler = pipeline;
@@ -114,7 +115,7 @@
         /// <summary>
         /// Returns a default HttpMessageHandler that supports automatic decompression.
         /// </summary>
-        public static HttpMessageHandler CreateDefaultHttpClientHandler()
+        public static HttpClientHandler CreateDefaultHttpClientHandler()
         {
             var handler = new HttpClientHandler();
             if (handler.SupportsAutomaticDecompression)

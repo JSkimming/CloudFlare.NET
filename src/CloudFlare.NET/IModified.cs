@@ -5,7 +5,7 @@
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Defines the <see cref="CreatedOn"/> and <see cref="ModifiedOn"/> properies of an entity.
+    /// Defines the <see cref="CreatedOn"/> and <see cref="ModifiedOn"/> properties of an entity.
     /// </summary>
     public interface IModified
     {
