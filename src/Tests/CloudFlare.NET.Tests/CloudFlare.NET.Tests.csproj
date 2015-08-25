@@ -103,6 +103,7 @@
     <Compile Include="CloudFlareCustomization.cs" />
     <Compile Include="CloudFlareErrorSpec.cs" />
     <Compile Include="DnsRecordClientExtensionsSpec.cs" />
+    <Compile Include="DnsRecordClientSpec.cs" />
     <Compile Include="EqualsBehaviors.cs" />
     <Compile Include="FixtureContext.cs" />
     <Compile Include="HttpHandlers\TestHttpHandler.cs" />
