@@ -1,4 +1,4 @@
-﻿namespace CloudFlare.NET.ZoneSpec
+﻿namespace CloudFlare.NET.ZoneClientExtensionsSpec
 {
     using System;
     using System.Collections.Generic;
