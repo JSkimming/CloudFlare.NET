@@ -11,5 +11,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <tags>CloudFlare YAML API Client</tags>
+    <dependencies>
+      <dependency id="CloudFlare.NET" version="0.0.3" />
+    </dependencies>
   </metadata>
 </package>
