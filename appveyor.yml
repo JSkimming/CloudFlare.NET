@@ -63,6 +63,9 @@ after_build:
   - nuget pack "%APPVEYOR_BUILD_FOLDER%\src\CloudFlare.NET\CloudFlare.NET.csproj" -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%" -Symbols
   - appveyor PushArtifact "CloudFlare.NET.%GitVersion_NuGetVersion%.nupkg"
   - appveyor PushArtifact "CloudFlare.NET.%GitVersion_NuGetVersion%.symbols.nupkg"
+  - nuget pack "%APPVEYOR_BUILD_FOLDER%\src\CloudFlare.NET.Yaml\CloudFlare.NET.Yaml.csproj" -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%" -Symbols
+  - appveyor PushArtifact "CloudFlare.NET.Yaml.%GitVersion_NuGetVersion%.nupkg"
+  - appveyor PushArtifact "CloudFlare.NET.Yaml.%GitVersion_NuGetVersion%.symbols.nupkg"
 
 #---------------------------------#
 #       tests configuration       #
