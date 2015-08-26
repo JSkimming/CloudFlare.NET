@@ -3,6 +3,7 @@ namespace CloudFlare.NET
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using CloudFlare.NET.HttpHandlers;
     using Machine.Specifications;
@@ -29,6 +30,18 @@ namespace CloudFlare.NET
             _handler = new TestHttpHandler();
             _sut = new CloudFlareClient(new HttpClient(_handler), _fixture.Create<CloudFlareAuth>());
             _auth = _fixture.Create<CloudFlareAuth>();
+        };
+    }
+
+    public abstract class ErredRequestContext : RequestContext
+    {
+        protected static CloudFlareResponseBase _erredResponse;
+        protected static Exception _exception;
+
+        Establish context = () =>
+        {
+            _erredResponse = _fixture.Create<CloudFlareResponseBase>();
+            _handler.SetResponseContent(_erredResponse, (HttpStatusCode)new Random().Next(400, 600));
         };
     }
 }

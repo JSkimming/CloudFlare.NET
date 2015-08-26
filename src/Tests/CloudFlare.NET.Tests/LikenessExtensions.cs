@@ -18,6 +18,22 @@
             return actual.AsSource().OfLikeness<T>();
         }
 
+        public static Likeness<CloudFlareResponseBase, CloudFlareResponseBase> AsLikeness(this CloudFlareResponseBase actual)
+        {
+            if (actual == null)
+                throw new ArgumentNullException(nameof(actual));
+
+            return actual
+                .AsSource()
+                .OfLikeness<CloudFlareResponseBase>()
+                .With(r => r.Errors)
+                .EqualsWhen((a, e) => a.Errors.SequenceEqual(e.Errors))
+                .With(r => r.Messages)
+                .EqualsWhen((a, e) => a.Messages.SequenceEqual(e.Messages))
+                .With(r => r.ResultInfo)
+                .EqualsWhen((a, e) => a.ResultInfo.AsLikeness().Equals(e.ResultInfo));
+        }
+
         public static Likeness<Zone, Zone> AsLikeness(this Zone actual)
         {
             if (actual == null)

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using Machine.Specifications;
     using Ploeh.AutoFixture;
@@ -32,6 +33,27 @@
 
         It should_return_the_expected_zones = () =>
             _actual.Select(z => z.AsLikeness().CreateProxy()).SequenceEqual(_expected).ShouldBeTrue();
+    }
+
+    [Subject(typeof(CloudFlareClient))]
+    public class When_getting_all_zones_and_an_error_occurs : ErredRequestContext
+    {
+        static Uri _expectedRequestUri;
+
+        Establish context = () =>
+        {
+            _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones");
+        };
+
+        Because of = () => _exception = Catch.Exception(() => _sut.GetZonesAsync(_auth).Await());
+
+        Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
+
+        Behaves_like<ErredRequestBehaviour> erred_request_behaviour;
+
+        It should_make_a_GET_request = () => _handler.Request.Method.ShouldEqual(HttpMethod.Get);
+
+        It should_request_the_zones_endpoint = () => _handler.Request.RequestUri.ShouldEqual(_expectedRequestUri);
     }
 
     [Subject(typeof(CloudFlareClient))]

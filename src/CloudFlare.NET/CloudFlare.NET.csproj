@@ -67,6 +67,7 @@
     <Compile Include="CloudFlareClient.cs" />
     <Compile Include="CloudFlareConstants.cs" />
     <Compile Include="CloudFlareError.cs" />
+    <Compile Include="CloudFlareException.cs" />
     <Compile Include="CloudFlareResponse.cs" />
     <Compile Include="CloudFlareResponseBase.cs" />
     <Compile Include="CloudFlareResultInfo.cs" />
