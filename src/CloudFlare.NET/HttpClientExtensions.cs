@@ -19,7 +19,7 @@
         public static Uri ZonesUri { get; } = new Uri(CloudFlareConstants.BaseUri, "zones");
 
         /// <summary>
-        /// Gets the <see cref="CloudFlareResponse{T}.Result"/> of a CloudFlare API <paramref name="response"/>.
+        /// Gets the <see cref="CloudFlareResponse{T}"/> of a CloudFlare API <paramref name="response"/>.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="CloudFlareResponse{T}.Result"/>.</typeparam>
         public static async Task<CloudFlareResponse<T>> GetResultAsync<T>(
@@ -38,13 +38,13 @@
                     .ConfigureAwait(false);
             }
 
-            var errorResult = await response
-                .Content
-                .ReadAsAsync<CloudFlareResponseBase>(cancellationToken)
-                .ConfigureAwait(false);
+            CloudFlareResponseBase errorResponse =
+                await response
+                    .Content
+                    .ReadAsAsync<CloudFlareResponseBase>(cancellationToken)
+                    .ConfigureAwait(false);
 
-            // TODO: Do some nice error handling.
-            throw new Exception("It's Not so good and stuff.");
+            throw new CloudFlareException(errorResponse, response);
         }
 
         /// <summary>

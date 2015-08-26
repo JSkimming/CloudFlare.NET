@@ -56,19 +56,19 @@
 
         public Func<HttpRequestMessage, Task<HttpRequestMessage>> OnSendingRequest { get; set; }
 
-        public void SetResponseContent(object content)
+        public void SetResponseContent(object content, HttpStatusCode code = HttpStatusCode.OK)
         {
-            SetResponseContent(JObject.FromObject(content).ToString(Formatting.None));
+            SetResponseContent(JObject.FromObject(content).ToString(Formatting.None), code);
         }
 
-        public void SetResponseContent(string content)
+        public void SetResponseContent(string content, HttpStatusCode code = HttpStatusCode.OK)
         {
-            Response = CreateResponse(content);
+            Response = CreateResponse(content, code);
         }
 
-        public void AddResponseContent(string content)
+        public void AddResponseContent(string content, HttpStatusCode code = HttpStatusCode.OK)
         {
-            Responses.Add(CreateResponse(content));
+            Responses.Add(CreateResponse(content, code));
         }
 
         protected async override Task<HttpResponseMessage> SendAsync(
