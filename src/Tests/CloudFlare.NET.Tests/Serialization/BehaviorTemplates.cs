@@ -53,4 +53,23 @@
 
         It should_serialize_modified_on_for_ISO8601 = () => _json["modified_on"].ToString().ShouldEndWith("Z");
     }
+
+    [Behaviors]
+    public class PagedParametersSerializeBehavior<TOrder>
+        where TOrder : struct
+    {
+        protected static JObject _json;
+        protected static PagedParameters<TOrder> _sut;
+
+        It should_serialize_id = () => _sut.Page.ShouldEqual(_json["page"].Value<int>());
+
+        It should_serialize_per_page = () => _sut.PerPage.ShouldEqual(_json["per_page"].Value<int>());
+
+        It should_serialize_order = () => _sut.Order.ToString().ShouldEqual(_json["order"].Value<string>());
+
+        It should_serialize_direction =
+            () => _sut.Direction.ToString().ShouldEqual(_json["direction"].Value<string>());
+
+        It should_serialize_match = () => _sut.Match.ToString().ShouldEqual(_json["match"].Value<string>());
+    }
 }
