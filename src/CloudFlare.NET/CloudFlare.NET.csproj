@@ -84,10 +84,16 @@
     <Compile Include="IIdentifier.cs" />
     <Compile Include="IModified.cs" />
     <Compile Include="IZoneClient.cs" />
+    <Compile Include="PagedParameters.cs" />
+    <Compile Include="PagedParametersMatchType.cs" />
+    <Compile Include="PagedParametersOrderType.cs" />
+    <Compile Include="PagedZoneOrderFieldTypes.cs" />
+    <Compile Include="PagedZoneParameters.cs" />
     <Compile Include="Serialization\IsoDateTimeOffsetConverter.cs" />
     <Compile Include="Serialization\ToStringJsonConverter.cs" />
     <Compile Include="Zone.cs" />
     <Compile Include="ZoneClientExtensions.cs" />
+    <Compile Include="ZoneStatusType.cs" />
     <None Include="app.config" />
     <None Include="CloudFlare.NET.nuspec" />
     <None Include="packages.config" />

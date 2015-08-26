@@ -4,25 +4,22 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-// ReSharper disable InconsistentNaming
+    // ReSharper disable InconsistentNaming
 #pragma warning disable 1591
 
     /// <summary>
-    /// The type of a <see cref="DnsRecord"/>.
+    /// The fields by which zones can be ordered.
     /// </summary>
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented",
         Justification = "Names are self-explanatory.")]
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
+        Justification = "Named to match serialized values.")]
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum DnsRecordType
+    public enum PagedZoneOrderFieldTypes
     {
-        A,
-        AAAA,
-        CNAME,
-        TXT,
-        SRV,
-        LOC,
-        MX,
-        NS,
-        SPF,
+        none,
+        name,
+        status,
+        email,
     }
 }
