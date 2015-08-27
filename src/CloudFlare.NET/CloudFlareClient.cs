@@ -127,9 +127,12 @@
         }
 
         /// <inheritdoc/>
-        public Task<IReadOnlyList<Zone>> GetZonesAsync(CancellationToken cancellationToken, CloudFlareAuth auth = null)
+        public Task<IReadOnlyList<Zone>> GetZonesAsync(
+            CancellationToken cancellationToken,
+            PagedZoneParameters parameters = null,
+            CloudFlareAuth auth = null)
         {
-            return _client.GetZonesAsync(cancellationToken, auth ?? _auth);
+            return _client.GetZonesAsync(cancellationToken, auth ?? _auth, parameters);
         }
 
         /// <inheritdoc/>

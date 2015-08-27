@@ -15,12 +15,31 @@
         /// Gets the zones for the subscription.
         /// </summary>
         /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
-        public static Task<IReadOnlyList<Zone>> GetZonesAsync(this IZoneClient client, CloudFlareAuth auth = null)
+        public static Task<IReadOnlyList<Zone>> GetZonesAsync(
+            this IZoneClient client,
+            PagedZoneParameters parameters = null)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
 
-            return client.GetZonesAsync(CancellationToken.None, auth);
+            return client.GetZonesAsync(CancellationToken.None, parameters);
+        }
+
+        /// <summary>
+        /// Gets the zones for the subscription.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
+        public static Task<IReadOnlyList<Zone>> GetZonesAsync(
+            this IZoneClient client,
+            CloudFlareAuth auth,
+            PagedZoneParameters parameters = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (auth == null)
+                throw new ArgumentNullException(nameof(auth));
+
+            return client.GetZonesAsync(CancellationToken.None, parameters, auth);
         }
 
         /// <summary>
