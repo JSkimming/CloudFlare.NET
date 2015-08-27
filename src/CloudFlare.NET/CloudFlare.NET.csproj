@@ -85,6 +85,7 @@
     <Compile Include="IModified.cs" />
     <Compile Include="IZoneClient.cs" />
     <Compile Include="PagedParameters.cs" />
+    <Compile Include="PagedParametersExtensions.cs" />
     <Compile Include="PagedParametersMatchType.cs" />
     <Compile Include="PagedParametersOrderType.cs" />
     <Compile Include="PagedZoneOrderFieldTypes.cs" />

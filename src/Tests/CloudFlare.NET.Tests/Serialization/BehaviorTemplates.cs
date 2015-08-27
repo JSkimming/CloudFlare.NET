@@ -72,4 +72,22 @@
 
         It should_serialize_match = () => _sut.Match.ToString().ShouldEqual(_json["match"].Value<string>());
     }
+
+    [Behaviors]
+    public class PagedParametersKvpBehavior<TOrder>
+        where TOrder : struct
+    {
+        protected static PagedParameters<TOrder> _parameters;
+        protected static IReadOnlyDictionary<string, string> _result;
+
+        It should_have_name_page = () => _result["page"].ShouldEqual(_parameters.Page.ToString());
+
+        It should_have_name_per_page = () => _result["per_page"].ShouldEqual(_parameters.PerPage.ToString());
+
+        It should_have_name_order = () => _result["order"].ShouldEqual(_parameters.Order.ToString());
+
+        It should_have_name_direction = () => _result["direction"].ShouldEqual(_parameters.Direction.ToString());
+
+        It should_have_name_match = () => _result["match"].ShouldEqual(_parameters.Match.ToString());
+    }
 }
