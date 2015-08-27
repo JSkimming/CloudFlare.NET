@@ -8,21 +8,20 @@
 #pragma warning disable 1591
 
     /// <summary>
-    /// The type of a <see cref="DnsRecord"/>.
+    /// The types of status of a zone.
     /// </summary>
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented",
         Justification = "Names are self-explanatory.")]
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
+        Justification = "Named to match serialized values.")]
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum DnsRecordType
+    public enum ZoneStatusType
     {
-        A,
-        AAAA,
-        CNAME,
-        TXT,
-        SRV,
-        LOC,
-        MX,
-        NS,
-        SPF,
+        active,
+        pending,
+        initializing,
+        moved,
+        deleted,
+        deactivated,
     }
 }

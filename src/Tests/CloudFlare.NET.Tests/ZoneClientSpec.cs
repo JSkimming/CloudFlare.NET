@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
     using System.Net.Http;
     using Machine.Specifications;
     using Ploeh.AutoFixture;
@@ -24,6 +23,42 @@
         };
 
         Because of = () => _actual = _sut.GetZonesAsync(_auth).Await().AsTask.Result;
+
+        Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
+
+        It should_make_a_GET_request = () => _handler.Request.Method.ShouldEqual(HttpMethod.Get);
+
+        It should_request_the_zones_endpoint = () => _handler.Request.RequestUri.ShouldEqual(_expectedRequestUri);
+
+        It should_return_the_expected_zones = () =>
+            _actual.Select(z => z.AsLikeness().CreateProxy()).SequenceEqual(_expected).ShouldBeTrue();
+    }
+
+    [Subject(typeof(CloudFlareClient))]
+    public class When_getting_all_zones_with_parameters : RequestContext
+    {
+        static IReadOnlyList<Zone> _expected;
+        static IReadOnlyList<Zone> _actual;
+        static PagedZoneParameters _parameters;
+        static Uri _expectedRequestUri;
+
+        Establish context = () =>
+        {
+            var response = _fixture.Create<CloudFlareResponse<IReadOnlyList<Zone>>>();
+            _expected = response.Result;
+            _handler.SetResponseContent(response);
+
+            // Auto fixture chooses the default value for enumerations.
+            _fixture.Inject(PagedZoneOrderFieldTypes.email);
+            _fixture.Inject(PagedParametersOrderType.desc);
+            _fixture.Inject(PagedParametersMatchType.any);
+
+            _parameters = _fixture.Create<PagedZoneParameters>();
+
+            _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones?" + _parameters.ToQuery());
+        };
+
+        Because of = () => _actual = _sut.GetZonesAsync(_auth, _parameters).Await().AsTask.Result;
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 

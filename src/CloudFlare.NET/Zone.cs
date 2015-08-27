@@ -26,7 +26,8 @@
             IReadOnlyList<string> originalNameServers = null,
             string originalRegistrar = null,
             string originalDnshost = null,
-            IReadOnlyList<string> nameServers = null)
+            IReadOnlyList<string> nameServers = null,
+            ZoneStatusType status = ZoneStatusType.active)
         {
             if (id == null)
                 throw new ArgumentNullException(nameof(id));
@@ -42,6 +43,7 @@
             OriginalRegistrar = originalRegistrar ?? string.Empty;
             OriginalDnshost = originalDnshost ?? string.Empty;
             NameServers = nameServers ?? EmptyStrings;
+            Status = status;
         }
 
         /// <summary>
@@ -95,5 +97,11 @@
         /// </summary>
         [JsonProperty("name_servers")]
         public IReadOnlyList<string> NameServers { get; }
+
+        /// <summary>
+        /// Status of the zone.
+        /// </summary>
+        [JsonProperty("status")]
+        public ZoneStatusType Status { get; }
     }
 }

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <title>$title$</title>
     <authors>James Skimming</authors>
     <owners>James Skimming</owners>
@@ -11,5 +11,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <tags>CloudFlare API Client</tags>
+    <dependencies>
+      <!-- Need to add explicitly, otherwise it is removed. -->
+      <dependency id="Microsoft.Net.Http" version="2.2.22" />
+    </dependencies>
   </metadata>
 </package>

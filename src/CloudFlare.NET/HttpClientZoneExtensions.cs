@@ -20,7 +20,8 @@
         public static async Task<IReadOnlyList<Zone>> GetZonesAsync(
             this HttpClient client,
             CancellationToken cancellationToken,
-            CloudFlareAuth auth)
+            CloudFlareAuth auth,
+            PagedZoneParameters parameters = null)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
@@ -28,6 +29,11 @@
                 throw new ArgumentNullException(nameof(auth));
 
             Uri uri = new Uri(CloudFlareConstants.BaseUri, "zones");
+            if (parameters != null)
+            {
+                uri = new UriBuilder(uri) { Query = parameters.ToQuery() }.Uri;
+            }
+
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             request.AddAuth(auth);
 

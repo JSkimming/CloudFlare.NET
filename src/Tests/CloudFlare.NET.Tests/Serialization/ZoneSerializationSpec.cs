@@ -41,6 +41,8 @@
 
         It should_deserialize_name_servers =
             () => _sut.NameServers.ShouldContainOnly(_json["name_servers"].ToObject<List<string>>());
+
+        It should_deserialize_status = () => _sut.Status.ToString().ShouldEqual(_json["status"].Value<string>());
     }
 
     [Subject(typeof(Zone))]
@@ -91,6 +93,8 @@
 
         It should_serialize_name_servers =
             () => _sut.NameServers.ShouldContainOnly(_json["name_servers"].ToObject<List<string>>());
+
+        It should_serialize_status = () => _sut.Status.ToString().ShouldEqual(_json["status"].Value<string>());
     }
 
     [Subject(typeof(Zone))]
