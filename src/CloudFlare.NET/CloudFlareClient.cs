@@ -12,13 +12,13 @@
     /// <inheritdoc/>
     public class CloudFlareClient : ICloudFlareClient
     {
-        private readonly HttpClient _client;
-
-        private readonly CloudFlareAuth _auth;
-
         private static readonly Lazy<HttpClient> LazyClient = new Lazy<HttpClient>(
             () => CreateDefaultHttpClient(),
             LazyThreadSafetyMode.PublicationOnly);
+
+        private readonly HttpClient _client;
+
+        private readonly CloudFlareAuth _auth;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CloudFlareClient"/> class.
