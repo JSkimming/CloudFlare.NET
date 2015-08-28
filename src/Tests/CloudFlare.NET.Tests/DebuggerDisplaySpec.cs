@@ -1,0 +1,81 @@
+﻿namespace CloudFlare.NET.DebuggerDisplaySpec
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Reflection;
+    using Machine.Specifications;
+    using Ploeh.AutoFixture;
+
+    public abstract class DebuggerDisplayContext<T> : FixtureContext
+        where T : class
+    {
+        protected static T _sut;
+        protected static DebuggerDisplayAttribute _debuggerDisplay;
+        protected static PropertyInfo _debuggerDisplayPropertyInfo;
+        protected static MethodInfo _debuggerDisplayGetMethod;
+        protected static object _debuggerDisplayValue;
+
+        /// <summary>
+        /// Returns the <see cref="DebuggerDisplayAttribute"/> data of the <see cref="_sut"/>
+        /// </summary>
+        /// <returns>The <see cref="DebuggerDisplayAttribute"/> data of the <see cref="_sut"/>.</returns>
+        protected static string GetDebuggerDisplay()
+        {
+            Type type = _sut.GetType();
+
+            _debuggerDisplay = type.GetCustomAttribute<DebuggerDisplayAttribute>(inherit: false);
+
+            _debuggerDisplayPropertyInfo =
+                type.GetProperty("DebuggerDisplay", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            _debuggerDisplayGetMethod = _debuggerDisplayPropertyInfo.GetGetMethod(true);
+
+            _debuggerDisplayValue = _debuggerDisplayGetMethod.Invoke(_sut, new object[] {});
+
+            return _debuggerDisplayValue.ToString();
+        }
+    }
+
+    [Behaviors]
+    public class DebuggerDisplayBehavior
+    {
+        protected static object _sut;
+        protected static DebuggerDisplayAttribute _debuggerDisplay;
+        protected static PropertyInfo _debuggerDisplayPropertyInfo;
+        protected static MethodInfo _debuggerDisplayGetMethod;
+        protected static object _debuggerDisplayValue;
+
+        It should_have_the_debugger_display_attribute = () => _debuggerDisplay.ShouldNotBeNull();
+
+        It should_specify_the_debugger_display_property =
+            () => _debuggerDisplay.Value.ShouldEqual("{DebuggerDisplay,nq}");
+
+        It should_have_the_debugger_display_private_property = () => _debuggerDisplayPropertyInfo.ShouldNotBeNull();
+
+        It should_have_a_getter_on_the_debugger_display_property = () => _debuggerDisplayGetMethod.ShouldNotBeNull();
+
+        It should_provide_a_string_display_property = () => _debuggerDisplayValue.ShouldBeOfExactType<string>();
+
+        It should_include_the_type_in_the_debugger_display =
+            () => _debuggerDisplayValue.ToString().ShouldStartWith($"{_sut.GetType().Name}:");
+    }
+
+    namespace CloudFlareAuthSpec
+    {
+        [Subject(typeof(CloudFlareAuth))]
+        public class When_running_in_the_debugger : DebuggerDisplayContext<CloudFlareAuth>
+        {
+            static string _debuggerDisplay;
+
+            Establish contect = () => _sut = _fixture.Create<CloudFlareAuth>();
+
+            Because of = () => _debuggerDisplay = GetDebuggerDisplay();
+
+            Behaves_like<DebuggerDisplayBehavior> debugger_display_behaviour;
+
+            It should_include_the_email_in_the_debugger_display = () => _debuggerDisplay.ShouldContain(_sut.Email);
+        }
+    }
+}

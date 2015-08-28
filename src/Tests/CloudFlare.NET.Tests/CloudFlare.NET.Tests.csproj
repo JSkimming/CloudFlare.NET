@@ -107,6 +107,7 @@
     <Compile Include="CloudFlareClientSpec.cs" />
     <Compile Include="CloudFlareCustomization.cs" />
     <Compile Include="CloudFlareErrorSpec.cs" />
+    <Compile Include="DebuggerDisplaySpec.cs" />
     <Compile Include="DnsRecordClientExtensionsSpec.cs" />
     <Compile Include="DnsRecordClientSpec.cs" />
     <Compile Include="EqualsBehaviors.cs" />
