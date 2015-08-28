@@ -14,11 +14,6 @@
     public static class HttpClientExtensions
     {
         /// <summary>
-        /// Gets the base address of the CloudFlare API.
-        /// </summary>
-        public static Uri ZonesUri { get; } = new Uri(CloudFlareConstants.BaseUri, "zones");
-
-        /// <summary>
         /// Gets the <see cref="CloudFlareResponse{T}"/> of a CloudFlare API <paramref name="response"/>.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="CloudFlareResponse{T}.Result"/>.</typeparam>
@@ -59,6 +54,40 @@
 
             request.Headers.Add("X-Auth-Key", auth.Key);
             request.Headers.Add("X-Auth-Email", auth.Email);
+        }
+
+        /// <summary>
+        /// Executes a <see cref="HttpMethod.Get"/> request returning the type specified by <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="CloudFlareResponse{T}.Result"/>.</typeparam>
+        public static async Task<T> GetAsync<T>(
+            this HttpClient client,
+            Uri uri,
+            CloudFlareAuth auth,
+            CancellationToken cancellationToken)
+            where T : class
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (uri == null)
+                throw new ArgumentNullException(nameof(uri));
+            if (auth == null)
+                throw new ArgumentNullException(nameof(auth));
+
+            using (var request = new HttpRequestMessage(HttpMethod.Get, uri))
+            {
+                request.AddAuth(auth);
+
+                HttpResponseMessage response =
+                    await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+                        .ConfigureAwait(false);
+                using (response)
+                {
+                    CloudFlareResponse<T> cloudFlareResponse =
+                        await response.GetResultAsync<T>(cancellationToken).ConfigureAwait(false);
+                    return cloudFlareResponse.Result;
+                }
+            }
         }
     }
 }
