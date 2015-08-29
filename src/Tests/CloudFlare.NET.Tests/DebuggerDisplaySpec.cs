@@ -96,4 +96,25 @@
                 () => _debuggerDisplayText.ShouldContain(_sut.Auth.Email);
         }
     }
+
+    namespace CloudFlareErrorSpec
+    {
+        [Subject(typeof(CloudFlareError))]
+        public class When_running_in_the_debugger : DebuggerDisplayContext<CloudFlareError>
+        {
+            static string _debuggerDisplayText;
+
+            Establish contect = () => _sut = _fixture.Create<CloudFlareError>();
+
+            Because of = () => _debuggerDisplayText = GetDebuggerDisplay();
+
+            Behaves_like<DebuggerDisplayBehavior> debugger_display_behaviour;
+
+            It should_include_the_code_in_the_debugger_display =
+                () => _debuggerDisplayText.ShouldContain(_sut.Code.ToString());
+
+            It should_include_the_message_in_the_debugger_display =
+                () => _debuggerDisplayText.ShouldContain(_sut.Message);
+        }
+    }
 }
