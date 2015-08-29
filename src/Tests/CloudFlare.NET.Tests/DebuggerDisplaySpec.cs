@@ -135,4 +135,28 @@
                 () => _debuggerDisplayText.ShouldContain($"Success={_sut.Success}");
         }
     }
+
+    namespace DnsRecordSpec
+    {
+        [Subject(typeof(DnsRecord))]
+        public class When_running_in_the_debugger : DebuggerDisplayContext<DnsRecord>
+        {
+            static string _debuggerDisplayText;
+
+            Establish contect = () => _sut = _fixture.Create<DnsRecord>();
+
+            Because of = () => _debuggerDisplayText = GetDebuggerDisplay();
+
+            Behaves_like<DebuggerDisplayBehavior> debugger_display_behaviour;
+
+            It should_include_the_type_in_the_debugger_display =
+                () => _debuggerDisplayText.ShouldContain($"{_sut.Type}");
+
+            It should_include_the_name_in_the_debugger_display =
+                () => _debuggerDisplayText.ShouldContain($"{_sut.Name}");
+
+            It should_include_the_content_in_the_debugger_display =
+                () => _debuggerDisplayText.ShouldContain($"{_sut.Content}");
+        }
+    }
 }
