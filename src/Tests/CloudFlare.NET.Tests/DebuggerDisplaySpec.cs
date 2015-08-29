@@ -117,4 +117,22 @@
                 () => _debuggerDisplayText.ShouldContain(_sut.Message);
         }
     }
+
+    namespace CloudFlareResponseBaseSpec
+    {
+        [Subject(typeof(CloudFlareResponseBase))]
+        public class When_running_in_the_debugger : DebuggerDisplayContext<CloudFlareResponseBase>
+        {
+            static string _debuggerDisplayText;
+
+            Establish contect = () => _sut = _fixture.Create<CloudFlareResponseBase>();
+
+            Because of = () => _debuggerDisplayText = GetDebuggerDisplay();
+
+            Behaves_like<DebuggerDisplayBehavior> debugger_display_behaviour;
+
+            It should_include_the_success_status_in_the_debugger_display =
+                () => _debuggerDisplayText.ShouldContain($"Success={_sut.Success}");
+        }
+    }
 }
