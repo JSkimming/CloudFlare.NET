@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using Newtonsoft.Json;
 
@@ -9,6 +10,7 @@
     /// Represent the base response from CloudFlare indicating success or failure.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#responses"/>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class CloudFlareResponseBase
     {
         private static readonly IReadOnlyList<CloudFlareError> EmptyErrors =
@@ -57,5 +59,7 @@
         /// </summary>
         [JsonProperty("result_info")]
         public CloudFlareResultInfo ResultInfo { get; }
+
+        private string DebuggerDisplay => $"{GetType().Name}: Success={Success}";
     }
 }

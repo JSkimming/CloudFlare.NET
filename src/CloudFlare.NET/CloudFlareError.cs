@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using Newtonsoft.Json;
 
@@ -9,6 +10,7 @@
     /// Represents an error that can occur as a result of a CloudFlare API request.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#responses"/>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class CloudFlareError : IEquatable<CloudFlareError>
     {
         /// <summary>
@@ -31,6 +33,8 @@
         /// </summary>
         [JsonProperty("message")]
         public string Message { get; }
+
+        private string DebuggerDisplay => $"{GetType().Name}: {Code} '{Message}'";
 
         /// <summary>
         /// The implicit operator to return the <see cref="Code"/> of a <see cref="CloudFlareError"/>.

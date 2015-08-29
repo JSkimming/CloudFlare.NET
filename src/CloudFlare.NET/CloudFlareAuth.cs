@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     /// <summary>
     /// Represents the authorization parameters for accessing the CloudFlare API.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#requests"/>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class CloudFlareAuth
     {
         /// <summary>
@@ -33,5 +35,7 @@
         /// Gets the API key generated on the "My Account" page.
         /// </summary>
         public string Key { get; }
+
+        private string DebuggerDisplay => $"{GetType().Name}: {Email}";
     }
 }

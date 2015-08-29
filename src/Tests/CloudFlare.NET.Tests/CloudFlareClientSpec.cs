@@ -6,6 +6,7 @@
     using System.Net.Http;
     using Machine.Specifications;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
 
     [Subject(typeof(CloudFlareClient))]
     public class When_creating_the_message_handler_pipeline_using_only_delegates : FixtureContext
@@ -98,5 +99,22 @@
         Because of = () => _exception = Catch.Exception(() => CloudFlareClient.CreatePipeline(_handlers));
 
         It should_throw_an_ArgumentException = () => _exception.ShouldBeOfExactType<ArgumentException>();
+    }
+
+    [Subject(typeof (CloudFlareClient))]
+    public class When_initialising_with_a_custom_HttpClient : FixtureContext
+    {
+        static HttpClient _httpClient;
+        static CloudFlareClient _sut;
+
+        Establish context = () =>
+        {
+            _httpClient = _fixture.Freeze<HttpClient>();
+            _fixture.Customize(new ConstructorCustomization(typeof(CloudFlareClient), new GreedyConstructorQuery()));
+        };
+
+        Because of = () => _sut = _fixture.Create<CloudFlareClient>();
+
+        It should_use_the_HttpClient = () => _sut.Client.ShouldBeTheSameAs(_httpClient);
     }
 }

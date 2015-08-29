@@ -2,15 +2,16 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
     using Newtonsoft.Json.Linq;
 
     /// <summary>
     /// Represents a DNS record for a <see cref="Zone"/>.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone-properties"/>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class DnsRecord : IIdentifier, IModified
     {
         /// <summary>
@@ -143,5 +144,7 @@
         /// </summary>
         [JsonProperty("priority")]
         public int Priority { get; }
+
+        private string DebuggerDisplay => $"{GetType().Name}: {Type} {Name} => {Content}";
     }
 }

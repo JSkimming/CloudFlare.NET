@@ -2,14 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
-    using CloudFlare.NET.Serialization;
     using Newtonsoft.Json;
 
     /// <summary>
     /// A Zone is a domain name along with its subdomains and other identities.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#zone-properties"/>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class Zone : IIdentifier, IModified
     {
         private static readonly IReadOnlyList<string> EmptyStrings = Enumerable.Empty<string>().ToArray();
@@ -103,5 +104,7 @@
         /// </summary>
         [JsonProperty("status")]
         public ZoneStatusType Status { get; }
+
+        private string DebuggerDisplay => $"{GetType().Name}: {Name}";
     }
 }
