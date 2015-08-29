@@ -159,4 +159,22 @@
                 () => _debuggerDisplayText.ShouldContain($"{_sut.Content}");
         }
     }
+
+    namespace ZoneSpec
+    {
+        [Subject(typeof(Zone))]
+        public class When_running_in_the_debugger : DebuggerDisplayContext<Zone>
+        {
+            static string _debuggerDisplayText;
+
+            Establish contect = () => _sut = _fixture.Create<Zone>();
+
+            Because of = () => _debuggerDisplayText = GetDebuggerDisplay();
+
+            Behaves_like<DebuggerDisplayBehavior> debugger_display_behaviour;
+
+            It should_include_the_name_in_the_debugger_display =
+                () => _debuggerDisplayText.ShouldContain($"{_sut.Name}");
+        }
+    }
 }
