@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Net;
     using System.Net.Http;
@@ -10,6 +11,7 @@
     using System.Threading.Tasks;
 
     /// <inheritdoc/>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class CloudFlareClient : ICloudFlareClient
     {
         private static readonly Lazy<HttpClient> LazyClient = new Lazy<HttpClient>(
@@ -50,6 +52,18 @@
             _client = client;
             _auth = auth;
         }
+
+        /// <summary>
+        /// Gets the <see cref="CloudFlareAuth"/> for this client.
+        /// </summary>
+        public CloudFlareAuth Auth => _auth;
+
+        /// <summary>
+        /// Gets the underlying HttpClient used to make requests.
+        /// </summary>
+        public HttpClient Client => _client;
+
+        private string DebuggerDisplay => $"{GetType().Name}: {_auth?.Email ?? string.Empty}";
 
         /// <summary>
         /// Creates the default <see cref="HttpClient"/>

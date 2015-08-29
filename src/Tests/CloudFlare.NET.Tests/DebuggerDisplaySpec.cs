@@ -67,15 +67,33 @@
         [Subject(typeof(CloudFlareAuth))]
         public class When_running_in_the_debugger : DebuggerDisplayContext<CloudFlareAuth>
         {
-            static string _debuggerDisplay;
+            static string _debuggerDisplayText;
 
             Establish contect = () => _sut = _fixture.Create<CloudFlareAuth>();
 
-            Because of = () => _debuggerDisplay = GetDebuggerDisplay();
+            Because of = () => _debuggerDisplayText = GetDebuggerDisplay();
 
             Behaves_like<DebuggerDisplayBehavior> debugger_display_behaviour;
 
-            It should_include_the_email_in_the_debugger_display = () => _debuggerDisplay.ShouldContain(_sut.Email);
+            It should_include_the_email_in_the_debugger_display = () => _debuggerDisplayText.ShouldContain(_sut.Email);
+        }
+    }
+
+    namespace CloudFlareClientSpec
+    {
+        [Subject(typeof(CloudFlareClient))]
+        public class When_running_in_the_debugger : DebuggerDisplayContext<CloudFlareClient>
+        {
+            static string _debuggerDisplayText;
+
+            Establish contect = () => _sut = _fixture.Create<CloudFlareClient>();
+
+            Because of = () => _debuggerDisplayText = GetDebuggerDisplay();
+
+            Behaves_like<DebuggerDisplayBehavior> debugger_display_behaviour;
+
+            It should_include_the_authentication_email_in_the_debugger_display =
+                () => _debuggerDisplayText.ShouldContain(_sut.Auth.Email);
         }
     }
 }
