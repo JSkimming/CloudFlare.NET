@@ -15,7 +15,7 @@
         /// Gets the zones for the subscription.
         /// </summary>
         /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
-        public static Task<IReadOnlyList<Zone>> GetZonesAsync(
+        public static Task<CloudFlareResponse<IReadOnlyList<Zone>>> GetZonesAsync(
             this IZoneClient client,
             PagedZoneParameters parameters = null)
         {
@@ -29,7 +29,7 @@
         /// Gets the zones for the subscription.
         /// </summary>
         /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
-        public static Task<IReadOnlyList<Zone>> GetZonesAsync(
+        public static Task<CloudFlareResponse<IReadOnlyList<Zone>>> GetZonesAsync(
             this IZoneClient client,
             CloudFlareAuth auth,
             PagedZoneParameters parameters = null)

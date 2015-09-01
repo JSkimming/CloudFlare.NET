@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading;
     using Machine.Specifications;
 
     [Subject("Zones")]
@@ -18,7 +17,8 @@
         {
             var client = new CloudFlareClient();
             _auth = new CloudFlareAuth(Helper.AuthEmail, Helper.AuthKey);
-            _zone = client.GetZonesAsync(_auth).Await().AsTask.Result.First();
+            CloudFlareResponse<IReadOnlyList<Zone>> response = client.GetZonesAsync(_auth).Await();
+            _zone = response.Result.First();
             _client = client;
         };
 

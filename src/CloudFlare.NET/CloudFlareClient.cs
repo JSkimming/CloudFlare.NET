@@ -141,7 +141,7 @@
         }
 
         /// <inheritdoc/>
-        public Task<IReadOnlyList<Zone>> GetZonesAsync(
+        public Task<CloudFlareResponse<IReadOnlyList<Zone>>> GetZonesAsync(
             CancellationToken cancellationToken,
             PagedZoneParameters parameters = null,
             CloudFlareAuth auth = null)

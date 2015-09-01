@@ -10,7 +10,7 @@
     {
         static IZoneClient _client;
         static CloudFlareAuth _auth;
-        static IReadOnlyList<Zone> _zones;
+        static CloudFlareResponse<IReadOnlyList<Zone>> _response;
 
         Establish context = () =>
         {
@@ -18,8 +18,8 @@
             _auth = new CloudFlareAuth(Helper.AuthEmail, Helper.AuthKey);
         };
 
-        Because of = () => _zones = _client.GetZonesAsync(_auth).Await().AsTask.Result;
+        Because of = () => _response = _client.GetZonesAsync(_auth).Await();
 
-        It should_return_the_zones = () => _zones.ShouldNotBeEmpty();
+        It should_return_the_zones = () => _response.Result.ShouldNotBeEmpty();
     }
 }
