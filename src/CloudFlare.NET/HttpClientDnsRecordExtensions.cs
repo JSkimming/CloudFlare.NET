@@ -27,7 +27,7 @@
                 throw new ArgumentNullException(nameof(zoneId));
 
             Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/dns_records");
-            return client.GetAsync<IReadOnlyList<DnsRecord>>(uri, auth, cancellationToken);
+            return client.GetCloudFlareResultAsync<IReadOnlyList<DnsRecord>>(uri, auth, cancellationToken);
         }
     }
 }

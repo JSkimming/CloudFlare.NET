@@ -29,7 +29,7 @@
                 uri = new UriBuilder(uri) { Query = parameters.ToQuery() }.Uri;
             }
 
-            return client.GetAsync<IReadOnlyList<Zone>>(uri, auth, cancellationToken);
+            return client.GetCloudFlareResultAsync<IReadOnlyList<Zone>>(uri, auth, cancellationToken);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@
                 throw new ArgumentNullException(nameof(zoneId));
 
             Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}");
-            return client.GetAsync<Zone>(uri, auth, cancellationToken);
+            return client.GetCloudFlareResultAsync<Zone>(uri, auth, cancellationToken);
         }
     }
 }

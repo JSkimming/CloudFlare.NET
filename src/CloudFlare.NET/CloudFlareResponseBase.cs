@@ -13,13 +13,12 @@
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class CloudFlareResponseBase
     {
-        private static readonly IReadOnlyList<CloudFlareError> EmptyErrors =
-            Enumerable.Empty<CloudFlareError>().ToList();
+        private static readonly IReadOnlyList<CloudFlareError> EmptyErrors = new CloudFlareError[0];
 
         private static readonly CloudFlareResultInfo DefaultResultInfo =
             new CloudFlareResultInfo(-1, -1, -1, -1);
 
-        private static readonly IReadOnlyList<string> EmptyMessages = Enumerable.Empty<string>().ToList();
+        private static readonly IReadOnlyList<string> EmptyMessages = new string[0];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CloudFlareResponseBase"/> class.
