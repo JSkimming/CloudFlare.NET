@@ -37,7 +37,8 @@
                 throw new ArgumentNullException(nameof(zoneId));
 
             Task<Zone> zoneTask = client.GetZoneAsync(zoneId, cancellationToken, auth);
-            Task<IReadOnlyList<DnsRecord>> dnsRecordsTask = client.GetDnsRecordsAsync(zoneId, cancellationToken, auth);
+            Task<IReadOnlyList<DnsRecord>> dnsRecordsTask =
+                client.GetDnsRecordsAsync(zoneId, cancellationToken, auth: auth);
 
             await Task.WhenAll(zoneTask, dnsRecordsTask).ConfigureAwait(false);
 

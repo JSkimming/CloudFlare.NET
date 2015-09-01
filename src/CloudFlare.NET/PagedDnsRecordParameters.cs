@@ -7,50 +7,58 @@
     using Newtonsoft.Json.Linq;
 
     /// <summary>
-    /// Specifies the parameters of the <see cref="IZoneClient.GetZonesAsync"/> request.
+    /// Specifies the parameters of the <see cref="IDnsRecordClient.GetDnsRecordsAsync"/> request.
     /// </summary>
-    /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
-    public class PagedZoneParameters : PagedParameters<PagedZoneOrderFieldTypes>
+    /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records"/>
+    public class PagedDnsRecordParameters : PagedParameters<PagedDnsRecordOrderFieldTypes>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PagedZoneParameters"/> class.
+        /// Initializes a new instance of the <see cref="PagedDnsRecordParameters"/> class.
         /// </summary>
-        public PagedZoneParameters(
+        public PagedDnsRecordParameters(
+            DnsRecordType? type = null,
             string name = null,
-            ZoneStatusType? status = null,
+            string content = null,
             int page = 0,
             int perPage = 0,
-            PagedZoneOrderFieldTypes order = default(PagedZoneOrderFieldTypes),
+            PagedDnsRecordOrderFieldTypes order = default(PagedDnsRecordOrderFieldTypes),
             PagedParametersOrderType direction = default(PagedParametersOrderType),
             PagedParametersMatchType match = default(PagedParametersMatchType))
             : base(page, perPage, order, direction, match)
         {
+            Type = type;
             Name = name;
-            Status = status;
+            Content = content;
         }
 
         /// <summary>
-        /// A domain name.
+        /// DNS record type
+        /// </summary>
+        [JsonProperty("type")]
+        public DnsRecordType? Type { get; }
+
+        /// <summary>
+        /// DNS record name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
-        /// Status of the zone
+        /// DNS record content.
         /// </summary>
-        [JsonProperty("status")]
-        public ZoneStatusType? Status { get; }
+        [JsonProperty("content")]
+        public string Content { get; }
 
         /// <summary>
         /// Creates a <see cref="PagedZoneParameters"/> from the <paramref name="data"/> copying any matching
         /// properties.
         /// </summary>
-        public static PagedZoneParameters Create(object data)
+        public static PagedDnsRecordParameters Create(object data)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
-            return JObject.FromObject(data).ToObject<PagedZoneParameters>();
+            return JObject.FromObject(data).ToObject<PagedDnsRecordParameters>();
         }
     }
 }

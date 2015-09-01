@@ -25,7 +25,12 @@
 
             _clientMock.Setup(c => c.GetZoneAsync(_expected.Zone.Id, CancellationToken.None, _auth))
                 .ReturnsAsync(_expected.Zone);
-            _clientMock.Setup(c => c.GetDnsRecordsAsync(_expected.Zone.Id, CancellationToken.None, _auth))
+            _clientMock.Setup(
+                c => c.GetDnsRecordsAsync(
+                    _expected.Zone.Id,
+                    CancellationToken.None,
+                    default(PagedDnsRecordParameters),
+                    _auth))
                 .ReturnsAsync(_expected.DnsRecords);
         };
 

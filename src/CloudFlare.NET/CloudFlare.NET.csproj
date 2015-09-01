@@ -84,6 +84,8 @@
     <Compile Include="IIdentifier.cs" />
     <Compile Include="IModified.cs" />
     <Compile Include="IZoneClient.cs" />
+    <Compile Include="PagedDnsRecordOrderFieldTypes.cs" />
+    <Compile Include="PagedDnsRecordParameters.cs" />
     <Compile Include="PagedParameters.cs" />
     <Compile Include="PagedParametersExtensions.cs" />
     <Compile Include="PagedParametersMatchType.cs" />

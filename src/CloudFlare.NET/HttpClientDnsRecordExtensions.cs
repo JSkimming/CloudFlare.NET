@@ -21,12 +21,18 @@
             this HttpClient client,
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
-            CloudFlareAuth auth)
+            CloudFlareAuth auth,
+            PagedDnsRecordParameters parameters = null)
         {
             if (zoneId == null)
                 throw new ArgumentNullException(nameof(zoneId));
 
             Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/dns_records");
+            if (parameters != null)
+            {
+                uri = new UriBuilder(uri) { Query = parameters.ToQuery() }.Uri;
+            }
+
             return client.GetCloudFlareResultAsync<IReadOnlyList<DnsRecord>>(uri, auth, cancellationToken);
         }
     }

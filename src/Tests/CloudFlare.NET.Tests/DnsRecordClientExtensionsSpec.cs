@@ -10,7 +10,7 @@
     using It = Machine.Specifications.It;
 
     [Subject(typeof(DnsRecordClientExtensions))]
-    public class When_getting_dnsRecords : FixtureContext
+    public class When_getting_all_dns_records : FixtureContext
     {
         static Mock<IDnsRecordClient> _dnsRecordClientMock;
         static CloudFlareAuth _auth;
@@ -25,12 +25,45 @@
             _zoneId = _fixture.Create<IdentifierTag>();
             _expected = _fixture.Create<DnsRecord[]>();
             _dnsRecordClientMock
-                .Setup(c => c.GetDnsRecordsAsync(_zoneId, CancellationToken.None, _auth))
+                .Setup(
+                    c => c.GetDnsRecordsAsync(
+                        _zoneId,
+                        CancellationToken.None,
+                        default(PagedDnsRecordParameters),
+                        _auth))
                 .ReturnsAsync(_expected);
         };
 
-        Because of = () => _actual = _dnsRecordClientMock.Object.GetDnsRecordsAsync(_zoneId, _auth).Await().AsTask.Result;
+        Because of =
+            () => _actual = _dnsRecordClientMock.Object.GetDnsRecordsAsync(_zoneId, _auth).Await().AsTask.Result;
 
-        It should_return_the_zones = () => _actual.ShouldBeTheSameAs(_expected);
+        It should_return_the_dns_record = () => _actual.ShouldBeTheSameAs(_expected);
+    }
+
+    [Subject(typeof(DnsRecordClientExtensions))]
+    public class When_getting_all_dns_records_with_parameters : FixtureContext
+    {
+        static Mock<IDnsRecordClient> _dnsRecordClientMock;
+        static IdentifierTag _zoneId;
+        static PagedDnsRecordParameters _parameters;
+        static IReadOnlyList<DnsRecord> _expected;
+        static IReadOnlyList<DnsRecord> _actual;
+
+        Establish context = () =>
+        {
+            _dnsRecordClientMock = _fixture.Create<Mock<IDnsRecordClient>>();
+            _zoneId = _fixture.Create<IdentifierTag>();
+            _parameters = _fixture.Create<PagedDnsRecordParameters>();
+            _expected = _fixture.Create<DnsRecord[]>();
+            _dnsRecordClientMock
+                .Setup(
+                    c => c.GetDnsRecordsAsync(_zoneId, CancellationToken.None, _parameters, default(CloudFlareAuth)))
+                .ReturnsAsync(_expected);
+        };
+
+        Because of =
+            () => _actual = _dnsRecordClientMock.Object.GetDnsRecordsAsync(_zoneId, _parameters).Await().AsTask.Result;
+
+        It should_return_the_dns_record = () => _actual.ShouldBeTheSameAs(_expected);
     }
 }

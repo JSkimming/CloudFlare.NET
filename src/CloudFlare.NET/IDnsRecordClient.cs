@@ -19,6 +19,7 @@
         Task<IReadOnlyList<DnsRecord>> GetDnsRecordsAsync(
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
+            PagedDnsRecordParameters parameters = null,
             CloudFlareAuth auth = null);
     }
 }
