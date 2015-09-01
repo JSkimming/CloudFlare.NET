@@ -159,7 +159,7 @@
         }
 
         /// <inheritdoc/>
-        public Task<IReadOnlyList<DnsRecord>> GetDnsRecordsAsync(
+        public Task<CloudFlareResponse<IReadOnlyList<DnsRecord>>> GetDnsRecordsAsync(
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             PagedDnsRecordParameters parameters = null,

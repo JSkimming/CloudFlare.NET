@@ -15,7 +15,7 @@
         /// Gets the zones for the subscription.
         /// </summary>
         /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records"/>
-        public static Task<IReadOnlyList<DnsRecord>> GetDnsRecordsAsync(
+        public static Task<CloudFlareResponse<IReadOnlyList<DnsRecord>>> GetDnsRecordsAsync(
             this IDnsRecordClient client,
             IdentifierTag zoneId,
             PagedDnsRecordParameters parameters = null)
@@ -32,7 +32,7 @@
         /// Gets the zones for the subscription.
         /// </summary>
         /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records"/>
-        public static Task<IReadOnlyList<DnsRecord>> GetDnsRecordsAsync(
+        public static Task<CloudFlareResponse<IReadOnlyList<DnsRecord>>> GetDnsRecordsAsync(
             this IDnsRecordClient client,
             IdentifierTag zoneId,
             CloudFlareAuth auth,

@@ -11,20 +11,19 @@
     public class When_getting_all_dns_records : RequestContext
     {
         static IdentifierTag _zoneId;
-        static IReadOnlyList<DnsRecord> _expected;
-        static IReadOnlyList<DnsRecord> _actual;
+        static CloudFlareResponse<IReadOnlyList<DnsRecord>> _expected;
+        static CloudFlareResponse<IReadOnlyList<DnsRecord>> _actual;
         static Uri _expectedRequestUri;
 
         Establish context = () =>
         {
             _zoneId = _fixture.Create<IdentifierTag>();
-            var response = _fixture.Create<CloudFlareResponse<IReadOnlyList<DnsRecord>>>();
-            _expected = response.Result;
-            _handler.SetResponseContent(response);
+            _expected = _fixture.Create<CloudFlareResponse<IReadOnlyList<DnsRecord>>>();
+            _handler.SetResponseContent(_expected);
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/dns_records");
         };
 
-        Because of = () => _actual = _sut.GetDnsRecordsAsync(_zoneId, _auth).Await().AsTask.Result;
+        Because of = () => _actual = _sut.GetDnsRecordsAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 
@@ -34,24 +33,23 @@
             = () => _handler.Request.RequestUri.ShouldEqual(_expectedRequestUri);
 
         It should_return_the_expected_dns_records = () =>
-            _actual.Select(i => i.AsLikeness().CreateProxy()).SequenceEqual(_expected).ShouldBeTrue();
+            _actual.Result.Select(i => i.AsLikeness().CreateProxy()).SequenceEqual(_expected.Result).ShouldBeTrue();
     }
 
     [Subject(typeof(CloudFlareClient))]
     public class When_getting_all_dns_records_with_parameters : RequestContext
     {
         static IdentifierTag _zoneId;
-        static IReadOnlyList<DnsRecord> _expected;
-        static IReadOnlyList<DnsRecord> _actual;
+        static CloudFlareResponse<IReadOnlyList<DnsRecord>> _expected;
+        static CloudFlareResponse<IReadOnlyList<DnsRecord>> _actual;
         static PagedDnsRecordParameters _parameters;
         static Uri _expectedRequestUri;
 
         Establish context = () =>
         {
             _zoneId = _fixture.Create<IdentifierTag>();
-            var response = _fixture.Create<CloudFlareResponse<IReadOnlyList<DnsRecord>>>();
-            _expected = response.Result;
-            _handler.SetResponseContent(response);
+            _expected = _fixture.Create<CloudFlareResponse<IReadOnlyList<DnsRecord>>>();
+            _handler.SetResponseContent(_expected);
 
             // Auto fixture chooses the default value for enumerations.
             _fixture.Inject(PagedDnsRecordOrderFieldTypes.proxied);
@@ -64,7 +62,7 @@
                 = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/dns_records?{_parameters.ToQuery()}");
         };
 
-        Because of = () => _actual = _sut.GetDnsRecordsAsync(_zoneId, _auth, _parameters).Await().AsTask.Result;
+        Because of = () => _actual = _sut.GetDnsRecordsAsync(_zoneId, _auth, _parameters).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 
@@ -74,7 +72,7 @@
             = () => _handler.Request.RequestUri.ShouldEqual(_expectedRequestUri);
 
         It should_return_the_expected_dns_records = () =>
-            _actual.Select(i => i.AsLikeness().CreateProxy()).SequenceEqual(_expected).ShouldBeTrue();
+            _actual.Result.Select(i => i.AsLikeness().CreateProxy()).SequenceEqual(_expected.Result).ShouldBeTrue();
     }
 
     [Subject(typeof(CloudFlareClient))]

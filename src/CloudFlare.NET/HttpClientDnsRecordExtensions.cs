@@ -17,7 +17,7 @@
         /// Gets the zones for the account specified by the <paramref name="auth"/> details.
         /// </summary>
         /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records"/>
-        public static Task<IReadOnlyList<DnsRecord>> GetDnsRecordsAsync(
+        public static Task<CloudFlareResponse<IReadOnlyList<DnsRecord>>> GetDnsRecordsAsync(
             this HttpClient client,
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
@@ -33,7 +33,7 @@
                 uri = new UriBuilder(uri) { Query = parameters.ToQuery() }.Uri;
             }
 
-            return client.GetCloudFlareResultAsync<IReadOnlyList<DnsRecord>>(uri, auth, cancellationToken);
+            return client.GetCloudFlareResponseAsync<IReadOnlyList<DnsRecord>>(uri, auth, cancellationToken);
         }
     }
 }

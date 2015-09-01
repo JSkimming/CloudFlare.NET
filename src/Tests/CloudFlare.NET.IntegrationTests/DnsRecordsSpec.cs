@@ -11,7 +11,7 @@
         static IDnsRecordClient _client;
         static CloudFlareAuth _auth;
         static Zone _zone;
-        static IReadOnlyList<DnsRecord> _dnsRecords;
+        static CloudFlareResponse<IReadOnlyList<DnsRecord>> _response;
 
         Establish context = () =>
         {
@@ -22,8 +22,8 @@
             _client = client;
         };
 
-        Because of = () => _dnsRecords = _client.GetDnsRecordsAsync(_zone.Id, _auth).Await().AsTask.Result;
+        Because of = () => _response = _client.GetDnsRecordsAsync(_zone.Id, _auth).Await();
 
-        It should_return_the_zones = () => _dnsRecords.ShouldNotBeEmpty();
+        It should_return_the_zones = () => _response.Result.ShouldNotBeEmpty();
     }
 }
