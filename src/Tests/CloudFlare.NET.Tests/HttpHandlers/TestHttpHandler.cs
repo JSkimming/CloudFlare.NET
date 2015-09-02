@@ -66,6 +66,11 @@
             Response = CreateResponse(content, code);
         }
 
+        public void AddResponseContent(object content, HttpStatusCode code = HttpStatusCode.OK)
+        {
+            AddResponseContent(JObject.FromObject(content).ToString(Formatting.None), code);
+        }
+
         public void AddResponseContent(string content, HttpStatusCode code = HttpStatusCode.OK)
         {
             Responses.Add(CreateResponse(content, code));

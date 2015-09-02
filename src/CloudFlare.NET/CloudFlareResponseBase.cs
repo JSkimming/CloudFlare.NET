@@ -16,7 +16,7 @@
         private static readonly IReadOnlyList<CloudFlareError> EmptyErrors = new CloudFlareError[0];
 
         private static readonly CloudFlareResultInfo DefaultResultInfo =
-            new CloudFlareResultInfo(-1, -1, -1, -1);
+            new CloudFlareResultInfo(-1, -1, -1, -1, -1);
 
         private static readonly IReadOnlyList<string> EmptyMessages = new string[0];
 

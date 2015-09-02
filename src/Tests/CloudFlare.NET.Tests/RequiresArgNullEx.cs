@@ -14,6 +14,7 @@
         [Theory, RequiresArgNullExAutoMoq(typeof(IdentifierTag))]
         [Exclude(Method = "op_Equality")]
         [Exclude(Method = "op_Inequality")]
+        [Exclude(Type = typeof(CloudFlareClient), Method = "GetAllPagedResultsAsync")]
         public Task CloudFlare(MethodData method)
         {
             return method.Execute();
