@@ -10,7 +10,7 @@
     using It = Machine.Specifications.It;
 
     [Subject(typeof(DnsRecordClientExtensions))]
-    public class When_getting_all_dns_records : FixtureContext
+    public class When_getting_dns_records : FixtureContext
     {
         static Mock<IDnsRecordClient> _dnsRecordClientMock;
         static CloudFlareAuth _auth;
@@ -41,7 +41,7 @@
     }
 
     [Subject(typeof(DnsRecordClientExtensions))]
-    public class When_getting_all_dns_records_with_parameters : FixtureContext
+    public class When_getting_dns_records_with_parameters : FixtureContext
     {
         static Mock<IDnsRecordClient> _dnsRecordClientMock;
         static IdentifierTag _zoneId;

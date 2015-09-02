@@ -8,7 +8,7 @@
     using Ploeh.AutoFixture;
 
     [Subject(typeof(CloudFlareClient))]
-    public class When_getting_all_zones : RequestContext
+    public class When_getting_zones : RequestContext
     {
         static CloudFlareResponse<IReadOnlyList<Zone>> _expected;
         static CloudFlareResponse<IReadOnlyList<Zone>> _actual;
@@ -34,7 +34,7 @@
     }
 
     [Subject(typeof(CloudFlareClient))]
-    public class When_getting_all_zones_with_parameters : RequestContext
+    public class When_getting_zones_with_parameters : RequestContext
     {
         static CloudFlareResponse<IReadOnlyList<Zone>> _expected;
         static CloudFlareResponse<IReadOnlyList<Zone>> _actual;
@@ -69,7 +69,7 @@
     }
 
     [Subject(typeof(CloudFlareClient))]
-    public class When_getting_all_zones_and_an_error_occurs : ErredRequestContext
+    public class When_getting_zones_and_an_error_occurs : ErredRequestContext
     {
         static Uri _expectedRequestUri;
 

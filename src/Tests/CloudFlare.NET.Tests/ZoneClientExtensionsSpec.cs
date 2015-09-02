@@ -10,7 +10,7 @@
     using It = Machine.Specifications.It;
 
     [Subject(typeof(ZoneClientExtensions))]
-    public class When_getting_all_zones : FixtureContext
+    public class When_getting_zones : FixtureContext
     {
         static Mock<IZoneClient> _zoneClientMock;
         static CloudFlareAuth _auth;
@@ -33,7 +33,7 @@
     }
 
     [Subject(typeof(ZoneClientExtensions))]
-    public class When_getting_all_zones_with_parameters : FixtureContext
+    public class When_getting_zones_with_parameters : FixtureContext
     {
         static Mock<IZoneClient> _zoneClientMock;
         static PagedZoneParameters _parameters;
