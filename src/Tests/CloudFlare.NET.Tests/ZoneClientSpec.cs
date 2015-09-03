@@ -4,25 +4,26 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
+    using System.Threading;
     using Machine.Specifications;
+    using Newtonsoft.Json.Linq;
     using Ploeh.AutoFixture;
 
     [Subject(typeof(CloudFlareClient))]
-    public class When_getting_all_zones : RequestContext
+    public class When_getting_zones : RequestContext
     {
-        static IReadOnlyList<Zone> _expected;
-        static IReadOnlyList<Zone> _actual;
+        static CloudFlareResponse<IReadOnlyList<Zone>> _expected;
+        static CloudFlareResponse<IReadOnlyList<Zone>> _actual;
         static Uri _expectedRequestUri;
 
         Establish context = () =>
         {
-            var response = _fixture.Create<CloudFlareResponse<IReadOnlyList<Zone>>>();
-            _expected = response.Result;
-            _handler.SetResponseContent(response);
+            _expected = _fixture.Create<CloudFlareResponse<IReadOnlyList<Zone>>>();
+            _handler.SetResponseContent(_expected);
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones");
         };
 
-        Because of = () => _actual = _sut.GetZonesAsync(_auth).Await().AsTask.Result;
+        Because of = () => _actual = _sut.GetZonesAsync(_auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 
@@ -31,22 +32,21 @@
         It should_request_the_zones_endpoint = () => _handler.Request.RequestUri.ShouldEqual(_expectedRequestUri);
 
         It should_return_the_expected_zones = () =>
-            _actual.Select(z => z.AsLikeness().CreateProxy()).SequenceEqual(_expected).ShouldBeTrue();
+            _actual.Result.Select(z => z.AsLikeness().CreateProxy()).SequenceEqual(_expected.Result).ShouldBeTrue();
     }
 
     [Subject(typeof(CloudFlareClient))]
-    public class When_getting_all_zones_with_parameters : RequestContext
+    public class When_getting_zones_with_parameters : RequestContext
     {
-        static IReadOnlyList<Zone> _expected;
-        static IReadOnlyList<Zone> _actual;
+        static CloudFlareResponse<IReadOnlyList<Zone>> _expected;
+        static CloudFlareResponse<IReadOnlyList<Zone>> _actual;
         static PagedZoneParameters _parameters;
         static Uri _expectedRequestUri;
 
         Establish context = () =>
         {
-            var response = _fixture.Create<CloudFlareResponse<IReadOnlyList<Zone>>>();
-            _expected = response.Result;
-            _handler.SetResponseContent(response);
+            _expected = _fixture.Create<CloudFlareResponse<IReadOnlyList<Zone>>>();
+            _handler.SetResponseContent(_expected);
 
             // Auto fixture chooses the default value for enumerations.
             _fixture.Inject(PagedZoneOrderFieldTypes.email);
@@ -58,7 +58,7 @@
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones?" + _parameters.ToQuery());
         };
 
-        Because of = () => _actual = _sut.GetZonesAsync(_auth, _parameters).Await().AsTask.Result;
+        Because of = () => _actual = _sut.GetZonesAsync(_auth, _parameters).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 
@@ -67,11 +67,97 @@
         It should_request_the_zones_endpoint = () => _handler.Request.RequestUri.ShouldEqual(_expectedRequestUri);
 
         It should_return_the_expected_zones = () =>
+            _actual.Result.Select(z => z.AsLikeness().CreateProxy()).SequenceEqual(_expected.Result).ShouldBeTrue();
+    }
+
+    [Subject(typeof(CloudFlareClient))]
+    public class When_getting_all_zones : GetAllResultsContext<Zone>
+    {
+        static Uri _expectedFirstRequestUri;
+        static Uri _expectedSecondRequestUri;
+        static Uri _expectedLastRequestUri;
+
+        Establish context = () =>
+        {
+            string firstParams = new PagedZoneParameters(page: 1, perPage: 100).ToQuery();
+            string secondParams = new PagedZoneParameters(page: 2, perPage: 100).ToQuery();
+            string lastParams = new PagedZoneParameters(page: 3, perPage: 100).ToQuery();
+
+            _expectedFirstRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones?" + firstParams);
+            _expectedSecondRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones?" + secondParams);
+            _expectedLastRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones?" + lastParams);
+        };
+
+        Because of = () => _actual = _sut.GetAllZonesAsync(_auth).Await().AsTask.Result;
+
+        Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
+
+        It should_make_a_GET_request = () => _handler.Request.Method.ShouldEqual(HttpMethod.Get);
+
+        It should_request_the_first_page = () => _handler.Requests[0].RequestUri.ShouldEqual(_expectedFirstRequestUri);
+
+        It should_request_the_second_page =
+            () => _handler.Requests[1].RequestUri.ShouldEqual(_expectedSecondRequestUri);
+
+        It should_request_the_last_page = () => _handler.Requests[2].RequestUri.ShouldEqual(_expectedLastRequestUri);
+
+        It should_return_the_expected_zones = () =>
             _actual.Select(z => z.AsLikeness().CreateProxy()).SequenceEqual(_expected).ShouldBeTrue();
     }
 
     [Subject(typeof(CloudFlareClient))]
-    public class When_getting_all_zones_and_an_error_occurs : ErredRequestContext
+    public class When_getting_all_zones_with_parameters : GetAllResultsContext<Zone>
+    {
+        static PagedZoneParameters _parameters;
+        static Uri _expectedFirstRequestUri;
+        static Uri _expectedSecondRequestUri;
+        static Uri _expectedLastRequestUri;
+
+        Establish context = () =>
+        {
+            // Auto fixture chooses the default value for enumerations.
+            _fixture.Inject(PagedZoneOrderFieldTypes.email);
+            _fixture.Inject(PagedParametersOrderType.desc);
+            _fixture.Inject(PagedParametersMatchType.any);
+
+            _parameters = _fixture.Create<PagedZoneParameters>();
+
+            JObject first = JObject.FromObject(_parameters);
+            first.Merge(JObject.FromObject(new { page = 1, per_page = 100 }));
+            string firstParams = first.ToObject<PagedZoneParameters>().ToQuery();
+
+            JObject second = JObject.FromObject(_parameters);
+            second.Merge(JObject.FromObject(new { page = 2, per_page = 100 }));
+            string secondParams = second.ToObject<PagedZoneParameters>().ToQuery();
+
+            JObject last = JObject.FromObject(_parameters);
+            last.Merge(JObject.FromObject(new { page = 3, per_page = 100 }));
+            string lastParams = last.ToObject<PagedZoneParameters>().ToQuery();
+
+            _expectedFirstRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones?" + firstParams);
+            _expectedSecondRequestUri  = new Uri(CloudFlareConstants.BaseUri, "zones?" + secondParams);
+            _expectedLastRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones?" + lastParams);
+        };
+
+        Because of = () => _actual = _sut.GetAllZonesAsync(_auth, _parameters).Await().AsTask.Result;
+
+        Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
+
+        It should_make_a_GET_request = () => _handler.Request.Method.ShouldEqual(HttpMethod.Get);
+
+        It should_request_the_first_page = () => _handler.Requests[0].RequestUri.ShouldEqual(_expectedFirstRequestUri);
+
+        It should_request_the_second_page =
+            () => _handler.Requests[1].RequestUri.ShouldEqual(_expectedSecondRequestUri);
+
+        It should_request_the_last_page = () => _handler.Requests[2].RequestUri.ShouldEqual(_expectedLastRequestUri);
+
+        It should_return_the_expected_zones = () =>
+            _actual.Select(z => z.AsLikeness().CreateProxy()).SequenceEqual(_expected).ShouldBeTrue();
+    }
+
+    [Subject(typeof(CloudFlareClient))]
+    public class When_getting_zones_and_an_error_occurs : ErredRequestContext
     {
         static Uri _expectedRequestUri;
 

@@ -10,26 +10,72 @@
     using It = Machine.Specifications.It;
 
     [Subject(typeof(ZoneClientExtensions))]
-    public class When_getting_all_zones : FixtureContext
+    public class When_getting_zones : FixtureContext
     {
         static Mock<IZoneClient> _zoneClientMock;
         static CloudFlareAuth _auth;
-        static IReadOnlyList<Zone> _expected;
-        static IReadOnlyList<Zone> _actual;
+        static CloudFlareResponse<IReadOnlyList<Zone>> _expected;
+        static CloudFlareResponse<IReadOnlyList<Zone>> _actual;
 
         Establish context = () =>
         {
             _zoneClientMock = _fixture.Create<Mock<IZoneClient>>();
             _auth = _fixture.Create<CloudFlareAuth>();
-            _expected = _fixture.Create<Zone[]>();
+            _expected = _fixture.Create<CloudFlareResponse<IReadOnlyList<Zone>>>();
             _zoneClientMock
                 .Setup(c => c.GetZonesAsync(CancellationToken.None, default(PagedZoneParameters), _auth))
                 .ReturnsAsync(_expected);
         };
 
-        Because of = () => _actual = _zoneClientMock.Object.GetZonesAsync(_auth).Await().AsTask.Result;
+        Because of = () => _actual = _zoneClientMock.Object.GetZonesAsync(_auth).Await();
 
         It should_return_the_zones = () => _actual.ShouldBeTheSameAs(_expected);
+    }
+
+    [Subject(typeof(ZoneClientExtensions))]
+    public class When_getting_zones_with_parameters : FixtureContext
+    {
+        static Mock<IZoneClient> _zoneClientMock;
+        static PagedZoneParameters _parameters;
+        static CloudFlareResponse<IReadOnlyList<Zone>> _expected;
+        static CloudFlareResponse<IReadOnlyList<Zone>> _actual;
+
+        Establish context = () =>
+        {
+            _zoneClientMock = _fixture.Create<Mock<IZoneClient>>();
+            _parameters = _fixture.Create<PagedZoneParameters>();
+            _expected = _fixture.Create<CloudFlareResponse<IReadOnlyList<Zone>>>();
+            _zoneClientMock
+                .Setup(c => c.GetZonesAsync(CancellationToken.None, _parameters, default(CloudFlareAuth)))
+                .ReturnsAsync(_expected);
+        };
+
+        Because of = () => _actual = _zoneClientMock.Object.GetZonesAsync(_parameters).Await();
+
+        It should_return_the_zones = () => _actual.ShouldBeTheSameAs(_expected);
+    }
+
+    [Subject(typeof(ZoneClientExtensions))]
+    public class When_getting_all_zones : FixtureContext
+    {
+        static Mock<IZoneClient> _zoneClientMock;
+        static CloudFlareAuth _auth;
+        static IEnumerable<Zone> _expected;
+        static IEnumerable<Zone> _actual;
+
+        Establish context = () =>
+        {
+            _zoneClientMock = _fixture.Create<Mock<IZoneClient>>();
+            _auth = _fixture.Create<CloudFlareAuth>();
+            _expected = _fixture.CreateMany<Zone>();
+            _zoneClientMock
+                .Setup(c => c.GetAllZonesAsync(CancellationToken.None, default(PagedZoneParameters), _auth))
+                .ReturnsAsync(_expected);
+        };
+
+        Because of = () => _actual = _zoneClientMock.Object.GetAllZonesAsync(_auth).Await().AsTask.Result;
+
+        It should_return_all_the_zones = () => _actual.ShouldBeTheSameAs(_expected);
     }
 
     [Subject(typeof(ZoneClientExtensions))]
@@ -37,22 +83,22 @@
     {
         static Mock<IZoneClient> _zoneClientMock;
         static PagedZoneParameters _parameters;
-        static IReadOnlyList<Zone> _expected;
-        static IReadOnlyList<Zone> _actual;
+        static IEnumerable<Zone> _expected;
+        static IEnumerable<Zone> _actual;
 
         Establish context = () =>
         {
             _zoneClientMock = _fixture.Create<Mock<IZoneClient>>();
             _parameters = _fixture.Create<PagedZoneParameters>();
-            _expected = _fixture.Create<Zone[]>();
+            _expected = _fixture.CreateMany<Zone>();
             _zoneClientMock
-                .Setup(c => c.GetZonesAsync(CancellationToken.None, _parameters, default(CloudFlareAuth)))
+                .Setup(c => c.GetAllZonesAsync(CancellationToken.None, _parameters, default(CloudFlareAuth)))
                 .ReturnsAsync(_expected);
         };
 
-        Because of = () => _actual = _zoneClientMock.Object.GetZonesAsync(_parameters).Await().AsTask.Result;
+        Because of = () => _actual = _zoneClientMock.Object.GetAllZonesAsync(_parameters).Await().AsTask.Result;
 
-        It should_return_the_zones = () => _actual.ShouldBeTheSameAs(_expected);
+        It should_return_all_the_zones = () => _actual.ShouldBeTheSameAs(_expected);
     }
 
     [Subject(typeof(ZoneClientExtensions))]

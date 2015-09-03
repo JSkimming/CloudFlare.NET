@@ -13,7 +13,7 @@
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class Zone : IIdentifier, IModified
     {
-        private static readonly IReadOnlyList<string> EmptyStrings = Enumerable.Empty<string>().ToArray();
+        private static readonly IReadOnlyList<string> EmptyStrings = new string[0];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Zone"/> class.

@@ -16,7 +16,16 @@
         /// Gets the zones for the subscription.
         /// </summary>
         /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
-        Task<IReadOnlyList<Zone>> GetZonesAsync(
+        Task<CloudFlareResponse<IReadOnlyList<Zone>>> GetZonesAsync(
+            CancellationToken cancellationToken,
+            PagedZoneParameters parameters = null,
+            CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Gets all the zones for the subscription. Making multiple paged requests if necessary.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
+        Task<IEnumerable<Zone>> GetAllZonesAsync(
             CancellationToken cancellationToken,
             PagedZoneParameters parameters = null,
             CloudFlareAuth auth = null);

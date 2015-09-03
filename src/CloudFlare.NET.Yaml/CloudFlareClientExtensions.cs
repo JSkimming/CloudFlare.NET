@@ -37,11 +37,12 @@
                 throw new ArgumentNullException(nameof(zoneId));
 
             Task<Zone> zoneTask = client.GetZoneAsync(zoneId, cancellationToken, auth);
-            Task<IReadOnlyList<DnsRecord>> dnsRecordsTask = client.GetDnsRecordsAsync(zoneId, cancellationToken, auth);
+            Task<IEnumerable<DnsRecord>> dnsRecordsTask =
+                client.GetAllDnsRecordsAsync(zoneId, cancellationToken, auth: auth);
 
             await Task.WhenAll(zoneTask, dnsRecordsTask).ConfigureAwait(false);
 
-            return new ZoneData(zoneTask.Result, dnsRecordsTask.Result);
+            return new ZoneData(zoneTask.Result, dnsRecordsTask.Result.ToArray());
         }
     }
 }

@@ -9,6 +9,7 @@
     using System.Net.Http.Headers;
     using System.Threading;
     using System.Threading.Tasks;
+    using Newtonsoft.Json.Linq;
 
     /// <inheritdoc/>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
@@ -141,12 +142,25 @@
         }
 
         /// <inheritdoc/>
-        public Task<IReadOnlyList<Zone>> GetZonesAsync(
+        public Task<CloudFlareResponse<IReadOnlyList<Zone>>> GetZonesAsync(
             CancellationToken cancellationToken,
             PagedZoneParameters parameters = null,
             CloudFlareAuth auth = null)
         {
             return _client.GetZonesAsync(cancellationToken, auth ?? _auth, parameters);
+        }
+
+        /// <inheritdoc/>
+        public Task<IEnumerable<Zone>> GetAllZonesAsync(
+            CancellationToken cancellationToken,
+            PagedZoneParameters parameters = null,
+            CloudFlareAuth auth = null)
+        {
+            return GetAllPagedResultsAsync<Zone, PagedZoneParameters, PagedZoneOrderFieldTypes>(
+                _client.GetZonesAsync,
+                cancellationToken,
+                auth ?? _auth,
+                parameters);
         }
 
         /// <inheritdoc/>
@@ -159,12 +173,73 @@
         }
 
         /// <inheritdoc/>
-        public Task<IReadOnlyList<DnsRecord>> GetDnsRecordsAsync(
+        public Task<CloudFlareResponse<IReadOnlyList<DnsRecord>>> GetDnsRecordsAsync(
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
+            PagedDnsRecordParameters parameters = null,
             CloudFlareAuth auth = null)
         {
-            return _client.GetDnsRecordsAsync(zoneId, cancellationToken, auth ?? _auth);
+            return _client.GetDnsRecordsAsync(zoneId, cancellationToken, auth ?? _auth, parameters);
+        }
+
+        /// <inheritdoc/>
+        public Task<IEnumerable<DnsRecord>> GetAllDnsRecordsAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            PagedDnsRecordParameters parameters = null,
+            CloudFlareAuth auth = null)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return GetAllPagedResultsAsync<DnsRecord, PagedDnsRecordParameters, PagedDnsRecordOrderFieldTypes>(
+                (ct, a, p) => _client.GetDnsRecordsAsync(zoneId, ct, a, p),
+                cancellationToken,
+                auth ?? _auth,
+                parameters);
+        }
+
+        private static async Task<IEnumerable<TResult>> GetAllPagedResultsAsync<TResult, TParams, TOrder>(
+            Func<CancellationToken, CloudFlareAuth, TParams, Task<CloudFlareResponse<IReadOnlyList<TResult>>>> request,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth,
+            TParams parameters = null)
+            where TResult : class
+            where TParams : PagedParameters<TOrder>
+            where TOrder : struct
+        {
+            IEnumerable<TResult> result = Enumerable.Empty<TResult>();
+            int page = 0;
+            CloudFlareResultInfo resultInfo;
+
+            do
+            {
+                ++page;
+
+                // Create the paged parameters;
+                JObject jsonParams = JObject.FromObject(new { page, per_page = 100 });
+
+                // If parameters have been supplied use them, but override the paged parameters into them.
+                if (parameters != null)
+                {
+                    JObject mergedParams = JObject.FromObject(parameters);
+                    mergedParams.Merge(jsonParams);
+                    jsonParams = mergedParams;
+                }
+
+                TParams pagedParams = jsonParams.ToObject<TParams>();
+                CloudFlareResponse<IReadOnlyList<TResult>> response =
+                    await request(
+                        cancellationToken,
+                        auth,
+                        pagedParams).ConfigureAwait(false);
+
+                result = result.Concat(response.Result);
+                resultInfo = response.ResultInfo;
+            }
+            while (resultInfo.Page < resultInfo.TotalPages);
+
+            return result;
         }
     }
 }

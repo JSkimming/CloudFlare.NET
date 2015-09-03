@@ -17,7 +17,7 @@
         /// Gets the zones for the account specified by the <paramref name="auth"/> details.
         /// </summary>
         /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
-        public static Task<IReadOnlyList<Zone>> GetZonesAsync(
+        public static Task<CloudFlareResponse<IReadOnlyList<Zone>>> GetZonesAsync(
             this HttpClient client,
             CancellationToken cancellationToken,
             CloudFlareAuth auth,
@@ -29,7 +29,7 @@
                 uri = new UriBuilder(uri) { Query = parameters.ToQuery() }.Uri;
             }
 
-            return client.GetAsync<IReadOnlyList<Zone>>(uri, auth, cancellationToken);
+            return client.GetCloudFlareResponseAsync<IReadOnlyList<Zone>>(uri, auth, cancellationToken);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@
                 throw new ArgumentNullException(nameof(zoneId));
 
             Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}");
-            return client.GetAsync<Zone>(uri, auth, cancellationToken);
+            return client.GetCloudFlareResultAsync<Zone>(uri, auth, cancellationToken);
         }
     }
 }

@@ -14,34 +14,41 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="CloudFlareResultInfo"/> class.
         /// </summary>
-        public CloudFlareResultInfo(int page, int perPage, int count, int totalCount)
+        public CloudFlareResultInfo(int page, int totalPages, int perPage, int count, int totalCount)
         {
             Page = page;
+            TotalPages = totalPages;
             PerPage = perPage;
             Count = count;
             TotalCount = totalCount;
         }
 
         /// <summary>
-        /// Gets the TBD.
+        /// Gets the page number of the current <see cref="CloudFlareResponse{T}"/>.
         /// </summary>
         [JsonProperty("page")]
         public int Page { get; }
 
         /// <summary>
-        /// Gets the TBD.
+        /// Gets the total number of pages.
+        /// </summary>
+        [JsonProperty("total_pages")]
+        public int TotalPages { get; }
+
+        /// <summary>
+        /// Gets the number of results per page.
         /// </summary>
         [JsonProperty("per_page")]
         public int PerPage { get; }
 
         /// <summary>
-        /// Gets the TBD.
+        /// Gets the number of results of the current <see cref="CloudFlareResponse{T}"/>.
         /// </summary>
         [JsonProperty("count")]
         public int Count { get; }
 
         /// <summary>
-        /// Gets the TBD.
+        /// Gets the total number of results.
         /// </summary>
         [JsonProperty("total_count")]
         public int TotalCount { get; }

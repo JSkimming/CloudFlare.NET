@@ -17,7 +17,7 @@
         /// Gets the <see cref="CloudFlareResponse{T}"/> of a CloudFlare API <paramref name="response"/>.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="CloudFlareResponse{T}.Result"/>.</typeparam>
-        public static async Task<CloudFlareResponse<T>> GetResultAsync<T>(
+        public static async Task<CloudFlareResponse<T>> ReadCloudFlareResponseAsync<T>(
             this HttpResponseMessage response,
             CancellationToken cancellationToken)
             where T : class
@@ -57,10 +57,10 @@
         }
 
         /// <summary>
-        /// Executes a <see cref="HttpMethod.Get"/> request returning the type specified by <typeparamref name="T"/>.
+        /// Executes a <see cref="HttpMethod.Get"/> request returning the <see cref="CloudFlareResponse{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="CloudFlareResponse{T}.Result"/>.</typeparam>
-        public static async Task<T> GetAsync<T>(
+        public static async Task<CloudFlareResponse<T>> GetCloudFlareResponseAsync<T>(
             this HttpClient client,
             Uri uri,
             CloudFlareAuth auth,
@@ -84,10 +84,27 @@
                 using (response)
                 {
                     CloudFlareResponse<T> cloudFlareResponse =
-                        await response.GetResultAsync<T>(cancellationToken).ConfigureAwait(false);
-                    return cloudFlareResponse.Result;
+                        await response.ReadCloudFlareResponseAsync<T>(cancellationToken).ConfigureAwait(false);
+                    return cloudFlareResponse;
                 }
             }
+        }
+
+        /// <summary>
+        /// Executes a <see cref="HttpMethod.Get"/> request returning the type specified by <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="CloudFlareResponse{T}.Result"/>.</typeparam>
+        public static async Task<T> GetCloudFlareResultAsync<T>(
+            this HttpClient client,
+            Uri uri,
+            CloudFlareAuth auth,
+            CancellationToken cancellationToken)
+            where T : class
+        {
+            CloudFlareResponse<T> cloudFlareResponse =
+                await client.GetCloudFlareResponseAsync<T>(uri, auth, cancellationToken);
+
+            return cloudFlareResponse.Result;
         }
     }
 }

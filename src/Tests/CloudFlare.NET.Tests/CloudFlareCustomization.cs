@@ -23,6 +23,7 @@
             fixture.Register<IReadOnlyList<string>>(fixture.Create<string[]>);
             fixture.Register<IReadOnlyList<CloudFlareError>>(fixture.Create<CloudFlareError[]>);
             fixture.Register<IReadOnlyList<Zone>>(fixture.Create<Zone[]>);
+            fixture.Register<IReadOnlyList<DnsRecord>>(fixture.Create<DnsRecord[]>);
             fixture.Register(() => JObject.FromObject(fixture.Create<CloudFlareResponseBase>()));
         }
     }
