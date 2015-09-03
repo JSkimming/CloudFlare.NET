@@ -160,6 +160,7 @@
                 _client.GetZonesAsync,
                 cancellationToken,
                 auth ?? _auth,
+                50,
                 parameters);
         }
 
@@ -196,6 +197,7 @@
                 (ct, a, p) => _client.GetDnsRecordsAsync(zoneId, ct, a, p),
                 cancellationToken,
                 auth ?? _auth,
+                100,
                 parameters);
         }
 
@@ -203,6 +205,7 @@
             Func<CancellationToken, CloudFlareAuth, TParams, Task<CloudFlareResponse<IReadOnlyList<TResult>>>> request,
             CancellationToken cancellationToken,
             CloudFlareAuth auth,
+            int maxPerPage,
             TParams parameters = null)
             where TResult : class
             where TParams : PagedParameters<TOrder>
@@ -217,7 +220,7 @@
                 ++page;
 
                 // Create the paged parameters;
-                JObject jsonParams = JObject.FromObject(new { page, per_page = 100 });
+                JObject jsonParams = JObject.FromObject(new { page, per_page = maxPerPage });
 
                 // If parameters have been supplied use them, but override the paged parameters into them.
                 if (parameters != null)

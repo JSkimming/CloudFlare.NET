@@ -79,9 +79,9 @@
 
         Establish context = () =>
         {
-            string firstParams = new PagedZoneParameters(page: 1, perPage: 100).ToQuery();
-            string secondParams = new PagedZoneParameters(page: 2, perPage: 100).ToQuery();
-            string lastParams = new PagedZoneParameters(page: 3, perPage: 100).ToQuery();
+            string firstParams = new PagedZoneParameters(page: 1, perPage: 50).ToQuery();
+            string secondParams = new PagedZoneParameters(page: 2, perPage: 50).ToQuery();
+            string lastParams = new PagedZoneParameters(page: 3, perPage: 50).ToQuery();
 
             _expectedFirstRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones?" + firstParams);
             _expectedSecondRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones?" + secondParams);
@@ -123,15 +123,15 @@
             _parameters = _fixture.Create<PagedZoneParameters>();
 
             JObject first = JObject.FromObject(_parameters);
-            first.Merge(JObject.FromObject(new { page = 1, per_page = 100 }));
+            first.Merge(JObject.FromObject(new { page = 1, per_page = 50 }));
             string firstParams = first.ToObject<PagedZoneParameters>().ToQuery();
 
             JObject second = JObject.FromObject(_parameters);
-            second.Merge(JObject.FromObject(new { page = 2, per_page = 100 }));
+            second.Merge(JObject.FromObject(new { page = 2, per_page = 50 }));
             string secondParams = second.ToObject<PagedZoneParameters>().ToQuery();
 
             JObject last = JObject.FromObject(_parameters);
-            last.Merge(JObject.FromObject(new { page = 3, per_page = 100 }));
+            last.Merge(JObject.FromObject(new { page = 3, per_page = 50 }));
             string lastParams = last.ToObject<PagedZoneParameters>().ToQuery();
 
             _expectedFirstRequestUri = new Uri(CloudFlareConstants.BaseUri, "zones?" + firstParams);
