@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>0.0.5</version>
+    <version>0.1.0</version>
     <title>$title$</title>
     <authors>James Skimming</authors>
     <owners>James Skimming</owners>
@@ -12,7 +12,7 @@
     <description>$description$</description>
     <tags>CloudFlare YAML API Client</tags>
     <dependencies>
-      <dependency id="CloudFlare.NET" version="0.0.5" />
+      <dependency id="CloudFlare.NET" version="0.1.0" />
     </dependencies>
   </metadata>
 </package>
