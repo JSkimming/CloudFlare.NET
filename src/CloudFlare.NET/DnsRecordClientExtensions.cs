@@ -18,7 +18,7 @@
         public static Task<CloudFlareResponse<IReadOnlyList<DnsRecord>>> GetDnsRecordsAsync(
             this IDnsRecordClient client,
             IdentifierTag zoneId,
-            PagedDnsRecordParameters parameters = null)
+            DnsRecordGetParameters parameters = null)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
@@ -36,7 +36,7 @@
             this IDnsRecordClient client,
             IdentifierTag zoneId,
             CloudFlareAuth auth,
-            PagedDnsRecordParameters parameters = null)
+            DnsRecordGetParameters parameters = null)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
@@ -55,7 +55,7 @@
         public static Task<IEnumerable<DnsRecord>> GetAllDnsRecordsAsync(
             this IDnsRecordClient client,
             IdentifierTag zoneId,
-            PagedDnsRecordParameters parameters = null)
+            DnsRecordGetParameters parameters = null)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
@@ -73,7 +73,7 @@
             this IDnsRecordClient client,
             IdentifierTag zoneId,
             CloudFlareAuth auth,
-            PagedDnsRecordParameters parameters = null)
+            DnsRecordGetParameters parameters = null)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client));

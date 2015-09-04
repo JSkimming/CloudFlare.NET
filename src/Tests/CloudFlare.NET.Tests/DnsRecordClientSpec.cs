@@ -4,12 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
-    using System.Threading;
     using Machine.Specifications;
     using Newtonsoft.Json.Linq;
     using Ploeh.AutoFixture;
 
-    [Subject(typeof(CloudFlareClient))]
+    [Subject("DnsRecordClient")]
     public class When_getting_dns_records : RequestContext
     {
         static IdentifierTag _zoneId;
@@ -38,13 +37,13 @@
             _actual.Result.Select(i => i.AsLikeness().CreateProxy()).SequenceEqual(_expected.Result).ShouldBeTrue();
     }
 
-    [Subject(typeof(CloudFlareClient))]
+    [Subject("DnsRecordClient")]
     public class When_getting_dns_records_with_parameters : RequestContext
     {
         static IdentifierTag _zoneId;
         static CloudFlareResponse<IReadOnlyList<DnsRecord>> _expected;
         static CloudFlareResponse<IReadOnlyList<DnsRecord>> _actual;
-        static PagedDnsRecordParameters _parameters;
+        static DnsRecordGetParameters _parameters;
         static Uri _expectedRequestUri;
 
         Establish context = () =>
@@ -54,11 +53,11 @@
             _handler.SetResponseContent(_expected);
 
             // Auto fixture chooses the default value for enumerations.
-            _fixture.Inject(PagedDnsRecordOrderFieldTypes.proxied);
+            _fixture.Inject(DnsRecordOrderTypes.proxied);
             _fixture.Inject(PagedParametersOrderType.desc);
             _fixture.Inject(PagedParametersMatchType.any);
 
-            _parameters = _fixture.Create<PagedDnsRecordParameters>();
+            _parameters = _fixture.Create<DnsRecordGetParameters>();
 
             _expectedRequestUri
                 = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/dns_records?{_parameters.ToQuery()}");
@@ -77,7 +76,7 @@
             _actual.Result.Select(i => i.AsLikeness().CreateProxy()).SequenceEqual(_expected.Result).ShouldBeTrue();
     }
 
-    [Subject(typeof(CloudFlareClient))]
+    [Subject("DnsRecordClient")]
     public class When_getting_all_dns_records : GetAllResultsContext<DnsRecord>
     {
         static IdentifierTag _zoneId;
@@ -89,9 +88,9 @@
         {
             _zoneId = _fixture.Create<IdentifierTag>();
 
-            string firstParams = new PagedDnsRecordParameters(page: 1, perPage: 100).ToQuery();
-            string secondParams = new PagedDnsRecordParameters(page: 2, perPage: 100).ToQuery();
-            string lastParams = new PagedDnsRecordParameters(page: 3, perPage: 100).ToQuery();
+            string firstParams = new DnsRecordGetParameters(page: 1, perPage: 100).ToQuery();
+            string secondParams = new DnsRecordGetParameters(page: 2, perPage: 100).ToQuery();
+            string lastParams = new DnsRecordGetParameters(page: 3, perPage: 100).ToQuery();
 
             _expectedFirstRequestUri
                 = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/dns_records?{firstParams}");
@@ -118,11 +117,11 @@
             _actual.Select(z => z.AsLikeness().CreateProxy()).SequenceEqual(_expected).ShouldBeTrue();
     }
 
-    [Subject(typeof(CloudFlareClient))]
+    [Subject("DnsRecordClient")]
     public class When_getting_all_dns_records_with_parameters : GetAllResultsContext<DnsRecord>
     {
         static IdentifierTag _zoneId;
-        static PagedDnsRecordParameters _parameters;
+        static DnsRecordGetParameters _parameters;
         static Uri _expectedFirstRequestUri;
         static Uri _expectedSecondRequestUri;
         static Uri _expectedLastRequestUri;
@@ -132,23 +131,23 @@
             _zoneId = _fixture.Create<IdentifierTag>();
 
             // Auto fixture chooses the default value for enumerations.
-            _fixture.Inject(PagedDnsRecordOrderFieldTypes.proxied);
+            _fixture.Inject(DnsRecordOrderTypes.proxied);
             _fixture.Inject(PagedParametersOrderType.desc);
             _fixture.Inject(PagedParametersMatchType.any);
 
-            _parameters = _fixture.Create<PagedDnsRecordParameters>();
+            _parameters = _fixture.Create<DnsRecordGetParameters>();
 
             JObject first = JObject.FromObject(_parameters);
             first.Merge(JObject.FromObject(new { page = 1, per_page = 100 }));
-            string firstParams = first.ToObject<PagedDnsRecordParameters>().ToQuery();
+            string firstParams = first.ToObject<DnsRecordGetParameters>().ToQuery();
 
             JObject second = JObject.FromObject(_parameters);
             second.Merge(JObject.FromObject(new { page = 2, per_page = 100 }));
-            string secondParams = second.ToObject<PagedDnsRecordParameters>().ToQuery();
+            string secondParams = second.ToObject<DnsRecordGetParameters>().ToQuery();
 
             JObject last = JObject.FromObject(_parameters);
             last.Merge(JObject.FromObject(new { page = 3, per_page = 100 }));
-            string lastParams = last.ToObject<PagedDnsRecordParameters>().ToQuery();
+            string lastParams = last.ToObject<DnsRecordGetParameters>().ToQuery();
 
             _expectedFirstRequestUri
                 = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/dns_records?{firstParams}");
@@ -175,7 +174,7 @@
             _actual.Select(z => z.AsLikeness().CreateProxy()).SequenceEqual(_expected).ShouldBeTrue();
     }
 
-    [Subject(typeof(CloudFlareClient))]
+    [Subject("DnsRecordClient")]
     public class When_getting_dnsRecords_and_an_error_occurs : ErredRequestContext
     {
         static IdentifierTag _zoneId;

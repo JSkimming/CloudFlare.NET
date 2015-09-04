@@ -18,7 +18,7 @@
         /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
         Task<CloudFlareResponse<IReadOnlyList<Zone>>> GetZonesAsync(
             CancellationToken cancellationToken,
-            PagedZoneParameters parameters = null,
+            ZoneGetParameters parameters = null,
             CloudFlareAuth auth = null);
 
         /// <summary>
@@ -27,7 +27,7 @@
         /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
         Task<IEnumerable<Zone>> GetAllZonesAsync(
             CancellationToken cancellationToken,
-            PagedZoneParameters parameters = null,
+            ZoneGetParameters parameters = null,
             CloudFlareAuth auth = null);
 
         /// <summary>

@@ -19,7 +19,7 @@
         Task<CloudFlareResponse<IReadOnlyList<DnsRecord>>> GetDnsRecordsAsync(
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
-            PagedDnsRecordParameters parameters = null,
+            DnsRecordGetParameters parameters = null,
             CloudFlareAuth auth = null);
 
         /// <summary>
@@ -30,7 +30,7 @@
         Task<IEnumerable<DnsRecord>> GetAllDnsRecordsAsync(
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
-            PagedDnsRecordParameters parameters = null,
+            DnsRecordGetParameters parameters = null,
             CloudFlareAuth auth = null);
     }
 }

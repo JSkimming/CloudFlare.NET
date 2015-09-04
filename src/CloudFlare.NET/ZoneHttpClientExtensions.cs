@@ -11,7 +11,7 @@
     /// Extension methods on <see cref="HttpClient"/> to wrap the Zone APIs
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#zone"/>
-    public static class HttpClientZoneExtensions
+    public static class ZoneHttpClientExtensions
     {
         /// <summary>
         /// Gets the zones for the account specified by the <paramref name="auth"/> details.
@@ -21,7 +21,7 @@
             this HttpClient client,
             CancellationToken cancellationToken,
             CloudFlareAuth auth,
-            PagedZoneParameters parameters = null)
+            ZoneGetParameters parameters = null)
         {
             Uri uri = new Uri(CloudFlareConstants.BaseUri, "zones");
             if (parameters != null)
