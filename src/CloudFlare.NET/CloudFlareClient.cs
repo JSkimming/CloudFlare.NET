@@ -141,38 +141,6 @@
             return handler;
         }
 
-        /// <inheritdoc/>
-        public Task<CloudFlareResponse<IReadOnlyList<Zone>>> GetZonesAsync(
-            CancellationToken cancellationToken,
-            PagedZoneParameters parameters = null,
-            CloudFlareAuth auth = null)
-        {
-            return _client.GetZonesAsync(cancellationToken, auth ?? _auth, parameters);
-        }
-
-        /// <inheritdoc/>
-        public Task<IEnumerable<Zone>> GetAllZonesAsync(
-            CancellationToken cancellationToken,
-            PagedZoneParameters parameters = null,
-            CloudFlareAuth auth = null)
-        {
-            return GetAllPagedResultsAsync<Zone, PagedZoneParameters, PagedZoneOrderFieldTypes>(
-                _client.GetZonesAsync,
-                cancellationToken,
-                auth ?? _auth,
-                50,
-                parameters);
-        }
-
-        /// <inheritdoc/>
-        public Task<Zone> GetZoneAsync(
-            IdentifierTag zoneId,
-            CancellationToken cancellationToken,
-            CloudFlareAuth auth = null)
-        {
-            return _client.GetZoneAsync(zoneId, cancellationToken, auth ?? _auth);
-        }
-
         private static async Task<IEnumerable<TResult>> GetAllPagedResultsAsync<TResult, TParams, TOrder>(
             Func<CancellationToken, CloudFlareAuth, TParams, Task<CloudFlareResponse<IReadOnlyList<TResult>>>> request,
             CancellationToken cancellationToken,

@@ -23,7 +23,7 @@
             _auth = _fixture.Create<CloudFlareAuth>();
             _expected = _fixture.Create<CloudFlareResponse<IReadOnlyList<Zone>>>();
             _zoneClientMock
-                .Setup(c => c.GetZonesAsync(CancellationToken.None, default(PagedZoneParameters), _auth))
+                .Setup(c => c.GetZonesAsync(CancellationToken.None, default(ZoneGetParameters), _auth))
                 .ReturnsAsync(_expected);
         };
 
@@ -36,14 +36,14 @@
     public class When_getting_zones_with_parameters : FixtureContext
     {
         static Mock<IZoneClient> _zoneClientMock;
-        static PagedZoneParameters _parameters;
+        static ZoneGetParameters _parameters;
         static CloudFlareResponse<IReadOnlyList<Zone>> _expected;
         static CloudFlareResponse<IReadOnlyList<Zone>> _actual;
 
         Establish context = () =>
         {
             _zoneClientMock = _fixture.Create<Mock<IZoneClient>>();
-            _parameters = _fixture.Create<PagedZoneParameters>();
+            _parameters = _fixture.Create<ZoneGetParameters>();
             _expected = _fixture.Create<CloudFlareResponse<IReadOnlyList<Zone>>>();
             _zoneClientMock
                 .Setup(c => c.GetZonesAsync(CancellationToken.None, _parameters, default(CloudFlareAuth)))
@@ -69,7 +69,7 @@
             _auth = _fixture.Create<CloudFlareAuth>();
             _expected = _fixture.CreateMany<Zone>();
             _zoneClientMock
-                .Setup(c => c.GetAllZonesAsync(CancellationToken.None, default(PagedZoneParameters), _auth))
+                .Setup(c => c.GetAllZonesAsync(CancellationToken.None, default(ZoneGetParameters), _auth))
                 .ReturnsAsync(_expected);
         };
 
@@ -82,14 +82,14 @@
     public class When_getting_all_zones_with_parameters : FixtureContext
     {
         static Mock<IZoneClient> _zoneClientMock;
-        static PagedZoneParameters _parameters;
+        static ZoneGetParameters _parameters;
         static IEnumerable<Zone> _expected;
         static IEnumerable<Zone> _actual;
 
         Establish context = () =>
         {
             _zoneClientMock = _fixture.Create<Mock<IZoneClient>>();
-            _parameters = _fixture.Create<PagedZoneParameters>();
+            _parameters = _fixture.Create<ZoneGetParameters>();
             _expected = _fixture.CreateMany<Zone>();
             _zoneClientMock
                 .Setup(c => c.GetAllZonesAsync(CancellationToken.None, _parameters, default(CloudFlareAuth)))

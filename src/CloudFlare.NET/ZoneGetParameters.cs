@@ -10,17 +10,17 @@
     /// Specifies the parameters of the <see cref="IZoneClient.GetZonesAsync"/> request.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#zone-list-zones"/>
-    public class PagedZoneParameters : PagedParameters<PagedZoneOrderFieldTypes>
+    public class ZoneGetParameters : PagedParameters<ZoneOrderTypes>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PagedZoneParameters"/> class.
+        /// Initializes a new instance of the <see cref="ZoneGetParameters"/> class.
         /// </summary>
-        public PagedZoneParameters(
+        public ZoneGetParameters(
             string name = null,
             ZoneStatusType? status = null,
             int page = 0,
             int perPage = 0,
-            PagedZoneOrderFieldTypes order = default(PagedZoneOrderFieldTypes),
+            ZoneOrderTypes order = default(ZoneOrderTypes),
             PagedParametersOrderType direction = default(PagedParametersOrderType),
             PagedParametersMatchType match = default(PagedParametersMatchType))
             : base(page, perPage, order, direction, match)
@@ -42,15 +42,15 @@
         public ZoneStatusType? Status { get; }
 
         /// <summary>
-        /// Creates a <see cref="PagedZoneParameters"/> from the <paramref name="data"/> copying any matching
+        /// Creates a <see cref="ZoneGetParameters"/> from the <paramref name="data"/> copying any matching
         /// properties.
         /// </summary>
-        public static PagedZoneParameters Create(object data)
+        public static ZoneGetParameters Create(object data)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
-            return JObject.FromObject(data).ToObject<PagedZoneParameters>();
+            return JObject.FromObject(data).ToObject<ZoneGetParameters>();
         }
     }
 }
