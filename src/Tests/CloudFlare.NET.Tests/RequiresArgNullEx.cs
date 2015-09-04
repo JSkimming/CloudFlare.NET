@@ -15,6 +15,7 @@
         [Exclude(Method = "op_Equality")]
         [Exclude(Method = "op_Inequality")]
         [Exclude(Type = typeof(CloudFlareClient), Method = "GetAllPagedResultsAsync")]
+        [Substitute(typeof(ZoneSetting<>), typeof(ZoneSetting<int>))]
         public Task CloudFlare(MethodData method)
         {
             return method.Execute();

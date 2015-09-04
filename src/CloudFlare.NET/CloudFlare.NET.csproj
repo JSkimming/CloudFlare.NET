@@ -98,6 +98,11 @@
     <Compile Include="ZoneGetParameters.cs" />
     <Compile Include="ZoneHttpClientExtensions.cs" />
     <Compile Include="ZoneOrderTypes.cs" />
+    <Compile Include="ZoneSetting.cs" />
+    <Compile Include="ZoneSettingBase.cs" />
+    <Compile Include="ZoneSettingsClient.Interface.cs" />
+    <Compile Include="ZoneSettingsClientExtensions.cs" />
+    <Compile Include="ZoneSettingsHttpClientExtensions.cs" />
     <Compile Include="ZoneStatusType.cs" />
     <None Include="app.config" />
     <None Include="CloudFlare.NET.nuspec" />

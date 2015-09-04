@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// The CloudFlare DNS records for a zone API Client.
+    /// The CloudFlare DNS record API Client.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone"/>
     public interface IDnsRecordClient

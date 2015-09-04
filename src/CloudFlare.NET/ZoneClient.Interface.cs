@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// The CloudFlare API Client.
+    /// The CloudFlare Zone API Client.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#zone"/>
     public interface IZoneClient
