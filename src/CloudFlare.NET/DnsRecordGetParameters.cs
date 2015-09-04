@@ -10,18 +10,18 @@
     /// Specifies the parameters of the <see cref="IDnsRecordClient.GetDnsRecordsAsync"/> request.
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records"/>
-    public class PagedDnsRecordParameters : PagedParameters<PagedDnsRecordOrderFieldTypes>
+    public class DnsRecordGetParameters : PagedParameters<DnsRecordOrderTypes>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PagedDnsRecordParameters"/> class.
+        /// Initializes a new instance of the <see cref="DnsRecordGetParameters"/> class.
         /// </summary>
-        public PagedDnsRecordParameters(
+        public DnsRecordGetParameters(
             DnsRecordType? type = null,
             string name = null,
             string content = null,
             int page = 0,
             int perPage = 0,
-            PagedDnsRecordOrderFieldTypes order = default(PagedDnsRecordOrderFieldTypes),
+            DnsRecordOrderTypes order = default(DnsRecordOrderTypes),
             PagedParametersOrderType direction = default(PagedParametersOrderType),
             PagedParametersMatchType match = default(PagedParametersMatchType))
             : base(page, perPage, order, direction, match)
@@ -50,15 +50,15 @@
         public string Content { get; }
 
         /// <summary>
-        /// Creates a <see cref="PagedZoneParameters"/> from the <paramref name="data"/> copying any matching
+        /// Creates a <see cref="DnsRecordGetParameters"/> from the <paramref name="data"/> copying any matching
         /// properties.
         /// </summary>
-        public static PagedDnsRecordParameters Create(object data)
+        public static DnsRecordGetParameters Create(object data)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
-            return JObject.FromObject(data).ToObject<PagedDnsRecordParameters>();
+            return JObject.FromObject(data).ToObject<DnsRecordGetParameters>();
         }
     }
 }

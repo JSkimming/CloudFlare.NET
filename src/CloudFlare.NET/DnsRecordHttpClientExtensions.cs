@@ -11,7 +11,7 @@
     /// Extension methods on <see cref="HttpClient"/> to wrap the Zone APIs
     /// </summary>
     /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone"/>
-    public static class HttpClientDnsRecordExtensions
+    public static class DnsRecordHttpClientExtensions
     {
         /// <summary>
         /// Gets the zones for the account specified by the <paramref name="auth"/> details.
@@ -22,7 +22,7 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth,
-            PagedDnsRecordParameters parameters = null)
+            DnsRecordGetParameters parameters = null)
         {
             if (zoneId == null)
                 throw new ArgumentNullException(nameof(zoneId));

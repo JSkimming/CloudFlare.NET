@@ -15,7 +15,7 @@
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
         Justification = "Named to match serialized values.")]
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum PagedDnsRecordOrderFieldTypes
+    public enum DnsRecordOrderTypes
     {
         none,
         type,

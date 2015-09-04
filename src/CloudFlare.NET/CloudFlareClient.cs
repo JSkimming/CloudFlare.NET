@@ -13,7 +13,7 @@
 
     /// <inheritdoc/>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class CloudFlareClient : ICloudFlareClient
+    public partial class CloudFlareClient : ICloudFlareClient
     {
         private static readonly Lazy<HttpClient> LazyClient = new Lazy<HttpClient>(
             () => CreateDefaultHttpClient(),
@@ -171,34 +171,6 @@
             CloudFlareAuth auth = null)
         {
             return _client.GetZoneAsync(zoneId, cancellationToken, auth ?? _auth);
-        }
-
-        /// <inheritdoc/>
-        public Task<CloudFlareResponse<IReadOnlyList<DnsRecord>>> GetDnsRecordsAsync(
-            IdentifierTag zoneId,
-            CancellationToken cancellationToken,
-            PagedDnsRecordParameters parameters = null,
-            CloudFlareAuth auth = null)
-        {
-            return _client.GetDnsRecordsAsync(zoneId, cancellationToken, auth ?? _auth, parameters);
-        }
-
-        /// <inheritdoc/>
-        public Task<IEnumerable<DnsRecord>> GetAllDnsRecordsAsync(
-            IdentifierTag zoneId,
-            CancellationToken cancellationToken,
-            PagedDnsRecordParameters parameters = null,
-            CloudFlareAuth auth = null)
-        {
-            if (zoneId == null)
-                throw new ArgumentNullException(nameof(zoneId));
-
-            return GetAllPagedResultsAsync<DnsRecord, PagedDnsRecordParameters, PagedDnsRecordOrderFieldTypes>(
-                (ct, a, p) => _client.GetDnsRecordsAsync(zoneId, ct, a, p),
-                cancellationToken,
-                auth ?? _auth,
-                100,
-                parameters);
         }
 
         private static async Task<IEnumerable<TResult>> GetAllPagedResultsAsync<TResult, TParams, TOrder>(

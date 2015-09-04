@@ -1,4 +1,4 @@
-﻿namespace CloudFlare.NET.DnsRecordSpec
+﻿namespace CloudFlare.NET.DnsRecordClientExtensionsSpec
 {
     using System;
     using System.Collections.Generic;
@@ -29,7 +29,7 @@
                     c => c.GetDnsRecordsAsync(
                         _zoneId,
                         CancellationToken.None,
-                        default(PagedDnsRecordParameters),
+                        default(DnsRecordGetParameters),
                         _auth))
                 .ReturnsAsync(_expected);
         };
@@ -44,7 +44,7 @@
     {
         static Mock<IDnsRecordClient> _dnsRecordClientMock;
         static IdentifierTag _zoneId;
-        static PagedDnsRecordParameters _parameters;
+        static DnsRecordGetParameters _parameters;
         static CloudFlareResponse<IReadOnlyList<DnsRecord>> _expected;
         static CloudFlareResponse<IReadOnlyList<DnsRecord>> _actual;
 
@@ -52,7 +52,7 @@
         {
             _dnsRecordClientMock = _fixture.Create<Mock<IDnsRecordClient>>();
             _zoneId = _fixture.Create<IdentifierTag>();
-            _parameters = _fixture.Create<PagedDnsRecordParameters>();
+            _parameters = _fixture.Create<DnsRecordGetParameters>();
             _expected = _fixture.Create<CloudFlareResponse<IReadOnlyList<DnsRecord>>>();
             _dnsRecordClientMock
                 .Setup(
@@ -85,7 +85,7 @@
                     c => c.GetAllDnsRecordsAsync(
                         _zoneId,
                         CancellationToken.None,
-                        default(PagedDnsRecordParameters),
+                        default(DnsRecordGetParameters),
                         _auth))
                 .ReturnsAsync(_expected);
         };
@@ -101,7 +101,7 @@
     {
         static Mock<IDnsRecordClient> _dnsRecordClientMock;
         static IdentifierTag _zoneId;
-        static PagedDnsRecordParameters _parameters;
+        static DnsRecordGetParameters _parameters;
         static IEnumerable<DnsRecord> _expected;
         static IEnumerable<DnsRecord> _actual;
 
@@ -109,7 +109,7 @@
         {
             _dnsRecordClientMock = _fixture.Create<Mock<IDnsRecordClient>>();
             _zoneId = _fixture.Create<IdentifierTag>();
-            _parameters = _fixture.Create<PagedDnsRecordParameters>();
+            _parameters = _fixture.Create<DnsRecordGetParameters>();
             _expected = _fixture.CreateMany<DnsRecord>();
             _dnsRecordClientMock
                 .Setup(

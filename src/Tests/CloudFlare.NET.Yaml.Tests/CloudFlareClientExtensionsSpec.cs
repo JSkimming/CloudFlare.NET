@@ -31,7 +31,7 @@
                 c => c.GetAllDnsRecordsAsync(
                     _expectedZone.Id,
                     CancellationToken.None,
-                    default(PagedDnsRecordParameters),
+                    default(DnsRecordGetParameters),
                     _auth))
                 .ReturnsAsync(_expectedDnsRecords);
         };
