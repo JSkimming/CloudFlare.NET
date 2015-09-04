@@ -8,7 +8,8 @@
 
     internal class SampleJson
     {
-        public static JObject Load(string fileName)
+        public static TJson Load<TJson>(string fileName)
+            where TJson : JToken
         {
             Stream stream =
                 typeof(SampleJson).Assembly.GetManifestResourceStream(typeof(SampleJson), $"{fileName}.json");
@@ -21,20 +22,22 @@
             using (var sr = new StreamReader(stream))
             {
                 string json = sr.ReadToEnd();
-                return JObject.Parse(json);
+                return (TJson)JToken.Parse(json);
             }
         }
 
-        public static JObject DnsRecord => Load(nameof(DnsRecord));
+        public static JObject DnsRecord => Load<JObject>(nameof(DnsRecord));
 
-        public static JObject DnsRecordMinimal => Load(nameof(DnsRecordMinimal));
+        public static JObject DnsRecordMinimal => Load<JObject>(nameof(DnsRecordMinimal));
 
-        public static JObject ErrorResponse => Load(nameof(ErrorResponse));
+        public static JObject ErrorResponse => Load<JObject>(nameof(ErrorResponse));
 
-        public static JObject SuccessResponse => Load(nameof(SuccessResponse));
+        public static JObject SuccessResponse => Load<JObject>(nameof(SuccessResponse));
 
-        public static JObject Zone => Load(nameof(Zone));
+        public static JObject Zone => Load<JObject>(nameof(Zone));
 
-        public static JObject ZoneMinimal => Load(nameof(ZoneMinimal));
+        public static JObject ZoneMinimal => Load<JObject>(nameof(ZoneMinimal));
+
+        public static JArray ZoneSettings => Load<JArray>(nameof(ZoneSettings));
     }
 }

@@ -15,7 +15,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ZoneSetting{TValue}"/> class.
         /// </summary>
-        public ZoneSetting(string id, TValue value, bool editable, DateTimeOffset modifiedOn)
+        public ZoneSetting(string id, TValue value, bool editable, DateTimeOffset? modifiedOn)
             : base(id, editable, modifiedOn)
         {
             Value = value;

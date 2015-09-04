@@ -14,7 +14,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ZoneSettingBase"/> class.
         /// </summary>
-        protected ZoneSettingBase(string id, bool editable, DateTimeOffset modifiedOn)
+        protected ZoneSettingBase(string id, bool editable, DateTimeOffset? modifiedOn)
         {
             if (id == null)
                 throw new ArgumentNullException(nameof(id));
@@ -40,6 +40,6 @@
         /// last time this setting was modified.
         /// </summary>
         [JsonProperty("modified_on")]
-        public DateTimeOffset ModifiedOn { get; }
+        public DateTimeOffset? ModifiedOn { get; }
     }
 }
