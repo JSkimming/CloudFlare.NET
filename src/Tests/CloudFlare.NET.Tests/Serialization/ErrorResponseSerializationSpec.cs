@@ -12,11 +12,9 @@
         static JObject _json;
         static CloudFlareResponseBase _sut;
 
-        Because of = () =>
-        {
-            _json = SampleJson.ErrorResponse;
-            _sut = _json.ToObject<CloudFlareResponseBase>();
-        };
+        Establish context = () => _json = SampleJson.ErrorResponse;
+
+        Because of = () => _sut = _json.ToObject<CloudFlareResponseBase>();
 
         It should_deserialize_success =
             () => _sut.Success.ShouldEqual(_json["success"].Value<bool>());

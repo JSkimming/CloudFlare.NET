@@ -13,11 +13,9 @@
         protected static JObject _json;
         protected static DnsRecord _sut;
 
-        Because of = () =>
-        {
-            _json = SampleJson.DnsRecord;
-            _sut = _json.ToObject<DnsRecord>();
-        };
+        Establish context = () => _json = SampleJson.DnsRecord;
+
+        Because of = () => _sut = _json.ToObject<DnsRecord>();
 
         Behaves_like<IdentifierDeserializeBehavior> identifier_deserialize_behavior;
 
@@ -50,11 +48,9 @@
         protected static JObject _json;
         protected static DnsRecord _sut;
 
-        Because of = () =>
-        {
-            _json = SampleJson.DnsRecordMinimal;
-            _sut = _json.ToObject<DnsRecord>();
-        };
+        Establish context = () => _json = SampleJson.DnsRecordMinimal;
+
+        Because of = () => _sut = _json.ToObject<DnsRecord>();
 
         Behaves_like<IdentifierDeserializeBehavior> identifier_deserialize_behavior;
 
