@@ -10,18 +10,14 @@
     [Subject(typeof(ZoneSetting<>))]
     public class When_serializing : FixtureContext
     {
-        static ZoneSetting<string> _sut;
-        static JObject _json;
+        protected static ZoneSetting<string> _sut;
+        protected static JObject _json;
 
         Establish context = () => _sut = _fixture.Create<ZoneSetting<string>>();
 
         Because of = () => _json = JObject.FromObject(_sut);
 
-        It should_serialize_id = () => _sut.Id.ShouldEqual(_json["id"].Value<string>());
-
-        It should_serialize_editable = () => _sut.Editable.ShouldEqual(_json["editable"].Value<bool>());
-
-        It should_serialize_modified_on = () => _sut.ModifiedOn.ShouldEqual(_json["modified_on"].Value<DateTime>());
+        Behaves_like<ZoneSettingSerializeBehavior> zone_setting_serialize_behavior;
 
         It should_serialize_value = () => _sut.Value.ShouldEqual(_json["value"].Value<string>());
     }
@@ -42,18 +38,14 @@
     [Subject(typeof(ZoneSetting<>))]
     public class When_deserializing
     {
-        static JObject _json;
-        static ZoneSetting<string> _sut;
+        protected static JObject _json;
+        protected static ZoneSetting<string> _sut;
 
         Establish context = () => _json = SampleJson.ZoneSettingTest1;
 
         Because of = () => _sut = _json.ToObject<ZoneSetting<string>>();
 
-        It should_deserialize_id = () => _sut.Id.ShouldEqual(_json["id"].Value<string>());
-
-        It should_deserialize_editable = () => _sut.Editable.ShouldEqual(_json["editable"].Value<bool>());
-
-        It should_deserialize_modified_on = () => _sut.ModifiedOn.ShouldEqual(_json["modified_on"].Value<DateTime>());
+        Behaves_like<ZoneSettingDeserializeBehavior> zone_setting_deserialize_behavior;
 
         It should_deserialize_value = () => _sut.Value.ShouldEqual(_json["value"].Value<string>());
     }

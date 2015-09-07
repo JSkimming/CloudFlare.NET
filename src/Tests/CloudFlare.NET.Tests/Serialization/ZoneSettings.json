@@ -38,8 +38,9 @@
     {
         "id": "development_mode",
         "value": "off",
-        "modified_on": null,
-        "editable": true
+        "modified_on": "2001-02-03T04:05:06.789Z",
+        "editable": true,
+        "time_remaining": 1234
     },
     {
         "id": "edge_cache_ttl",
