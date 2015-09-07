@@ -56,7 +56,8 @@ build:
   verbosity: minimal
 
 before_build:
-  - nuget restore src\cloudflare.net.sln
+  - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/nuget-restore.cmd
+  - nuget-restore src\cloudflare.net.sln
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 
 after_build:
@@ -79,6 +80,27 @@ after_test: |
   appveyor PushArtifact src\TestResults\Specifications.html -FileName "Specifications_%GitVersion_FullSemVer%.html"
 
 #---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+deploy:
+  # Deploy to NuGet when tags are applied to the master branch.
+  - provider: NuGet
+    api_key:
+      secure: YE/e/aOqNtjXWWk+IKzSl+HtDzrSE1tkaUPGQtzg6mA5chWEz53GJ9WNF/qdXgX1
+    on:
+      branch: master
+      appveyor_repo_tag: true
+
+  # Deploy to GitHub when tags are applied to the master branch.
+  - provider: GitHub
+    auth_token:
+      secure: HsYB0bln/Vj2trBco3Z3y9tG8sN8kguyXMogs9wSV65e0qRLl+BABxBxt3Q+CX9y
+    on:
+      branch: master
+      appveyor_repo_tag: true
+
+#---------------------------------#
 #        global handlers          #
 #---------------------------------#
 
@@ -98,5 +120,5 @@ notifications:
     auth_token:
       secure: AkSNuuHmfzAFp2+Oq00NRQFOfrXl4ue08SHx0FC2WTeXSiZv8uVKI3ZBWns7HTcV
     channel: cloudflare_net
+    on_build_success: false
     on_build_status_changed: true
-
