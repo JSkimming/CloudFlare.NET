@@ -142,6 +142,7 @@
     <EmbeddedResource Include="Serialization\Zone.json" />
     <EmbeddedResource Include="Serialization\ZoneMinimal.json" />
     <EmbeddedResource Include="Serialization\ZoneSettings.json" />
+    <EmbeddedResource Include="Serialization\ZoneSettingsErred.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CloudFlare.NET\CloudFlare.NET.csproj">

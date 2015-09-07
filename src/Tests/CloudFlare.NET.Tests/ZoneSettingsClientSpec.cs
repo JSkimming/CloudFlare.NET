@@ -48,7 +48,7 @@
     }
 
     [Subject("ZoneSettingsClient")]
-    public class When_getting_dnsRecords_and_an_error_occurs : ErredRequestContext
+    public class When_getting_zone_settings_and_an_error_occurs : ErredRequestContext
     {
         static IdentifierTag _zoneId;
         static Uri _expectedRequestUri;
@@ -66,6 +66,33 @@
         Behaves_like<ErredRequestBehaviour> erred_request_behaviour;
 
         It should_make_a_GET_request = () => _handler.Request.Method.ShouldEqual(HttpMethod.Get);
+
+        It should_request_the_zone_settings_endpoint
+            = () => _handler.Request.RequestUri.ShouldEqual(_expectedRequestUri);
+    }
+
+    [Subject("ZoneSettingsClient")]
+    public class When_getting_zone_settings_and_a_setting_has_no_id : RequestContext
+    {
+        static IdentifierTag _zoneId;
+        static Uri _expectedRequestUri;
+        static Exception _exception;
+
+        Establish context = () =>
+        {
+            var response = new CloudFlareResponse<JArray>(true, SampleJson.ZoneSettingsErred);
+            _zoneId = _fixture.Create<IdentifierTag>();
+            _handler.SetResponseContent(response);
+            _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings");
+        };
+
+        Because of = () => _exception = Catch.Exception(
+            () => _sut.GetAllZoneSettingsAsync(_zoneId, _auth).Await().AsTask.Result.ToList());
+
+        It should_throw_an_InvalidOperationException =
+            () => _exception.ShouldBeOfExactType<InvalidOperationException>();
+
+        Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 
         It should_request_the_zone_settings_endpoint
             = () => _handler.Request.RequestUri.ShouldEqual(_expectedRequestUri);

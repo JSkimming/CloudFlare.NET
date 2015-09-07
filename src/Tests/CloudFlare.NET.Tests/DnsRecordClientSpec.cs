@@ -175,7 +175,7 @@
     }
 
     [Subject("DnsRecordClient")]
-    public class When_getting_dnsRecords_and_an_error_occurs : ErredRequestContext
+    public class When_getting_dns_records_and_an_error_occurs : ErredRequestContext
     {
         static IdentifierTag _zoneId;
         static Uri _expectedRequestUri;

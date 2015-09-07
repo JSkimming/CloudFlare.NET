@@ -40,6 +40,8 @@
 
         public static JArray ZoneSettings => Load<JArray>(nameof(ZoneSettings));
 
+        public static JArray ZoneSettingsErred => Load<JArray>(nameof(ZoneSettingsErred));
+
         public static JObject ZoneSettingDevelopmentMode
             => ZoneSettings.Cast<JObject>().Single(s => s["id"].Value<string>() == "development_mode");
 

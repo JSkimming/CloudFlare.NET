@@ -45,7 +45,7 @@
                 JToken idToken = json["id"];
                 if (idToken == null)
                 {
-                    throw new ArgumentException($"The setting does not have an id property.\n{json}", nameof(json));
+                    throw new InvalidOperationException($"The setting does not have an id property.\n{json}");
                 }
 
                 string id = idToken.Value<string>();
