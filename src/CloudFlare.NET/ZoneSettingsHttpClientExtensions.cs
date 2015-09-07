@@ -29,7 +29,8 @@
 
             Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings");
 
-            JArray jsonSettings = await client.GetCloudFlareResultAsync<JArray>(uri, auth, cancellationToken);
+            JArray jsonSettings = await client.GetCloudFlareResultAsync<JArray>(uri, auth, cancellationToken)
+                .ConfigureAwait(false);
 
             return GetZoneSetting(jsonSettings.Cast<JObject>());
         }

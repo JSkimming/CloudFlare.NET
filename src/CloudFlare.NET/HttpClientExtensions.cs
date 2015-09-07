@@ -102,7 +102,7 @@
             where T : class
         {
             CloudFlareResponse<T> cloudFlareResponse =
-                await client.GetCloudFlareResponseAsync<T>(uri, auth, cancellationToken);
+                await client.GetCloudFlareResponseAsync<T>(uri, auth, cancellationToken).ConfigureAwait(false);
 
             return cloudFlareResponse.Result;
         }
