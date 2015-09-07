@@ -55,6 +55,36 @@
     }
 
     [Behaviors]
+    public class ZoneSettingDeserializeBehavior
+    {
+        protected static JObject _json;
+        protected static ZoneSettingBase _sut;
+
+        It should_deserialize_id = () => _sut.Id.ShouldEqual(_json["id"].Value<string>());
+
+        It should_deserialize_editable = () => _sut.Editable.ShouldEqual(_json["editable"].Value<bool>());
+
+        It should_deserialize_modified_on = () => _sut.ModifiedOn.ShouldEqual(_json["modified_on"].Value<DateTime>());
+    }
+
+    [Behaviors]
+    public class ZoneSettingSerializeBehavior
+    {
+        protected static JObject _json;
+        protected static ZoneSettingBase _sut;
+
+        It should_serialize_id = () => _sut.Id.ShouldEqual(_json["id"].Value<string>());
+
+        It should_serialize_editable = () => _sut.Editable.ShouldEqual(_json["editable"].Value<bool>());
+
+        It should_serialize_modified_on =
+            () => _sut.ModifiedOn.GetValueOrDefault().UtcDateTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK")
+                .ShouldEqual(_json["modified_on"].Value<string>());
+
+        It should_serialize_modified_on_for_ISO8601 = () => _json["modified_on"].ToString().ShouldEndWith("Z");
+    }
+
+    [Behaviors]
     public class PagedParametersSerializeBehavior<TOrder>
         where TOrder : struct
     {

@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using Machine.Specifications;
-    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using Ploeh.AutoFixture;
 
@@ -14,11 +13,9 @@
         protected static JObject _json;
         protected static Zone _sut;
 
-        Because of = () =>
-        {
-            _json = SampleJson.Zone;
-            _sut = _json.ToObject<Zone>();
-        };
+        Establish context = () => _json = SampleJson.Zone;
+
+        Because of = () => _sut = _json.ToObject<Zone>();
 
         Behaves_like<IdentifierDeserializeBehavior> identifier_deserialize_behavior;
 
@@ -51,11 +48,9 @@
         protected static JObject _json;
         protected static Zone _sut;
 
-        Because of = () =>
-        {
-            _json = SampleJson.ZoneMinimal;
-            _sut = _json.ToObject<Zone>();
-        };
+        Establish context = () => _json = SampleJson.ZoneMinimal;
+
+        Because of = () => _sut = _json.ToObject<Zone>();
 
         Behaves_like<IdentifierDeserializeBehavior> identifier_deserialize_behavior;
 
@@ -105,11 +100,7 @@
 
         Establish context = () => _expected = _fixture.Create<Zone>();
 
-        Because of = () =>
-        {
-            var serializeObject = JsonConvert.SerializeObject(_expected);
-            _actual = JObject.FromObject(_expected).ToObject<Zone>();
-        };
+        Because of = () => _actual = JObject.FromObject(_expected).ToObject<Zone>();
 
         It should_retain_all_properties = () => _actual.AsLikeness().ShouldEqual(_expected);
     }

@@ -6,7 +6,6 @@
     using System.Linq;
     using System.Net.Http;
     using Machine.Specifications;
-    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using Ploeh.AutoFixture;
 
@@ -35,11 +34,7 @@
 
         Establish context = () => _expected = _fixture.Create<ZoneGetParameters>();
 
-        Because of = () =>
-        {
-            var serializeObject = JsonConvert.SerializeObject(_expected);
-            _actual = JObject.FromObject(_expected).ToObject<ZoneGetParameters>();
-        };
+        Because of = () => _actual = JObject.FromObject(_expected).ToObject<ZoneGetParameters>();
 
         It should_retain_all_properties = () => _actual.AsLikeness().ShouldEqual(_expected);
     }

@@ -14,7 +14,7 @@
     public static class DnsRecordHttpClientExtensions
     {
         /// <summary>
-        /// Gets the zones for the account specified by the <paramref name="auth"/> details.
+        /// Gets the DNS records for the zone with the specified <paramref name="zoneId"/>.
         /// </summary>
         /// <seealso href="https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records"/>
         public static Task<CloudFlareResponse<IReadOnlyList<DnsRecord>>> GetDnsRecordsAsync(
