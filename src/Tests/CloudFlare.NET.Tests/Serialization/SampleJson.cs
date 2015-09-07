@@ -39,5 +39,8 @@
         public static JObject ZoneMinimal => Load<JObject>(nameof(ZoneMinimal));
 
         public static JArray ZoneSettings => Load<JArray>(nameof(ZoneSettings));
+
+        public static JObject ZoneSettingTest1
+            => ZoneSettings.Cast<JObject>().Single(s => s["id"].Value<string>() == "xxx_test1");
     }
 }

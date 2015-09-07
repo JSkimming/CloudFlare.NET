@@ -126,6 +126,7 @@
     <Compile Include="Serialization\SampleJson.cs" />
     <Compile Include="Serialization\SuccessResponseSerializationSpec.cs" />
     <Compile Include="Serialization\ZoneGetParametersSpec.cs" />
+    <Compile Include="Serialization\ZoneSettingSpec.cs" />
     <Compile Include="Serialization\ZoneSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZoneClientExtensionsSpec.cs" />

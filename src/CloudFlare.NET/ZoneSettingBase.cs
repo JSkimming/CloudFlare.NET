@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using CloudFlare.NET.Serialization;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -40,6 +41,7 @@
         /// last time this setting was modified.
         /// </summary>
         [JsonProperty("modified_on")]
+        [JsonConverter(typeof(IsoDateTimeOffsetConverter))]
         public DateTimeOffset? ModifiedOn { get; }
     }
 }
