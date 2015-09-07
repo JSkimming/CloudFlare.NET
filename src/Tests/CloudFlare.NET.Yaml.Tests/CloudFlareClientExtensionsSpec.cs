@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
-    using System.Threading.Tasks;
     using Machine.Specifications;
     using Moq;
     using Ploeh.AutoFixture;
     using It = Machine.Specifications.It;
 
+    [Subject(typeof(CloudFlareClientExtensions))]
     public class When_getting_all_the_zone_data : FixtureContext
     {
         static Zone _expectedZone;
