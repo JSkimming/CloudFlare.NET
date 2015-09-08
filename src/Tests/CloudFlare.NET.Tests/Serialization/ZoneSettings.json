@@ -81,8 +81,8 @@
     {
         "id": "minify",
         "value": {
-            "css": "off",
-            "html": "off",
+            "css": "on",
+            "html": "on",
             "js": "off"
         },
         "modified_on": null,
