@@ -68,7 +68,7 @@
     },
     {
         "id": "ipv6",
-        "value": "on",
+        "value": "safe",
         "modified_on": "2015-08-19T10:05:27.442217Z",
         "editable": true
     },
@@ -112,7 +112,7 @@
     },
     {
         "id": "polish",
-        "value": "off",
+        "value": "lossless",
         "modified_on": null,
         "editable": false
     },
@@ -136,7 +136,7 @@
     },
     {
         "id": "rocket_loader",
-        "value": "off",
+        "value": "manual",
         "modified_on": null,
         "editable": true
     },
