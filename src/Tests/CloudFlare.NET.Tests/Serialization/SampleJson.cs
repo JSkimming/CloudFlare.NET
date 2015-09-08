@@ -49,6 +49,8 @@
 
         public static JObject ZoneSettingMinify => GetZoneSetting("minify");
 
+        public static JObject ZoneSettingMobileRedirect => GetZoneSetting("mobile_redirect");
+
         public static JObject ZoneSettingTest1 => GetZoneSetting("xxx_test1");
     }
 }

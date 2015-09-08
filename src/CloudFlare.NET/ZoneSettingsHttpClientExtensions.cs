@@ -102,6 +102,8 @@
                         yield return json.ToObject<ZoneSetting<SettingMinify>>();
                         break;
                     case "mobile_redirect":
+                        yield return json.ToObject<ZoneSetting<SettingMobileRedirect>>();
+                        break;
                     case "security_header":
                         yield return json.ToObject<ZoneSetting<JObject>>();
                         break;

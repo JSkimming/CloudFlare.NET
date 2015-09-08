@@ -94,6 +94,7 @@
     <Compile Include="SettingCacheLevelTypes.cs" />
     <Compile Include="SettingIPv6Types.cs" />
     <Compile Include="SettingMinify.cs" />
+    <Compile Include="SettingMobileRedirect.cs" />
     <Compile Include="SettingOnOffTypes.cs" />
     <Compile Include="SettingPolishTypes.cs" />
     <Compile Include="SettingRocketLoaderTypes.cs" />

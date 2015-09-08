@@ -98,7 +98,7 @@
         "id": "mobile_redirect",
         "value": {
             "status": "off",
-            "mobile_subdomain": null,
+            "mobile_subdomain": "m",
             "strip_uri": false
         },
         "modified_on": null,
