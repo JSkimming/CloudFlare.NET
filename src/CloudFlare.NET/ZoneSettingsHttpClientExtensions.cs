@@ -105,7 +105,7 @@
                         yield return json.ToObject<ZoneSetting<SettingMobileRedirect>>();
                         break;
                     case "security_header":
-                        yield return json.ToObject<ZoneSetting<JObject>>();
+                        yield return json.ToObject<ZoneSetting<SettingSecurityHeader>>();
                         break;
                     default:
                         yield return json.ToObject<ZoneSetting<JToken>>();

@@ -98,8 +98,10 @@
     <Compile Include="SettingOnOffTypes.cs" />
     <Compile Include="SettingPolishTypes.cs" />
     <Compile Include="SettingRocketLoaderTypes.cs" />
+    <Compile Include="SettingSecurityHeader.cs" />
     <Compile Include="SettingSecurityLevelTypes.cs" />
     <Compile Include="SettingSslTypes.cs" />
+    <Compile Include="SettingStrictTransportSecurity.cs" />
     <Compile Include="Zone.cs" />
     <Compile Include="ZoneClient.Implementation.cs" />
     <Compile Include="ZoneClient.Interface.cs" />

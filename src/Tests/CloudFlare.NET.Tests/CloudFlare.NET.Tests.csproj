@@ -126,6 +126,7 @@
     <Compile Include="Serialization\SampleJson.cs" />
     <Compile Include="Serialization\SettingMinifySpec.cs" />
     <Compile Include="Serialization\SettingMobileRedirectSpec.cs" />
+    <Compile Include="Serialization\SettingSecurityHeaderSpec.cs" />
     <Compile Include="Serialization\SuccessResponseSerializationSpec.cs" />
     <Compile Include="Serialization\ZoneDevelopmentModeSettingSpec.cs" />
     <Compile Include="Serialization\ZoneGetParametersSpec.cs" />

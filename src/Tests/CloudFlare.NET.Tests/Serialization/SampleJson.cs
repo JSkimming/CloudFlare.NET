@@ -51,6 +51,8 @@
 
         public static JObject ZoneSettingMobileRedirect => GetZoneSetting("mobile_redirect");
 
+        public static JObject ZoneSettingSecurityHeader => GetZoneSetting("security_header");
+
         public static JObject ZoneSettingTest1 => GetZoneSetting("xxx_test1");
     }
 }
