@@ -97,4 +97,34 @@
         It should_request_the_zone_settings_endpoint
             = () => _handler.Request.RequestUri.ShouldEqual(_expectedRequestUri);
     }
+
+    [Subject("ZoneSettingsClient")]
+    public class When_getting_zone_advanced_DDOS_setting : RequestContext
+    {
+        static IdentifierTag _zoneId;
+        static ZoneSetting<SettingOnOffTypes> _expected;
+        static ZoneSetting<SettingOnOffTypes> _actual;
+        static Uri _expectedRequestUri;
+
+        Establish context = () =>
+        {
+            JObject source = SampleJson.ZoneSettingAdvancedDdos;
+            _expected = source.ToObject<ZoneSetting<SettingOnOffTypes>>();
+            var response = new CloudFlareResponse<JObject>(true, source);
+            _zoneId = _fixture.Create<IdentifierTag>();
+            _handler.SetResponseContent(response);
+            _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/advanced_ddos");
+        };
+
+        Because of = () => _actual = _sut.GetAdvancedDdosSettingAsync(_zoneId, _auth).Await();
+
+        Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
+
+        It should_make_a_GET_request = () => _handler.Request.Method.ShouldEqual(HttpMethod.Get);
+
+        It should_request_the_zone_settings_endpoint
+            = () => _handler.Request.RequestUri.ShouldEqual(_expectedRequestUri);
+
+        It should_return_the_expected_zone_setting = () => _actual.AsLikeness().ShouldEqual(_expected);
+    }
 }

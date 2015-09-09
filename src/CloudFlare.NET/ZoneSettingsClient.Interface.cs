@@ -20,5 +20,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Advanced protection from Distributed Denial of Service (DDoS) attacks on your website.
+        /// This is an uneditable value that is 'on' in the case of Business and Enterprise zones
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-advanced-ddos-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetAdvancedDdosSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

@@ -35,6 +35,25 @@
             return GetZoneSetting(jsonSettings.Cast<JObject>());
         }
 
+        /// <summary>
+        /// Advanced protection from Distributed Denial of Service (DDoS) attacks on your website.
+        /// This is an uneditable value that is 'on' in the case of Business and Enterprise zones
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-advanced-ddos-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetAdvancedDdosSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/advanced_ddos");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

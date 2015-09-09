@@ -17,5 +17,14 @@
         {
             return _client.GetAllZoneSettingsAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetAdvancedDdosSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetAdvancedDdosSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

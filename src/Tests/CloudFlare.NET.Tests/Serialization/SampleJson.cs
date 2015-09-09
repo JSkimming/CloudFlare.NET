@@ -45,6 +45,8 @@
 
         public static JArray ZoneSettingsErred => Load<JArray>(nameof(ZoneSettingsErred));
 
+        public static JObject ZoneSettingAdvancedDdos => GetZoneSetting("advanced_ddos");
+
         public static JObject ZoneSettingDevelopmentMode => GetZoneSetting("development_mode");
 
         public static JObject ZoneSettingMinify => GetZoneSetting("minify");
