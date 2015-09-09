@@ -26,6 +26,9 @@
             }
         }
 
+        private static JObject GetZoneSetting(string setting)
+            => ZoneSettings.Cast<JObject>().Single(s => s["id"].Value<string>() == setting);
+
         public static JObject DnsRecord => Load<JObject>(nameof(DnsRecord));
 
         public static JObject DnsRecordMinimal => Load<JObject>(nameof(DnsRecordMinimal));
@@ -42,10 +45,14 @@
 
         public static JArray ZoneSettingsErred => Load<JArray>(nameof(ZoneSettingsErred));
 
-        public static JObject ZoneSettingDevelopmentMode
-            => ZoneSettings.Cast<JObject>().Single(s => s["id"].Value<string>() == "development_mode");
+        public static JObject ZoneSettingDevelopmentMode => GetZoneSetting("development_mode");
 
-        public static JObject ZoneSettingTest1
-            => ZoneSettings.Cast<JObject>().Single(s => s["id"].Value<string>() == "xxx_test1");
+        public static JObject ZoneSettingMinify => GetZoneSetting("minify");
+
+        public static JObject ZoneSettingMobileRedirect => GetZoneSetting("mobile_redirect");
+
+        public static JObject ZoneSettingSecurityHeader => GetZoneSetting("security_header");
+
+        public static JObject ZoneSettingTest1 => GetZoneSetting("xxx_test1");
     }
 }

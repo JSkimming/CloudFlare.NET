@@ -18,7 +18,21 @@
             return actual.AsSource().OfLikeness<T>();
         }
 
-        public static Likeness<CloudFlareResponseBase, CloudFlareResponseBase> AsLikeness(this CloudFlareResponseBase actual)
+        public static Likeness<SettingSecurityHeader, SettingSecurityHeader> AsLikeness(
+            this SettingSecurityHeader actual)
+        {
+            if (actual == null)
+                throw new ArgumentNullException(nameof(actual));
+
+            return actual
+                .AsSource()
+                .OfLikeness<SettingSecurityHeader>()
+                .With(s => s.StrictTransportSecurity)
+                .EqualsWhen((a, e) => a.StrictTransportSecurity.AsLikeness().Equals(e.StrictTransportSecurity));
+        }
+
+        public static Likeness<CloudFlareResponseBase, CloudFlareResponseBase> AsLikeness(
+            this CloudFlareResponseBase actual)
         {
             if (actual == null)
                 throw new ArgumentNullException(nameof(actual));

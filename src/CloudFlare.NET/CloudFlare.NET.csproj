@@ -92,9 +92,16 @@
     <Compile Include="Serialization\IsoDateTimeOffsetConverter.cs" />
     <Compile Include="Serialization\ToStringJsonConverter.cs" />
     <Compile Include="SettingCacheLevelTypes.cs" />
+    <Compile Include="SettingIPv6Types.cs" />
+    <Compile Include="SettingMinify.cs" />
+    <Compile Include="SettingMobileRedirect.cs" />
     <Compile Include="SettingOnOffTypes.cs" />
+    <Compile Include="SettingPolishTypes.cs" />
+    <Compile Include="SettingRocketLoaderTypes.cs" />
+    <Compile Include="SettingSecurityHeader.cs" />
     <Compile Include="SettingSecurityLevelTypes.cs" />
     <Compile Include="SettingSslTypes.cs" />
+    <Compile Include="SettingStrictTransportSecurity.cs" />
     <Compile Include="Zone.cs" />
     <Compile Include="ZoneClient.Implementation.cs" />
     <Compile Include="ZoneClient.Interface.cs" />

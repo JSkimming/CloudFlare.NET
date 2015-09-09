@@ -60,13 +60,10 @@
                     case "email_obfuscation":
                     case "hotlink_protection":
                     case "ip_geolocation":
-                    case "ipv6":
                     case "mirage":
-                    case "polish":
                     case "prefetch_preload":
                     case "pseudo_ipv4":
                     case "response_buffering":
-                    case "rocket_loader":
                     case "server_side_exclude":
                     case "tls_client_auth":
                     case "true_client_ip_header":
@@ -83,6 +80,15 @@
                     case "cache_level":
                         yield return json.ToObject<ZoneSetting<SettingCacheLevelTypes>>();
                         break;
+                    case "ipv6":
+                        yield return json.ToObject<ZoneSetting<SettingIPv6Types>>();
+                        break;
+                    case "polish":
+                        yield return json.ToObject<ZoneSetting<SettingPolishTypes>>();
+                        break;
+                    case "rocket_loader":
+                        yield return json.ToObject<ZoneSetting<SettingRocketLoaderTypes>>();
+                        break;
                     case "security_level":
                         yield return json.ToObject<ZoneSetting<SettingSecurityLevelTypes>>();
                         break;
@@ -93,9 +99,13 @@
                         yield return json.ToObject<ZoneDevelopmentModeSetting>();
                         break;
                     case "minify":
+                        yield return json.ToObject<ZoneSetting<SettingMinify>>();
+                        break;
                     case "mobile_redirect":
+                        yield return json.ToObject<ZoneSetting<SettingMobileRedirect>>();
+                        break;
                     case "security_header":
-                        yield return json.ToObject<ZoneSetting<JObject>>();
+                        yield return json.ToObject<ZoneSetting<SettingSecurityHeader>>();
                         break;
                     default:
                         yield return json.ToObject<ZoneSetting<JToken>>();
