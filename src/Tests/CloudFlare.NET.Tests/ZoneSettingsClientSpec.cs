@@ -176,7 +176,7 @@
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/browser_cache_ttl");
         };
 
-        //Because of = () => _actual = _sut.GetBrowserCacheTtlSettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetBrowserCacheTtlSettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 

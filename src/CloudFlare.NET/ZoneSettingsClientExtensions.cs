@@ -62,5 +62,23 @@
 
             return client.GetAlwaysOnlineSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Browser Cache TTL (in seconds) specifies how long CloudFlare-cached resources will remain on your visitors'
+        /// computers.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-browser-cache-ttl-setting"/>
+        public static Task<ZoneSetting<int>> GetBrowserCacheTtlSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetBrowserCacheTtlSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

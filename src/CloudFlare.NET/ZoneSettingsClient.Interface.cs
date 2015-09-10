@@ -39,5 +39,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Browser Cache TTL (in seconds) specifies how long CloudFlare-cached resources will remain on your visitors'
+        /// computers.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-browser-cache-ttl-setting"/>
+        Task<ZoneSetting<int>> GetBrowserCacheTtlSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }
