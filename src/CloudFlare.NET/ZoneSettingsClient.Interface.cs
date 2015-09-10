@@ -88,5 +88,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Encrypt email addresses on your web page from bots, while keeping them visible to humans.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-email-obfuscation-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetEmailObfuscationSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

@@ -166,6 +166,24 @@
             return client.GetCloudFlareResultAsync<ZoneDevelopmentModeSetting>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Encrypt email addresses on your web page from bots, while keeping them visible to humans.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-email-obfuscation-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetEmailObfuscationSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/email_obfuscation");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

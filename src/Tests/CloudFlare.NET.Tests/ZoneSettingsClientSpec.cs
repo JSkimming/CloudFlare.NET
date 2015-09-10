@@ -326,7 +326,7 @@
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/email_obfuscation");
         };
 
-        //Because of = () => _actual = _sut.GetEmailObfuscationSettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetEmailObfuscationSettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 

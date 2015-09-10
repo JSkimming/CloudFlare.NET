@@ -80,5 +80,14 @@
         {
             return _client.GetDevelopmentModeSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetEmailObfuscationSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetEmailObfuscationSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }
