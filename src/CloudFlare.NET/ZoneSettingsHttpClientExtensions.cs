@@ -147,6 +147,25 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<int>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Development Mode temporarily allows you to enter development mode for your websites if you need to make
+        /// changes to your site.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-development-mode-setting"/>
+        public static Task<ZoneDevelopmentModeSetting> GetDevelopmentModeSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/development_mode");
+
+            return client.GetCloudFlareResultAsync<ZoneDevelopmentModeSetting>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

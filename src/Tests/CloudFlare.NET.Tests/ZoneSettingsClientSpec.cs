@@ -282,21 +282,21 @@
     public class When_getting_zone_development_mode_setting : RequestContext
     {
         static IdentifierTag _zoneId;
-        static ZoneSetting<ZoneDevelopmentModeSetting> _expected;
-        static ZoneSetting<ZoneDevelopmentModeSetting> _actual;
+        static ZoneDevelopmentModeSetting _expected;
+        static ZoneDevelopmentModeSetting _actual;
         static Uri _expectedRequestUri;
 
         Establish context = () =>
         {
             JObject source = SampleJson.ZoneSettingDevelopmentMode;
-            _expected = source.ToObject<ZoneSetting<ZoneDevelopmentModeSetting>>();
+            _expected = source.ToObject<ZoneDevelopmentModeSetting>();
             var response = new CloudFlareResponse<JObject>(true, source);
             _zoneId = _fixture.Create<IdentifierTag>();
             _handler.SetResponseContent(response);
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/development_mode");
         };
 
-        //Because of = () => _actual = _sut.GetDevelopmentModeSettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetDevelopmentModeSettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 

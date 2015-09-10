@@ -78,5 +78,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Development Mode temporarily allows you to enter development mode for your websites if you need to make
+        /// changes to your site.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-development-mode-setting"/>
+        Task<ZoneDevelopmentModeSetting> GetDevelopmentModeSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

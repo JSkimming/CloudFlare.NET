@@ -133,5 +133,23 @@
 
             return client.GetChallengeTtlSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Development Mode temporarily allows you to enter development mode for your websites if you need to make
+        /// changes to your site.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-development-mode-setting"/>
+        public static Task<ZoneDevelopmentModeSetting> GetDevelopmentModeSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetDevelopmentModeSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

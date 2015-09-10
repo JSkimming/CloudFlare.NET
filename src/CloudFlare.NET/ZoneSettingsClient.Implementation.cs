@@ -71,5 +71,14 @@
         {
             return _client.GetChallengeTtlSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneDevelopmentModeSetting> GetDevelopmentModeSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetDevelopmentModeSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }
