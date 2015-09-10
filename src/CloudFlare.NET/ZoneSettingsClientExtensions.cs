@@ -115,5 +115,23 @@
 
             return client.GetCacheLevelSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Specify how long a visitor is allowed access to your site after successfully completing a challenge
+        /// (such as a CAPTCHA).
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-challenge-ttl-setting"/>
+        public static Task<ZoneSetting<int>> GetChallengeTtlSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetChallengeTtlSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

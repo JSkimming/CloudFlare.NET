@@ -128,6 +128,25 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingCacheLevelTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Specify how long a visitor is allowed access to your site after successfully completing a challenge
+        /// (such as a CAPTCHA).
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-challenge-ttl-setting"/>
+        public static Task<ZoneSetting<int>> GetChallengeTtlSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/challenge_ttl");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<int>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

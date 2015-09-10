@@ -62,5 +62,14 @@
         {
             return _client.GetCacheLevelSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<int>> GetChallengeTtlSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetChallengeTtlSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

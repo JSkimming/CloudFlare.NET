@@ -68,5 +68,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Specify how long a visitor is allowed access to your site after successfully completing a challenge
+        /// (such as a CAPTCHA).
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-challenge-ttl-setting"/>
+        Task<ZoneSetting<int>> GetChallengeTtlSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }
