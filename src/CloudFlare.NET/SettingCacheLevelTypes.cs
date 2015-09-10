@@ -17,8 +17,8 @@
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SettingCacheLevelTypes
     {
+        aggressive,
         basic,
         simplified,
-        aggressive,
     }
 }

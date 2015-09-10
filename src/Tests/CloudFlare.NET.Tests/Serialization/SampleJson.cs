@@ -47,13 +47,59 @@
 
         public static JObject ZoneSettingAdvancedDdos => GetZoneSetting("advanced_ddos");
 
+        public static JObject ZoneSettingAlwaysOnline => GetZoneSetting("always_online");
+
+        public static JObject ZoneSettingBrowserCacheTtl => GetZoneSetting("browser_cache_ttl");
+
+        public static JObject ZoneSettingBrowserCheck => GetZoneSetting("browser_check");
+
+        public static JObject ZoneSettingCacheLevel => GetZoneSetting("cache_level");
+
+        public static JObject ZoneSettingChallengeTtl => GetZoneSetting("challenge_ttl");
+
         public static JObject ZoneSettingDevelopmentMode => GetZoneSetting("development_mode");
+
+        public static JObject ZoneSettingEmailObfuscation => GetZoneSetting("email_obfuscation");
+
+        public static JObject ZoneSettingHotlinkProtection => GetZoneSetting("hotlink_protection");
+
+        public static JObject ZoneSettingIpGeolocation => GetZoneSetting("ip_geolocation");
+
+        public static JObject ZoneSettingIPv6 => GetZoneSetting("ipv6");
 
         public static JObject ZoneSettingMinify => GetZoneSetting("minify");
 
         public static JObject ZoneSettingMobileRedirect => GetZoneSetting("mobile_redirect");
 
+        public static JObject ZoneSettingMirage => GetZoneSetting("mirage");
+
+        public static JObject ZoneSettingEnableErrorPagesOn => GetZoneSetting("origin_error_page_pass_thru");
+
+        public static JObject ZoneSettingPolish => GetZoneSetting("polish");
+
+        public static JObject ZoneSettingPrefetchPreload => GetZoneSetting("prefetch_preload");
+
+        public static JObject ZoneSettingResponseBuffering => GetZoneSetting("response_buffering");
+
+        public static JObject ZoneSettingRocketLoader => GetZoneSetting("rocket_loader");
+
         public static JObject ZoneSettingSecurityHeader => GetZoneSetting("security_header");
+
+        public static JObject ZoneSettingSecurityLevel => GetZoneSetting("security_level");
+
+        public static JObject ZoneSettingServerSideExclude => GetZoneSetting("server_side_exclude");
+
+        public static JObject ZoneSettingEnableQueryStringSort => GetZoneSetting("sort_query_string_for_cache");
+
+        public static JObject ZoneSettingSsl => GetZoneSetting("ssl");
+
+        public static JObject ZoneSettingEnableTls12 => GetZoneSetting("tls_1_2_only");
+
+        public static JObject ZoneSettingTlsClientAuth => GetZoneSetting("tls_client_auth");
+
+        public static JObject ZoneSettingTrueClientIp => GetZoneSetting("true_client_ip_header");
+
+        public static JObject ZoneSettingWebApplicationFirewall => GetZoneSetting("waf");
 
         public static JObject ZoneSettingTest1 => GetZoneSetting("xxx_test1");
     }
