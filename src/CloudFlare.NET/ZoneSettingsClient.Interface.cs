@@ -30,5 +30,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// When enabled, Always Online will serve pages from our cache if your server is offline.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-always-online-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetAlwaysOnlineSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

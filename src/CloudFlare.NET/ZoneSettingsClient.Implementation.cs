@@ -26,5 +26,14 @@
         {
             return _client.GetAdvancedDdosSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetAlwaysOnlineSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetAlwaysOnlineSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

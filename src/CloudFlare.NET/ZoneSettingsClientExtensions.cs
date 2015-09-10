@@ -45,5 +45,22 @@
 
             return client.GetAdvancedDdosSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// When enabled, Always Online will serve pages from our cache if your server is offline.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-always-online-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetAlwaysOnlineSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetAlwaysOnlineSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }
