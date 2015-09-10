@@ -49,5 +49,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Browser Integrity Check is similar to Bad Behavior and looks for common HTTP headers abused most commonly
+        /// by spammers and denies access to your page.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-browser-check-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetBrowserCheckSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

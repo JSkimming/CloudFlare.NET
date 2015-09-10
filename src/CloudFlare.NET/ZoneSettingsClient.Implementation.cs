@@ -44,5 +44,14 @@
         {
             return _client.GetBrowserCacheTtlSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetBrowserCheckSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetBrowserCheckSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

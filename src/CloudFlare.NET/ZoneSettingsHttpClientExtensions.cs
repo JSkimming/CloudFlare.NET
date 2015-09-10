@@ -91,6 +91,25 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<int>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Browser Integrity Check is similar to Bad Behavior and looks for common HTTP headers abused most commonly
+        /// by spammers and denies access to your page.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-browser-check-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetBrowserCheckSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/browser_check");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)
