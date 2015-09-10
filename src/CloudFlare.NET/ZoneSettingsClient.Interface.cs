@@ -59,5 +59,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Cache Level functions based off the setting level.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-cache-level-setting"/>
+        Task<ZoneSetting<SettingCacheLevelTypes>> GetCacheLevelSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

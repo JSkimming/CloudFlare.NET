@@ -98,5 +98,22 @@
 
             return client.GetBrowserCheckSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Cache Level functions based off the setting level.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-cache-level-setting"/>
+        public static Task<ZoneSetting<SettingCacheLevelTypes>> GetCacheLevelSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetCacheLevelSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

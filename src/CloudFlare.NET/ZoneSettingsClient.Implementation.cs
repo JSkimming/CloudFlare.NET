@@ -53,5 +53,14 @@
         {
             return _client.GetBrowserCheckSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingCacheLevelTypes>> GetCacheLevelSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetCacheLevelSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

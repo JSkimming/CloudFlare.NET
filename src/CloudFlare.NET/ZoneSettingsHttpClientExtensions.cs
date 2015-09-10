@@ -110,6 +110,24 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Cache Level functions based off the setting level.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-cache-level-setting"/>
+        public static Task<ZoneSetting<SettingCacheLevelTypes>> GetCacheLevelSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/cache_level");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingCacheLevelTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)
