@@ -272,5 +272,23 @@
 
             return client.GetMirageSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// CloudFlare will proxy customer error pages on any 502,504 errors on origin server instead of showing a
+        /// default CloudFlare error page.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-enable-error-pages-on-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetEnableErrorPagesOnSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetEnableErrorPagesOnSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

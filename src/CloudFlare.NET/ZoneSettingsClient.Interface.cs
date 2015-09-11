@@ -153,5 +153,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// CloudFlare will proxy customer error pages on any 502,504 errors on origin server instead of showing a
+        /// default CloudFlare error page.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-enable-error-pages-on-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetEnableErrorPagesOnSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

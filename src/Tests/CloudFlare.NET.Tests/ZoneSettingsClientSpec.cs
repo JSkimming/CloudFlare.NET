@@ -537,7 +537,7 @@
                 new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/origin_error_page_pass_thru");
         };
 
-        //Because of = () => _actual = _sut.GetEnableErrorPagesOnSettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetEnableErrorPagesOnSettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 

@@ -143,5 +143,14 @@
         {
             return _client.GetMirageSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetEnableErrorPagesOnSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetEnableErrorPagesOnSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }
