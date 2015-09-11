@@ -135,5 +135,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Automatically redirect visitors on mobile devices to a mobile-optimized subdomain.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-mobile-redirect-setting"/>
+        Task<ZoneSetting<SettingMobileRedirect>> GetMobileRedirectSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

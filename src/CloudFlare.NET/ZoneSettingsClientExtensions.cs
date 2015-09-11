@@ -238,5 +238,22 @@
 
             return client.GetMinifySettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Automatically redirect visitors on mobile devices to a mobile-optimized subdomain.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-mobile-redirect-setting"/>
+        public static Task<ZoneSetting<SettingMobileRedirect>> GetMobileRedirectSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetMobileRedirectSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

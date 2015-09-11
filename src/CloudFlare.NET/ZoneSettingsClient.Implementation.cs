@@ -125,5 +125,14 @@
         {
             return _client.GetMinifySettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingMobileRedirect>> GetMobileRedirectSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetMobileRedirectSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }
