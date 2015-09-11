@@ -161,5 +161,14 @@
         {
             return _client.GetPolishSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetPrefetchPreloadSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetPrefetchPreloadSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

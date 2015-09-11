@@ -172,5 +172,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// CloudFlare will prefetch any URLs that are included in the response headers.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-prefetch-preload-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetPrefetchPreloadSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

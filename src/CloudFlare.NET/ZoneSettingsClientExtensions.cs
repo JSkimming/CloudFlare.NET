@@ -307,5 +307,22 @@
 
             return client.GetPolishSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// CloudFlare will prefetch any URLs that are included in the response headers.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-prefetch-preload-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetPrefetchPreloadSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetPrefetchPreloadSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

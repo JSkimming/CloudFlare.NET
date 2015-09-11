@@ -331,6 +331,24 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingPolishTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// CloudFlare will prefetch any URLs that are included in the response headers.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-prefetch-preload-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetPrefetchPreloadSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/prefetch_preload");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)
