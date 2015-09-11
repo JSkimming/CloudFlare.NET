@@ -200,5 +200,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// CloudFlare security header for a zone.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-security-header-hsts-setting"/>
+        Task<ZoneSetting<SettingSecurityHeader>> GetSecurityHeaderSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

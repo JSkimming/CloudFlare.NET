@@ -387,6 +387,24 @@
                 client.GetCloudFlareResultAsync<ZoneSetting<SettingRocketLoaderTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// CloudFlare security header for a zone.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-security-header-hsts-setting"/>
+        public static Task<ZoneSetting<SettingSecurityHeader>> GetSecurityHeaderSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/security_header");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingSecurityHeader>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

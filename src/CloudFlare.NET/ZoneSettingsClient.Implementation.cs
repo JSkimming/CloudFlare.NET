@@ -188,5 +188,14 @@
         {
             return _client.GetRocketLoaderSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingSecurityHeader>> GetSecurityHeaderSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetSecurityHeaderSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

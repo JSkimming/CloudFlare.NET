@@ -88,6 +88,19 @@
                 .EqualsWhen((a, e) => a.Value.AsLikeness().Equals(e.Value));
         }
 
+        public static Likeness<ZoneSetting<SettingSecurityHeader>, ZoneSetting<SettingSecurityHeader>> AsLikeness(
+            this ZoneSetting<SettingSecurityHeader> actual)
+        {
+            if (actual == null)
+                throw new ArgumentNullException(nameof(actual));
+
+            return actual
+                .AsSource()
+                .OfLikeness<ZoneSetting<SettingSecurityHeader>>()
+                .With(s => s.Value)
+                .EqualsWhen((a, e) => a.Value.AsLikeness().Equals(e.Value));
+        }
+
         public static Likeness<DnsRecord, DnsRecord> AsLikeness(this DnsRecord actual)
         {
             if (actual == null)
