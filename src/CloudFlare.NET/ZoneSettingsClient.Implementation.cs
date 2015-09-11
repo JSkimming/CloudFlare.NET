@@ -89,5 +89,14 @@
         {
             return _client.GetEmailObfuscationSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetHotlinkProtectionSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetHotlinkProtectionSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

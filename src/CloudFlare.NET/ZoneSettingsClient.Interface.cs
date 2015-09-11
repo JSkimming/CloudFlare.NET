@@ -97,5 +97,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// When enabled, the Hotlink Protection option ensures that other sites cannot suck up your bandwidth by
+        /// building pages that use images hosted on your site.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-hotlink-protection-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetHotlinkProtectionSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

@@ -168,5 +168,23 @@
 
             return client.GetEmailObfuscationSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// When enabled, the Hotlink Protection option ensures that other sites cannot suck up your bandwidth by
+        /// building pages that use images hosted on your site.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-hotlink-protection-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetHotlinkProtectionSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetHotlinkProtectionSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

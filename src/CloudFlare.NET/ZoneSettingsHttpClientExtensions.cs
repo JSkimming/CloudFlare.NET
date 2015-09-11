@@ -184,6 +184,25 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// When enabled, the Hotlink Protection option ensures that other sites cannot suck up your bandwidth by
+        /// building pages that use images hosted on your site.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-hotlink-protection-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetHotlinkProtectionSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/hotlink_protection");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)
