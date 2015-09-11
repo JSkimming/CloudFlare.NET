@@ -179,5 +179,14 @@
         {
             return _client.GetResponseBufferingSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingRocketLoaderTypes>> GetRocketLoaderSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetRocketLoaderSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

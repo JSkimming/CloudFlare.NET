@@ -190,5 +190,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Rocket Loader is a general-purpose asynchronous JavaScript loader coupled with a lightweight virtual
+        /// browser which can safely run any JavaScript code after window.onload.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-rocket-loader-setting"/>
+        Task<ZoneSetting<SettingRocketLoaderTypes>> GetRocketLoaderSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

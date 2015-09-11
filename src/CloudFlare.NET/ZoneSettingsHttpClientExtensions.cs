@@ -367,6 +367,26 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Rocket Loader is a general-purpose asynchronous JavaScript loader coupled with a lightweight virtual
+        /// browser which can safely run any JavaScript code after window.onload.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-rocket-loader-setting"/>
+        public static Task<ZoneSetting<SettingRocketLoaderTypes>> GetRocketLoaderSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/rocket_loader");
+
+            return
+                client.GetCloudFlareResultAsync<ZoneSetting<SettingRocketLoaderTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)
