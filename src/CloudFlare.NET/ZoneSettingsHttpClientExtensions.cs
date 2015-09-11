@@ -240,6 +240,24 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingIPv6Types>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Automatically minify certain assets for your website
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-minify-setting"/>
+        public static Task<ZoneSetting<SettingMinify>> GetMinifySettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/minify");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingMinify>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

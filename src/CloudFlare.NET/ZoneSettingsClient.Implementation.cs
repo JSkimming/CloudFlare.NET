@@ -116,5 +116,14 @@
         {
             return _client.GetIPv6SettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingMinify>> GetMinifySettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetMinifySettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

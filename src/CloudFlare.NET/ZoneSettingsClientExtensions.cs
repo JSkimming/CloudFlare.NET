@@ -221,5 +221,22 @@
 
             return client.GetIPv6SettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Automatically minify certain assets for your website
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-minify-setting"/>
+        public static Task<ZoneSetting<SettingMinify>> GetMinifySettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetMinifySettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

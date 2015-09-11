@@ -126,5 +126,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Automatically minify certain assets for your website
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-minify-setting"/>
+        Task<ZoneSetting<SettingMinify>> GetMinifySettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }
