@@ -107,5 +107,14 @@
         {
             return _client.GetIpGeolocationSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingIPv6Types>> GetIPv6SettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetIPv6SettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

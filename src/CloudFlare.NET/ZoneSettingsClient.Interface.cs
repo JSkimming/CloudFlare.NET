@@ -117,5 +117,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Enable IPv6 on all subdomains that are CloudFlare enabled.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-ipv6-setting"/>
+        Task<ZoneSetting<SettingIPv6Types>> GetIPv6SettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

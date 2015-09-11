@@ -222,6 +222,24 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Enable IPv6 on all subdomains that are CloudFlare enabled.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-ipv6-setting"/>
+        public static Task<ZoneSetting<SettingIPv6Types>> GetIPv6SettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/ipv6");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingIPv6Types>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

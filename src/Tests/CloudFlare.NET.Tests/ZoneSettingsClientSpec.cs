@@ -416,7 +416,7 @@
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/ipv6");
         };
 
-        //Because of = () => _actual = _sut.GetIPv6SettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetIPv6SettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 

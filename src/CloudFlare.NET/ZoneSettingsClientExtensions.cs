@@ -204,5 +204,22 @@
 
             return client.GetIpGeolocationSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Enable IPv6 on all subdomains that are CloudFlare enabled.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-ipv6-setting"/>
+        public static Task<ZoneSetting<SettingIPv6Types>> GetIPv6SettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetIPv6SettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }
