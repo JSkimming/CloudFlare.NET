@@ -134,5 +134,14 @@
         {
             return _client.GetMobileRedirectSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetMirageSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetMirageSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

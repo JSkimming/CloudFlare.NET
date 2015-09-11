@@ -255,5 +255,22 @@
 
             return client.GetMobileRedirectSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Automatically optimize image loading for website visitors on mobile devices.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-mirage-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetMirageSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetMirageSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }
