@@ -152,5 +152,14 @@
         {
             return _client.GetEnableErrorPagesOnSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingPolishTypes>> GetPolishSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetPolishSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

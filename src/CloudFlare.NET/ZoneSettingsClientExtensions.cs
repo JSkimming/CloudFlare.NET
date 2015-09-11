@@ -290,5 +290,22 @@
 
             return client.GetEnableErrorPagesOnSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Strips metadata and compresses your images for faster page load times.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-polish-setting"/>
+        public static Task<ZoneSetting<SettingPolishTypes>> GetPolishSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetPolishSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

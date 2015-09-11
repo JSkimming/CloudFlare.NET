@@ -163,5 +163,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Strips metadata and compresses your images for faster page load times.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-polish-setting"/>
+        Task<ZoneSetting<SettingPolishTypes>> GetPolishSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

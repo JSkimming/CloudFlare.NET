@@ -313,6 +313,24 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Strips metadata and compresses your images for faster page load times.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-polish-setting"/>
+        public static Task<ZoneSetting<SettingPolishTypes>> GetPolishSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/polish");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingPolishTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)
