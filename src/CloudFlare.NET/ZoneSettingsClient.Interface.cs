@@ -181,5 +181,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Enables or disables buffering of responses from the proxied server.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-response-buffering-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetResponseBufferingSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

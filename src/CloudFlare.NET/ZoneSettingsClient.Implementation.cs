@@ -170,5 +170,14 @@
         {
             return _client.GetPrefetchPreloadSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetResponseBufferingSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetResponseBufferingSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

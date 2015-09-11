@@ -324,5 +324,22 @@
 
             return client.GetPrefetchPreloadSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Enables or disables buffering of responses from the proxied server.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-response-buffering-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetResponseBufferingSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetResponseBufferingSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

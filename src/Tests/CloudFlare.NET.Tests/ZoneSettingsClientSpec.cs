@@ -627,7 +627,7 @@
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/response_buffering");
         };
 
-        //Because of = () => _actual = _sut.GetResponseBufferingSettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetResponseBufferingSettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 
