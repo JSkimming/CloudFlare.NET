@@ -197,5 +197,14 @@
         {
             return _client.GetSecurityHeaderSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingSecurityLevelTypes>> GetSecurityLevelSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetSecurityLevelSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

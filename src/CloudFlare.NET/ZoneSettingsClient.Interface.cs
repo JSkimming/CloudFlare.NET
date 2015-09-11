@@ -209,5 +209,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Choose the appropriate security profile for your website, which will automatically adjust each of the
+        /// security settings.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-security-level-setting"/>
+        Task<ZoneSetting<SettingSecurityLevelTypes>> GetSecurityLevelSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

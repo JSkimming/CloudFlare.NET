@@ -405,6 +405,26 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingSecurityHeader>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Choose the appropriate security profile for your website, which will automatically adjust each of the
+        /// security settings.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-security-level-setting"/>
+        public static Task<ZoneSetting<SettingSecurityLevelTypes>> GetSecurityLevelSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/security_level");
+
+            return
+                client.GetCloudFlareResultAsync<ZoneSetting<SettingSecurityLevelTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

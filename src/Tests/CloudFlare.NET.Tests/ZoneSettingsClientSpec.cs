@@ -717,7 +717,7 @@
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/security_level");
         };
 
-        //Because of = () => _actual = _sut.GetSecurityLevelSettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetSecurityLevelSettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 
