@@ -98,5 +98,14 @@
         {
             return _client.GetHotlinkProtectionSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetIpGeolocationSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetIpGeolocationSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

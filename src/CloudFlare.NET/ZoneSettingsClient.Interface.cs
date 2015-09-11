@@ -107,5 +107,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Enable IP Geolocation to have CloudFlare geolocate visitors to your website and pass the country code to
+        /// you.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-ip-geolocation-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetIpGeolocationSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

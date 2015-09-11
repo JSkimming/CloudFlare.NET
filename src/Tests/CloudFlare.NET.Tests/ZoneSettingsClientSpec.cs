@@ -386,7 +386,7 @@
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/ip_geolocation");
         };
 
-        //Because of = () => _actual = _sut.GetIpGeolocationSettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetIpGeolocationSettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 

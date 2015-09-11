@@ -186,5 +186,23 @@
 
             return client.GetHotlinkProtectionSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Enable IP Geolocation to have CloudFlare geolocate visitors to your website and pass the country code to
+        /// you.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-ip-geolocation-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetIpGeolocationSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetIpGeolocationSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }
