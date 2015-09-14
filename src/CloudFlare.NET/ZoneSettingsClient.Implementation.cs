@@ -206,5 +206,14 @@
         {
             return _client.GetSecurityLevelSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetServerSideExcludeSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetServerSideExcludeSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

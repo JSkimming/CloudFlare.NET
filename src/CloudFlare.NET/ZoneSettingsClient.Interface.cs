@@ -219,5 +219,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// If there is sensitive content on your website that you want visible to real visitors, but that you want to
+        /// hide from suspicious visitors, all you have to do is wrap the content with CloudFlare SSE tags.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-server-side-exclude-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetServerSideExcludeSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

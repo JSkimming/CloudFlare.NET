@@ -425,6 +425,25 @@
                 client.GetCloudFlareResultAsync<ZoneSetting<SettingSecurityLevelTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// If there is sensitive content on your website that you want visible to real visitors, but that you want to
+        /// hide from suspicious visitors, all you have to do is wrap the content with CloudFlare SSE tags.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-server-side-exclude-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetServerSideExcludeSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/server_side_exclude");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)
