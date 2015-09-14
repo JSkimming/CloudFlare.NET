@@ -839,7 +839,7 @@
             _expectedRequestUri = new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/tls_1_2_only");
         };
 
-        //Because of = () => _actual = _sut.GetZoneEnableTls12SettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetZoneEnableTls12SettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 

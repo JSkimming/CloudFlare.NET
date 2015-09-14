@@ -482,6 +482,24 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingSslTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// Enable Crypto TLS 1.2 feature for this zone and prevent use of previous versions.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-zone-enable-tls-1-2-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetZoneEnableTls12SettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/tls_1_2_only");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

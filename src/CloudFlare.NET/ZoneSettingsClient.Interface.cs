@@ -249,5 +249,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Enable Crypto TLS 1.2 feature for this zone and prevent use of previous versions.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-zone-enable-tls-1-2-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetZoneEnableTls12SettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

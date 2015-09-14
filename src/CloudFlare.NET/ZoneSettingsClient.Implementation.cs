@@ -233,5 +233,14 @@
         {
             return _client.GetSslSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetZoneEnableTls12SettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetZoneEnableTls12SettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }
