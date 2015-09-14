@@ -465,5 +465,22 @@
 
             return client.GetZoneEnableTls12SettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// TLS Client Auth requires CloudFlare to connect to your origin server using a client certificate.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-tls-client-auth-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetTlsClientAuthSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetTlsClientAuthSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

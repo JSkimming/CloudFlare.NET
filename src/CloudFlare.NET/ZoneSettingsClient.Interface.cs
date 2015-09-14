@@ -258,5 +258,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// TLS Client Auth requires CloudFlare to connect to your origin server using a client certificate.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-tls-client-auth-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetTlsClientAuthSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

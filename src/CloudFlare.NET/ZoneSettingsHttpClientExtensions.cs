@@ -500,6 +500,24 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// TLS Client Auth requires CloudFlare to connect to your origin server using a client certificate.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-tls-client-auth-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetTlsClientAuthSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/tls_client_auth");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)
