@@ -482,5 +482,22 @@
 
             return client.GetTlsClientAuthSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// Allows customer to continue to use True Client IP (Akamai feature) in the headers we send to the origin.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-true-client-ip-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetTrueClientIpSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetTrueClientIpSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

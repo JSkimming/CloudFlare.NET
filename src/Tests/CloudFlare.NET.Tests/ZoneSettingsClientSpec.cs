@@ -900,7 +900,7 @@
                 new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/true_client_ip_header");
         };
 
-        //Because of = () => _actual = _sut.GetTrueClientIpSettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetTrueClientIpSettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 

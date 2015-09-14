@@ -267,5 +267,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// Allows customer to continue to use True Client IP (Akamai feature) in the headers we send to the origin.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-true-client-ip-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetTrueClientIpSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }
