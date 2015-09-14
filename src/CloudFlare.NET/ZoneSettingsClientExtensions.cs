@@ -25,7 +25,7 @@
             if (zoneId == null)
                 throw new ArgumentNullException(nameof(zoneId));
 
-            return client.GetAllZoneSettingsAsync(zoneId, CancellationToken.None,  auth);
+            return client.GetAllZoneSettingsAsync(zoneId, CancellationToken.None, auth);
         }
 
         /// <summary>
@@ -411,6 +411,24 @@
                 throw new ArgumentNullException(nameof(zoneId));
 
             return client.GetServerSideExcludeSettingAsync(zoneId, CancellationToken.None, auth);
+        }
+
+        /// <summary>
+        /// CloudFlare will treat files with the same query strings as the same file in cache, regardless of the order
+        /// of the query strings.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-enable-query-string-sort-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetEnableQueryStringSortSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetEnableQueryStringSortSettingAsync(zoneId, CancellationToken.None, auth);
         }
     }
 }

@@ -229,5 +229,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// CloudFlare will treat files with the same query strings as the same file in cache, regardless of the order
+        /// of the query strings.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-enable-query-string-sort-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetEnableQueryStringSortSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

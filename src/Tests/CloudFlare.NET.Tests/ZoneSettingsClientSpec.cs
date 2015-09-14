@@ -779,7 +779,7 @@
                 new Uri(CloudFlareConstants.BaseUri, $"zones/{_zoneId}/settings/sort_query_string_for_cache");
         };
 
-        //Because of = () => _actual = _sut.GetEnableQueryStringSortSettingAsync(_zoneId, _auth).Await();
+        Because of = () => _actual = _sut.GetEnableQueryStringSortSettingAsync(_zoneId, _auth).Await();
 
         Behaves_like<AuthenticatedRequestBehaviour> authenticated_request_behaviour;
 

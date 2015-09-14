@@ -215,5 +215,14 @@
         {
             return _client.GetServerSideExcludeSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetEnableQueryStringSortSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetEnableQueryStringSortSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }
