@@ -499,5 +499,22 @@
 
             return client.GetTrueClientIpSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// The WAF examines HTTP requests to your website.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-web-application-firewall-waf-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetWebApplicationFirewallSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetWebApplicationFirewallSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

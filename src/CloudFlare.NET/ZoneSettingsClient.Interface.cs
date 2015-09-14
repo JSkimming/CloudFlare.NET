@@ -276,5 +276,14 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// The WAF examines HTTP requests to your website.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-web-application-firewall-waf-setting"/>
+        Task<ZoneSetting<SettingOnOffTypes>> GetWebApplicationFirewallSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }

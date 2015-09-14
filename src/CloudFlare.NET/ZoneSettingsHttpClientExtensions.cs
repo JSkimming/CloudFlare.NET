@@ -536,6 +536,24 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// The WAF examines HTTP requests to your website.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-web-application-firewall-waf-setting"/>
+        public static Task<ZoneSetting<SettingOnOffTypes>> GetWebApplicationFirewallSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/waf");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

@@ -260,5 +260,14 @@
         {
             return _client.GetTrueClientIpSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingOnOffTypes>> GetWebApplicationFirewallSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetWebApplicationFirewallSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }
