@@ -62,6 +62,45 @@
                 .EqualsWhen((a, e) => a.OriginalNameServers.SequenceEqual(e.OriginalNameServers));
         }
 
+        public static Likeness<ZoneSetting<SettingMinify>, ZoneSetting<SettingMinify>> AsLikeness(
+            this ZoneSetting<SettingMinify> actual)
+        {
+            if (actual == null)
+                throw new ArgumentNullException(nameof(actual));
+
+            return actual
+                .AsSource()
+                .OfLikeness<ZoneSetting<SettingMinify>>()
+                .With(s => s.Value)
+                .EqualsWhen((a, e) => a.Value.AsLikeness().Equals(e.Value));
+        }
+
+        public static Likeness<ZoneSetting<SettingMobileRedirect>, ZoneSetting<SettingMobileRedirect>> AsLikeness(
+            this ZoneSetting<SettingMobileRedirect> actual)
+        {
+            if (actual == null)
+                throw new ArgumentNullException(nameof(actual));
+
+            return actual
+                .AsSource()
+                .OfLikeness<ZoneSetting<SettingMobileRedirect>>()
+                .With(s => s.Value)
+                .EqualsWhen((a, e) => a.Value.AsLikeness().Equals(e.Value));
+        }
+
+        public static Likeness<ZoneSetting<SettingSecurityHeader>, ZoneSetting<SettingSecurityHeader>> AsLikeness(
+            this ZoneSetting<SettingSecurityHeader> actual)
+        {
+            if (actual == null)
+                throw new ArgumentNullException(nameof(actual));
+
+            return actual
+                .AsSource()
+                .OfLikeness<ZoneSetting<SettingSecurityHeader>>()
+                .With(s => s.Value)
+                .EqualsWhen((a, e) => a.Value.AsLikeness().Equals(e.Value));
+        }
+
         public static Likeness<DnsRecord, DnsRecord> AsLikeness(this DnsRecord actual)
         {
             if (actual == null)
