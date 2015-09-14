@@ -463,6 +463,25 @@
             return client.GetCloudFlareResultAsync<ZoneSetting<SettingOnOffTypes>>(uri, auth, cancellationToken);
         }
 
+        /// <summary>
+        /// SSL encrypts your visitor's connection and safeguards credit card numbers and other personal data to and
+        /// from your website.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-ssl-setting"/>
+        public static Task<ZoneSetting<SettingSslTypes>> GetSslSettingAsync(
+            this HttpClient client,
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth)
+        {
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            Uri uri = new Uri(CloudFlareConstants.BaseUri, $"zones/{zoneId}/settings/ssl");
+
+            return client.GetCloudFlareResultAsync<ZoneSetting<SettingSslTypes>>(uri, auth, cancellationToken);
+        }
+
         private static IEnumerable<ZoneSettingBase> GetZoneSetting(IEnumerable<JObject> jsons)
         {
             if (jsons == null)

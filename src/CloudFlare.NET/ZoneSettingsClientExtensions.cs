@@ -430,5 +430,23 @@
 
             return client.GetEnableQueryStringSortSettingAsync(zoneId, CancellationToken.None, auth);
         }
+
+        /// <summary>
+        /// SSL encrypts your visitor's connection and safeguards credit card numbers and other personal data to and
+        /// from your website.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-ssl-setting"/>
+        public static Task<ZoneSetting<SettingSslTypes>> GetSslSettingAsync(
+            this IZoneSettingsClient client,
+            IdentifierTag zoneId,
+            CloudFlareAuth auth = null)
+        {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            if (zoneId == null)
+                throw new ArgumentNullException(nameof(zoneId));
+
+            return client.GetSslSettingAsync(zoneId, CancellationToken.None, auth);
+        }
     }
 }

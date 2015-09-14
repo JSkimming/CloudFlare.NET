@@ -224,5 +224,14 @@
         {
             return _client.GetEnableQueryStringSortSettingAsync(zoneId, cancellationToken, auth ?? _auth);
         }
+
+        /// <inheritdoc/>
+        public Task<ZoneSetting<SettingSslTypes>> GetSslSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null)
+        {
+            return _client.GetSslSettingAsync(zoneId, cancellationToken, auth ?? _auth);
+        }
     }
 }

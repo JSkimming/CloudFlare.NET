@@ -239,5 +239,15 @@
             IdentifierTag zoneId,
             CancellationToken cancellationToken,
             CloudFlareAuth auth = null);
+
+        /// <summary>
+        /// SSL encrypts your visitor's connection and safeguards credit card numbers and other personal data to and
+        /// from your website.
+        /// </summary>
+        /// <seealso href="https://api.cloudflare.com/#zone-settings-get-ssl-setting"/>
+        Task<ZoneSetting<SettingSslTypes>> GetSslSettingAsync(
+            IdentifierTag zoneId,
+            CancellationToken cancellationToken,
+            CloudFlareAuth auth = null);
     }
 }
