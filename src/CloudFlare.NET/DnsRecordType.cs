@@ -10,7 +10,9 @@
     /// <summary>
     /// The type of a <see cref="DnsRecord"/>.
     /// </summary>
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented",
+    [SuppressMessage(
+        "StyleCop.CSharp.DocumentationRules",
+        "SA1602:EnumerationItemsMustBeDocumented",
         Justification = "Names are self-explanatory.")]
     [JsonConverter(typeof(StringEnumConverter))]
     public enum DnsRecordType

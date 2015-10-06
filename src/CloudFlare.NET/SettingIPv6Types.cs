@@ -11,9 +11,13 @@
     /// Enable IPv6 on all subdomains that are CloudFlare enabled.
     /// <seealso href="https://api.cloudflare.com/#zone-settings-get-ipv6-setting"/>
     /// </summary>
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented",
+    [SuppressMessage(
+        "StyleCop.CSharp.DocumentationRules",
+        "SA1602:EnumerationItemsMustBeDocumented",
         Justification = "Names are self-explanatory.")]
-    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
+    [SuppressMessage(
+        "StyleCop.CSharp.NamingRules",
+        "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
         Justification = "Named to match serialized values.")]
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SettingIPv6Types

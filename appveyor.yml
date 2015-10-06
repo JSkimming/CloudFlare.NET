@@ -57,7 +57,7 @@ build:
 
 before_build:
   - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/nuget-restore.cmd
-  - nuget-restore cloudflare.net.sln
+  - nuget-restore
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 
 after_build:
