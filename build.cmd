@@ -7,5 +7,5 @@
 
 @CALL "%~dp0setmsbuild.cmd"
 
-@echo %msbuild% "%~dp0src\cloudflare.net.sln" /verbosity:m /t:Rebuild /p:Configuration="%config%"
-@%msbuild% "%~dp0src\cloudflare.net.sln" /verbosity:m /t:Rebuild /p:Configuration="%config%"
+@echo %msbuild% /verbosity:m /t:Rebuild /p:Configuration="%config%"
+@%msbuild% /verbosity:m /t:Rebuild /p:Configuration="%config%"

@@ -12,9 +12,13 @@
     /// which can safely run any JavaScript code after window.onload.
     /// <seealso href="https://api.cloudflare.com/#zone-settings-get-rocket-loader-setting"/>
     /// </summary>
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented",
+    [SuppressMessage(
+        "StyleCop.CSharp.DocumentationRules",
+        "SA1602:EnumerationItemsMustBeDocumented",
         Justification = "Names are self-explanatory.")]
-    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
+    [SuppressMessage(
+        "StyleCop.CSharp.NamingRules",
+        "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
         Justification = "Named to match serialized values.")]
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SettingRocketLoaderTypes

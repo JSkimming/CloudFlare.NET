@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET", "CloudFlare.NET\CloudFlare.NET.csproj", "{895AE2D8-6602-406E-B2ED-7CA9BC3174A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET", "src\CloudFlare.NET\CloudFlare.NET.csproj", "{895AE2D8-6602-406E-B2ED-7CA9BC3174A5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{872E03EB-A9C9-45C8-9644-8442B9CF5C4F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "src\Tests", "{872E03EB-A9C9-45C8-9644-8442B9CF5C4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.Tests", "Tests\CloudFlare.NET.Tests\CloudFlare.NET.Tests.csproj", "{33243227-AB2D-45FE-ABD3-2473A50CFD9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.Tests", "src\Tests\CloudFlare.NET.Tests\CloudFlare.NET.Tests.csproj", "{33243227-AB2D-45FE-ABD3-2473A50CFD9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.IntegrationTests", "Tests\CloudFlare.NET.IntegrationTests\CloudFlare.NET.IntegrationTests.csproj", "{B6869F85-BD98-418D-89F7-7E15BB9F1240}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.IntegrationTests", "src\Tests\CloudFlare.NET.IntegrationTests\CloudFlare.NET.IntegrationTests.csproj", "{B6869F85-BD98-418D-89F7-7E15BB9F1240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.Yaml", "CloudFlare.NET.Yaml\CloudFlare.NET.Yaml.csproj", "{86A16950-15A6-4BC3-90B6-00E4D08A1319}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.Yaml", "src\CloudFlare.NET.Yaml\CloudFlare.NET.Yaml.csproj", "{86A16950-15A6-4BC3-90B6-00E4D08A1319}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.Yaml.Tests", "Tests\CloudFlare.NET.Yaml.Tests\CloudFlare.NET.Yaml.Tests.csproj", "{64495306-B225-4C98-9DF8-C57E1D6395E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlare.NET.Yaml.Tests", "src\Tests\CloudFlare.NET.Yaml.Tests\CloudFlare.NET.Yaml.Tests.csproj", "{64495306-B225-4C98-9DF8-C57E1D6395E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

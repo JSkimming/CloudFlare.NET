@@ -10,7 +10,7 @@
 
 # Retain the NuGet package cache between builds
 cache:
-  - src\packages -> **\packages.config
+  - packages -> **\packages.config
 
 # version format
 version: 0.0.{build}
@@ -48,7 +48,7 @@ assembly_info:
 configuration: Release
 
 build:
-  project: src\cloudflare.net.sln
+  project: cloudflare.net.sln
   #publish_nuget: true             # package projects with .nuspec files and push to artifacts
   #publish_nuget_symbols: true    # generate and publish NuGet symbol packages
 
@@ -57,7 +57,7 @@ build:
 
 before_build:
   - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/nuget-restore.cmd
-  - nuget-restore src\cloudflare.net.sln
+  - nuget-restore
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 
 after_build:
