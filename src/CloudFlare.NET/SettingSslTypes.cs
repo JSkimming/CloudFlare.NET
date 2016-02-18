@@ -16,7 +16,7 @@
         Justification = "Names are self-explanatory.")]
     [SuppressMessage(
         "StyleCop.CSharp.NamingRules",
-        "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
+        "SA1300:ConstFieldNamesMustBeginWithUpperCaseLetter",
         Justification = "Named to match serialized values.")]
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SettingSslTypes
