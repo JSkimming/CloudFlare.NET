@@ -75,8 +75,8 @@ after_build:
 test_script: coverage.cmd
 
 after_test: |
-  FOR /r %%F IN (*coveralls.net.exe) DO SET coveralls_exe=%%F
-  %coveralls_exe% --opencover src\TestResults\Test.Coverage.xml
+  FOR /r %%F IN (*csmacnz.Coveralls.exe) DO SET coveralls_exe=%%F
+  %coveralls_exe% --opencover -i src\TestResults\Test.Coverage.xml --jobId %APPVEYOR_JOB_ID%
   appveyor PushArtifact src\TestResults\Specifications.html -FileName "Specifications_%GitVersion_FullSemVer%.html"
 
 #---------------------------------#
