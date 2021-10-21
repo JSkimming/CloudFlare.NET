@@ -1,143 +1,44 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{33243227-AB2D-45FE-ABD3-2473A50CFD9B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CloudFlare.NET</RootNamespace>
-    <AssemblyName>CloudFlare.NET.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyTitle>CloudFlare.NET.Tests</AssemblyTitle>
+    <Product>CloudFlare.NET.Tests</Product>
+    <Copyright>Copyright ©  2015</Copyright>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
     <NoWarn>169</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AssemblyTitle>CloudFlare.NET.Tests</AssemblyTitle>
+    <Product>CloudFlare.NET.Tests</Product>
+    <Copyright>Copyright ©  2015</Copyright>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoTest.ArgumentNullException, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\AutoTest.ArgumentNullException.0.7.0\lib\net40\AutoTest.ArgumentNullException.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AutoTest.ArgumentNullException.Xunit, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\AutoTest.ArgumentNullException.Xunit.0.7.0\lib\net40\AutoTest.ArgumentNullException.Xunit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Machine.Specifications, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Machine.Specifications.0.9.3\lib\net45\Machine.Specifications.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Machine.Specifications.Clr4, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Machine.Specifications.0.9.3\lib\net45\Machine.Specifications.Clr4.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Machine.Specifications.Should, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Machine.Specifications.Should.0.8.0\lib\net45\Machine.Specifications.Should.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Ploeh.AutoFixture, Version=3.40.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\AutoFixture.3.40.0\lib\net40\Ploeh.AutoFixture.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Ploeh.AutoFixture.AutoMoq, Version=3.40.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\AutoFixture.AutoMoq.3.40.0\lib\net40\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Ploeh.AutoFixture.Xunit, Version=3.40.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\AutoFixture.Xunit.3.40.0\lib\net40\Ploeh.AutoFixture.Xunit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Ploeh.SemanticComparison, Version=3.40.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\SemanticComparison.3.40.0\lib\net40\Ploeh.SemanticComparison.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest" />
-    <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="xunit.extensions, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <PackageReference Include="AutoFixture" Version="3.40.0" />
+    <PackageReference Include="AutoFixture.AutoMoq" Version="3.40.0" />
+    <PackageReference Include="AutoFixture.Xunit" Version="3.40.0" />
+    <PackageReference Include="AutoTest.ArgumentNullException" Version="0.7.0" />
+    <PackageReference Include="AutoTest.ArgumentNullException.Xunit" Version="0.7.0" />
+    <PackageReference Include="coveralls.io" Version="1.3.4" />
+    <PackageReference Include="Machine.Specifications" Version="0.9.3" />
+    <PackageReference Include="Machine.Specifications.Runner.Console" Version="0.9.2" />
+    <PackageReference Include="Machine.Specifications.Should" Version="0.8.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Moq" Version="4.2.1510.2205" />
+    <PackageReference Include="Newtonsoft.Json" Version="8.0.2" />
+    <PackageReference Include="OpenCover" Version="4.6.519" />
+    <PackageReference Include="ReportGenerator" Version="2.4.3.0" />
+    <PackageReference Include="SemanticComparison" Version="3.40.0" />
+    <PackageReference Include="xunit" Version="1.9.2" />
+    <PackageReference Include="xunit.extensions" Version="1.9.2" />
+    <PackageReference Include="xunit.runner.console" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CloudFlareAuthSpec.cs" />
-    <Compile Include="CloudFlareClientSpec.cs" />
-    <Compile Include="CloudFlareCustomization.cs" />
-    <Compile Include="CloudFlareErrorSpec.cs" />
-    <Compile Include="DebuggerDisplaySpec.cs" />
-    <Compile Include="DnsRecordClientExtensionsSpec.cs" />
-    <Compile Include="DnsRecordClientSpec.cs" />
-    <Compile Include="EqualsBehaviors.cs" />
-    <Compile Include="FixtureContext.cs" />
-    <Compile Include="HttpHandlers\TestHttpHandler.cs" />
-    <Compile Include="IdentifierTagSpec.cs" />
-    <Compile Include="IsNullable.cs" />
-    <Compile Include="LikenessExtensions.cs" />
-    <Compile Include="RequestBehaviorTemplates.cs" />
-    <Compile Include="RequiresArgNullEx.cs" />
-    <Compile Include="RequiresArgNullExAutoMoqAttribute.cs" />
-    <Compile Include="Serialization\BehaviorTemplates.cs" />
-    <Compile Include="Serialization\DnsRecordGetParametersSpec.cs" />
-    <Compile Include="Serialization\DnsRecordSpec.cs" />
-    <Compile Include="Serialization\ErrorResponseSerializationSpec.cs" />
-    <Compile Include="Serialization\SampleJson.cs" />
-    <Compile Include="Serialization\SettingMinifySpec.cs" />
-    <Compile Include="Serialization\SettingMobileRedirectSpec.cs" />
-    <Compile Include="Serialization\SettingSecurityHeaderSpec.cs" />
-    <Compile Include="Serialization\SuccessResponseSerializationSpec.cs" />
-    <Compile Include="Serialization\ZoneDevelopmentModeSettingSpec.cs" />
-    <Compile Include="Serialization\ZoneGetParametersSpec.cs" />
-    <Compile Include="Serialization\ZoneSettingSpec.cs" />
-    <Compile Include="Serialization\ZoneSpec.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ZoneClientExtensionsSpec.cs" />
-    <Compile Include="ZoneClientSpec.cs" />
-    <Compile Include="ZoneSettingsClientSpec.cs" />
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Serialization\DnsRecord.json" />
     <EmbeddedResource Include="Serialization\DnsRecordMinimal.json" />
     <EmbeddedResource Include="Serialization\ErrorResponse.json" />
@@ -148,24 +49,6 @@
     <EmbeddedResource Include="Serialization\ZoneSettingsErred.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CloudFlare.NET\CloudFlare.NET.csproj">
-      <Project>{895ae2d8-6602-406e-b2ed-7ca9bc3174a5}</Project>
-      <Name>CloudFlare.NET</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\CloudFlare.NET\CloudFlare.NET.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
-  </Target>
-  <Import Project="..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

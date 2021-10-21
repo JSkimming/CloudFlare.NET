@@ -58,9 +58,8 @@
                 jsonRecords = new JObject(new JProperty(containerName, jsonRecords));
             }
 
-            var serializer = new Serializer(SerializationOptions.DisableAliases);
-            serializer.RegisterTypeConverter(new JsonYamlTypeConverter());
-            serializer.Serialize(writer, jsonRecords);
+            var serializer = new SerializerBuilder().DisableAliases().WithTypeConverter(new JsonYamlTypeConverter());
+            serializer.Build().Serialize(writer, jsonRecords);
 
             return writer;
         }
@@ -82,9 +81,8 @@
 
             JObject jObject = formatter.Process(zone);
 
-            var serializer = new Serializer(SerializationOptions.DisableAliases);
-            serializer.RegisterTypeConverter(new JsonYamlTypeConverter());
-            serializer.Serialize(writer, jObject);
+            var serializer = new SerializerBuilder().DisableAliases().WithTypeConverter(new JsonYamlTypeConverter());
+            serializer.Build().Serialize(writer, jObject);
 
             return writer;
         }
